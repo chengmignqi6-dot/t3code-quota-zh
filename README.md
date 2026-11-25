@@ -1,33 +1,42 @@
 # T3 Code 精简额度栏 · 中文上下文
 
-**给固定版本的 Windows T3 Code 增加一行紧凑用量栏和中文说明，不替换原生模型选择器。**
+**给固定版本的 Windows T3 Code 加一行安静的状态栏和中文说明，不替换原生模型选择器。**
 
 > 非官方社区补丁。仅支持下方指定的 **T3 Code 0.1.12 Windows 构建**，不是完整客户端，不是额度破解工具。未知版本、升级版本和其他补丁会被拒绝。
 >
-> 本版已完成 0.1.12 适配：在本机真实界面中逐项点开核对过上下文面板、额度面板、模型选择器、用量页「限制 / 费用」与货币切换，并完成了安装与回滚保护。**不支持 0.1.11 或其他构建**；0.1.11 用户请使用 [v1.0.0](https://github.com/chengmignqi6-dot/t3code-quota-zh/releases/tag/v1.0.0)。
+> 本版已完成 0.1.12 适配：在真实界面里逐项点开核对过底栏、上下文面板、额度面板（5 小时 + 周额度）、模型选择器（两个提供方）、用量页「限制 / 费用 / token」与货币切换，并完成安装与回滚保护。**不支持 0.1.11 或其他构建**；0.1.11 用户请使用 [v1.0.0](https://github.com/chengmignqi6-dot/t3code-quota-zh/releases/tag/v1.0.0)。
 
-![T3 Code 精简额度栏](<docs/showcase/cover.jpg>)
+![T3 Code 精简额度栏](<docs/showcase/hero-overview.jpg>)
+
+<p align="center">
+  <img src="docs/showcase/hero-strip.jpg" alt="底栏与两个面板" width="49%">
+  <img src="docs/showcase/hero-usage.jpg" alt="用量页：限制与费用" width="49%">
+</p>
 
 ## 效果与图集
 
-下图全部按真实界面的实测尺寸与取样配色重绘，使用**演示数据**，不包含任何真实项目、账号、会话或路径。SVG 为矢量源文件，JPG 为同一画面的高清位图（JPG 不是矢量格式）。
+全部按真实界面的实测尺寸与取样配色重绘，使用**演示数据**，不含任何真实项目、账号、会话或路径。SVG 为矢量源文件，JPG 为同一画面的高清位图（长边 2560，JPG 不是矢量格式）。
+
+**总览一张图**：[全部入口总览](<docs/showcase/overview-map.jpg>) · [SVG](<docs/showcase/overview-map.svg>)
+
+**逐个入口拆分看：**
 
 | 图 | 内容 | 说明 |
 |---|---|---|
-| [整体位置](<docs/showcase/01-placement.jpg>) · [SVG](<docs/showcase/01-placement.svg>) | 底栏在输入框中的位置 | 底栏位于输入框底部一行，右侧是额度入口；模型选择器与侧栏保持原生 |
-| [底栏放大](<docs/showcase/02-footer.jpg>) · [SVG](<docs/showcase/02-footer.svg>) | 四个区域 | 上下文入口 / 轮次与工具 / 词元与缓存 / 额度入口 |
-| [上下文面板](<docs/showcase/03-context.jpg>) · [SVG](<docs/showcase/03-context.svg>) | 点「上下文」 | 已用、分段条、已缓存、未缓存、剩余空间、缓存命中、轮次与工具 |
-| [额度面板](<docs/showcase/04-quota.jpg>) · [SVG](<docs/showcase/04-quota.svg>) | 点「周额度」 | 提供方·模型、账号、20 段额度条、重置时间、「全部额度」 |
-| [模型选择器](<docs/showcase/05-picker.jpg>) · [SVG](<docs/showcase/05-picker.svg>) | 点模型按钮 | 原生选择器，新增每模型额度标记；GPT 与 Claude 不混排 |
-| [用量页 · 限制](<docs/showcase/06-limits.jpg>) · [SVG](<docs/showcase/06-limits.svg>) | 点「全部额度」 | 期限筛选、三个标签页、货币切换、按账户/共享池的额度卡片 |
-| [用量页 · 费用](<docs/showcase/07-cost.jpg>) · [SVG](<docs/showcase/07-cost.svg>) | 点「费用」 | 人民币总额、每小时图表、统计口径、类型占比、明细表 |
-| [点击路径](<docs/showcase/08-flow.jpg>) · [SVG](<docs/showcase/08-flow.svg>) | 总览 | 从底栏到两层弹窗再到用量页，每个入口都可返回 |
+| [底栏放大](<docs/showcase/detail-composer.jpg>) · [SVG](<docs/showcase/detail-composer.svg>) | 输入框底部的一行 | 四个区域：上下文 / 轮次·工具·速度 / 词元与缓存 / 5 小时与周额度 |
+| [上下文面板](<docs/showcase/detail-context.jpg>) · [SVG](<docs/showcase/detail-context.svg>) | 点「上下文」 | 已用 48%、分段条、已缓存 / 未缓存 / 剩余空间、缓存命中 |
+| [额度面板](<docs/showcase/detail-quota.jpg>) · [SVG](<docs/showcase/detail-quota.svg>) | 点「周额度」 | 5 小时与周额度各一张卡片、重置倒计时、全部额度入口 |
+| [模型选择器](<docs/showcase/detail-picker.jpg>) · [SVG](<docs/showcase/detail-picker.svg>) | 点模型按钮 | 两个提供方对照：Antigravity 有每模型额度，Codex 没有 |
+| [用量页 · 限制](<docs/showcase/detail-limits.jpg>) · [SVG](<docs/showcase/detail-limits.svg>) | 点「全部额度」 | 按提供商分组的额度卡片，共享池原样标注 |
+| [用量页 · 费用](<docs/showcase/detail-cost.jpg>) · [SVG](<docs/showcase/detail-cost.svg>) | 点「费用」 | 人民币总额、每小时图表、统计口径、明细表 |
+| [用量页 · token](<docs/showcase/detail-token.jpg>) · [SVG](<docs/showcase/detail-token.svg>) | 点「token」 | 同一份数据的 token 视角，区分缓存与非缓存 |
+| [点击路径](<docs/showcase/detail-flow.jpg>) · [SVG](<docs/showcase/detail-flow.svg>) | 总览 | 每一个入口都能打开、关闭并返回 |
 
 每张图的逐项标注见 [图集说明](<docs/showcase/README.md>)。
 
 ## 下载与安装
 
-- [下载最新发行包](https://github.com/chengmignqi6-dot/t3code-quota-zh/releases/latest) → 选择 `t3code-quota-zh-1.1.0-windows.zip`，**完整解压**。
+- [下载最新发行包](https://github.com/chengmignqi6-dot/t3code-quota-zh/releases/latest) → 选择 `t3code-quota-zh-1.1.1-windows.zip`，**完整解压**。
 - 安装 [Node.js 22 或更新版本](https://nodejs.org/)，无需为安装补丁运行 npm install。
 - 先运行 [Check.cmd](<Check.cmd>)，再**自行完全退出 T3 Code**。
 - 运行 [Install.cmd](<Install.cmd>)，阅读提示，输入 `YES` 才会写入；完成后自行打开 T3。
@@ -37,12 +46,12 @@
 
 ## 做了什么
 
-- **一行底栏**：上下文进度条与 `已用/上限`、轮次 · 工具次数 · 词元/秒、会话词元与缓存命中、以及当前模型的额度入口；不再在顶部另挂一排总览。
+- **一行底栏**：上下文进度条与 `已用/上限`、轮次 · 工具次数 · 词元/秒、会话词元与缓存命中，以及 5 小时与周额度两个入口；不再在顶部另挂一排总览。
 - **中文上下文面板**：已用、已缓存、未缓存、剩余空间、压缩预留、缓存命中；数值与格式仍来自原生统计。
-- **额度面板**：显示所选提供方实例与模型、账号归属、原生窗口（周额度 / 5 小时）、分格额度条、下次重置时间，并提供「全部额度」。
-- **模型选择器**：保留原生选择器与思考强度子菜单，只在每个模型行新增所属池的剩余额度。
+- **额度面板**：所选提供方实例与模型、账号归属、5 小时与周额度两张卡片、分格额度条、下次重置时间，并提供「全部额度」。
+- **模型选择器**：保留原生选择器与思考强度子菜单，在 Antigravity 的每个模型行显示所属池剩余额度；Codex 没有额度数据时不显示任何百分比。
 - **用量页**：保留原生「限制 / 费用 / token」三页；费用页支持 ¥ CNY / $ USD 切换与汇率重绘，统计口径不变。
-- **提供商与模型分离**：额度严格绑定当前 `instanceId + model`，不会把另一个提供商的模型额度套到当前选择上；共享池以 `shared` 原样显示，不拆成虚构额度。
+- **提供商与模型分离**：额度严格绑定当前 `instanceId + model`，不会把另一个提供商的额度套到当前选择上；共享池以 `shared` 原样显示。
 - 品牌名（`Antigravity`、`GPT`、`Claude`、`Google` 等）保持原文。
 
 ## 兼容与安全边界
@@ -61,8 +70,8 @@
 
 - **不凭空生成订阅额度。** Codex 没有返回 5 小时/周额度时，不造数补齐。真实额度依赖上游及有效登录。
 - 上游动态错误并非全部中文化。例如 Antigravity 登录过期提示仍可能是英文；需要用户在 T3 自行续登。
-- `476k / 1m` 是上下文词元使用量/容量，不是汉字数，也不是订阅剩余额度；缓存占比不代表免费额度。
-- 上游缓存估算回退公式保留；缓存数据不一定是逐词元直接计量。`工具 114 次` 是调用次数，不是秒数。
+- `498k / 1m` 是上下文词元使用量/容量，不是汉字数，也不是订阅剩余额度；缓存占比不代表免费额度。
+- 上游缓存估算回退公式保留；缓存数据不一定是逐词元直接计量。`工具 118 次` 是调用次数，不是秒数。
 - 已在本机验证固定构建上的原生界面与全部入口；**未验证其他机器、窄窗口布局、所有 GPT/Claude 数值额度**。
 - 图集是按真实界面重绘的示意图（演示数据），用于说明布局与交互，不是账号余额证据。
 

@@ -119,7 +119,7 @@
     },
     {
       "path": "tools/showcase/build-showcase.mjs",
-      "sha256": "f8ef4ee1c39e8084c0448bbd883ebe295d66ba8659a288a50dbf3577e39fbf81"
+      "sha256": "9786f21cb3a0da2349ad78a1025974d36d68511995e2a88f6f096898f3ec374b"
     },
     {
       "path": "tools/showcase/png-to-jpg.py",
@@ -131,7 +131,7 @@
     },
     {
       "path": "tools/showcase/showcase-lib.mjs",
-      "sha256": "57fab0ee2a0522a7b92cdbcde0f930254dd042396095525b6c978d0788227c29"
+      "sha256": "430adc63992e9a933eb82d5bb0b1bfb329b81fe6f6ca0cb66886754106690508"
     },
     {
       "path": "tools/source-0.1.12-port.mjs",
