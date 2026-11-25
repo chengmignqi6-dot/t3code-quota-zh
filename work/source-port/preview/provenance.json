@@ -1,0 +1,723 @@
+{
+  "selections": [
+    {
+      "name": "cards",
+      "source": "upstream-composer-telemetry.js",
+      "roots": [
+        "ContextBreakdownCard",
+        "ModelQuotaDetailCard",
+        "ComposerTelemetryStrip",
+        "hasComposerTelemetryContent"
+      ],
+      "imports": [
+        {
+          "module": "react/jsx-runtime",
+          "names": [
+            {
+              "imported": "jsx",
+              "local": "_jsx"
+            },
+            {
+              "imported": "jsxs",
+              "local": "_jsxs"
+            },
+            {
+              "imported": "Fragment",
+              "local": "_Fragment"
+            }
+          ]
+        },
+        {
+          "module": "@t3tools/shared/usageLimits",
+          "names": [
+            {
+              "imported": "formatDuration",
+              "local": "formatDuration"
+            },
+            {
+              "imported": "remainingPercent",
+              "local": "remainingPercent"
+            }
+          ]
+        },
+        {
+          "module": "lucide-react",
+          "names": [
+            {
+              "imported": "RotateCwIcon",
+              "local": "RotateCwIcon"
+            }
+          ]
+        },
+        {
+          "module": "../../hooks/useNowMinute",
+          "names": [
+            {
+              "imported": "useNowMinute",
+              "local": "useNowMinute"
+            }
+          ]
+        },
+        {
+          "module": "../../lib/contextWindow",
+          "names": [
+            {
+              "imported": "formatContextWindowTokens",
+              "local": "formatContextWindowTokens"
+            }
+          ]
+        },
+        {
+          "module": "../../lib/utils",
+          "names": [
+            {
+              "imported": "cn",
+              "local": "cn"
+            }
+          ]
+        },
+        {
+          "module": "../ui/button",
+          "names": [
+            {
+              "imported": "Button",
+              "local": "Button"
+            }
+          ]
+        },
+        {
+          "module": "../ui/popover",
+          "names": [
+            {
+              "imported": "Popover",
+              "local": "Popover"
+            },
+            {
+              "imported": "PopoverPopup",
+              "local": "PopoverPopup"
+            },
+            {
+              "imported": "PopoverTrigger",
+              "local": "PopoverTrigger"
+            }
+          ]
+        },
+        {
+          "module": "../ui/tooltip",
+          "names": [
+            {
+              "imported": "Tooltip",
+              "local": "Tooltip"
+            },
+            {
+              "imported": "TooltipPopup",
+              "local": "TooltipPopup"
+            },
+            {
+              "imported": "TooltipTrigger",
+              "local": "TooltipTrigger"
+            }
+          ]
+        },
+        {
+          "module": "./compaction.logic",
+          "names": [
+            {
+              "imported": "formatContextWindowCompactionMessage",
+              "local": "formatContextWindowCompactionMessage"
+            }
+          ]
+        },
+        {
+          "module": "./ComposerSurface",
+          "names": [
+            {
+              "imported": "ComposerSurface",
+              "local": "ComposerSurface"
+            }
+          ]
+        },
+        {
+          "module": "./turnTelemetry",
+          "names": [
+            {
+              "imported": "deriveContextWindowBreakdown",
+              "local": "deriveContextWindowBreakdown"
+            },
+            {
+              "imported": "deriveQuotaWindowMetrics",
+              "local": "deriveQuotaWindowMetrics"
+            },
+            {
+              "imported": "formatCompactTokenCount",
+              "local": "formatCompactTokenCount"
+            },
+            {
+              "imported": "formatLatencyMs",
+              "local": "formatLatencyMs"
+            },
+            {
+              "imported": "formatShortWindowLabel",
+              "local": "formatShortWindowLabel"
+            },
+            {
+              "imported": "resolveModelQuotaState",
+              "local": "resolveModelQuotaState"
+            }
+          ]
+        }
+      ],
+      "selectedStatements": 28,
+      "totalStatements": 29,
+      "unresolvedIdentifiers": [
+        "Array",
+        "Date",
+        "Math",
+        "Number"
+      ],
+      "excludedUi": "two custom API branches and their empty-strip visibility"
+    },
+    {
+      "name": "meta",
+      "source": "upstream-turn-telemetry-meta.js",
+      "roots": [
+        "TurnTelemetryMeta"
+      ],
+      "imports": [
+        {
+          "module": "react/jsx-runtime",
+          "names": [
+            {
+              "imported": "jsx",
+              "local": "_jsx"
+            },
+            {
+              "imported": "Fragment",
+              "local": "_Fragment"
+            },
+            {
+              "imported": "jsxs",
+              "local": "_jsxs"
+            }
+          ]
+        },
+        {
+          "module": "~/lib/utils",
+          "names": [
+            {
+              "imported": "cn",
+              "local": "cn"
+            }
+          ]
+        },
+        {
+          "module": "../ui/tooltip",
+          "names": [
+            {
+              "imported": "Tooltip",
+              "local": "Tooltip"
+            },
+            {
+              "imported": "TooltipPopup",
+              "local": "TooltipPopup"
+            },
+            {
+              "imported": "TooltipProvider",
+              "local": "TooltipProvider"
+            },
+            {
+              "imported": "TooltipTrigger",
+              "local": "TooltipTrigger"
+            }
+          ]
+        },
+        {
+          "module": "./turnTelemetry",
+          "names": [
+            {
+              "imported": "formatCompactTokenCount",
+              "local": "formatCompactTokenCount"
+            },
+            {
+              "imported": "formatLatencyMs",
+              "local": "formatLatencyMs"
+            },
+            {
+              "imported": "formatTps",
+              "local": "formatTps"
+            },
+            {
+              "imported": "hasVisibleTurnTelemetry",
+              "local": "hasVisibleTurnTelemetry"
+            }
+          ]
+        }
+      ],
+      "selectedStatements": 6,
+      "totalStatements": 6,
+      "unresolvedIdentifiers": [
+        "Math"
+      ],
+      "excludedUi": null
+    },
+    {
+      "name": "metrics",
+      "source": "upstream-turn-telemetry.js",
+      "roots": [
+        "deriveContextWindowBreakdown",
+        "deriveQuotaWindowMetrics",
+        "formatShortWindowLabel",
+        "formatCompactTokenCount",
+        "formatLatencyMs",
+        "formatTps",
+        "hasVisibleTurnTelemetry",
+        "resolveModelQuotaState",
+        "deriveTurnTelemetryIndex",
+        "lookupTurnTelemetry",
+        "countThreadToolCalls"
+      ],
+      "imports": [
+        {
+          "module": "@t3tools/shared/usageLimits",
+          "names": [
+            {
+              "imported": "collectProviderUsageLimits",
+              "local": "collectProviderUsageLimits"
+            },
+            {
+              "imported": "limitsNotice",
+              "local": "limitsNotice"
+            },
+            {
+              "imported": "paceOf",
+              "local": "paceOf"
+            },
+            {
+              "imported": "paceRemainingPercent",
+              "local": "paceRemainingPercent"
+            },
+            {
+              "imported": "remainingPercent",
+              "local": "remainingPercent"
+            }
+          ]
+        },
+        {
+          "module": "effect/DateTime",
+          "names": [
+            "DateTime"
+          ]
+        }
+      ],
+      "selectedStatements": 42,
+      "totalStatements": 42,
+      "unresolvedIdentifiers": [
+        "Date",
+        "Map",
+        "Math",
+        "Number",
+        "Set",
+        "String"
+      ],
+      "excludedUi": null
+    },
+    {
+      "name": "shared",
+      "source": "upstream-usage-limits-shared.js",
+      "roots": [
+        "formatDuration",
+        "remainingPercent",
+        "paceOf",
+        "paceRemainingPercent",
+        "collectProviderUsageLimits",
+        "limitsNotice"
+      ],
+      "imports": [
+        {
+          "module": "@t3tools/contracts",
+          "names": [
+            {
+              "imported": "isProviderAvailable",
+              "local": "isProviderAvailable"
+            }
+          ]
+        },
+        {
+          "module": "effect/DateTime",
+          "names": [
+            "DateTime"
+          ]
+        }
+      ],
+      "selectedStatements": 20,
+      "totalStatements": 52,
+      "unresolvedIdentifiers": [
+        "Date",
+        "Map",
+        "Math",
+        "Number",
+        "Set",
+        "String",
+        "usage"
+      ],
+      "excludedUi": null
+    },
+    {
+      "name": "popover",
+      "source": "upstream-popover.js",
+      "roots": [
+        "Popover",
+        "PopoverPopup",
+        "PopoverTrigger"
+      ],
+      "imports": [
+        {
+          "module": "react/jsx-runtime",
+          "names": [
+            {
+              "imported": "jsx",
+              "local": "_jsx"
+            },
+            {
+              "imported": "jsxs",
+              "local": "_jsxs"
+            }
+          ]
+        },
+        {
+          "module": "@base-ui/react/popover",
+          "names": [
+            {
+              "imported": "Popover",
+              "local": "PopoverPrimitive"
+            }
+          ]
+        },
+        {
+          "module": "~/lib/utils",
+          "names": [
+            {
+              "imported": "cn",
+              "local": "cn"
+            }
+          ]
+        },
+        {
+          "module": "./closing-positioner",
+          "names": [
+            {
+              "imported": "renderClosingPositioner",
+              "local": "renderClosingPositioner"
+            }
+          ]
+        }
+      ],
+      "selectedStatements": 9,
+      "totalStatements": 13,
+      "unresolvedIdentifiers": [],
+      "excludedUi": null
+    },
+    {
+      "name": "closing-positioner",
+      "source": "upstream-closing-positioner.js",
+      "roots": [
+        "renderClosingPositioner"
+      ],
+      "imports": [
+        {
+          "module": "react/jsx-runtime",
+          "names": [
+            {
+              "imported": "jsx",
+              "local": "_jsx"
+            }
+          ]
+        },
+        {
+          "module": "react",
+          "names": [
+            {
+              "imported": "useState",
+              "local": "useState"
+            }
+          ]
+        }
+      ],
+      "selectedStatements": 5,
+      "totalStatements": 5,
+      "unresolvedIdentifiers": [],
+      "excludedUi": null
+    },
+    {
+      "name": "composer-surface",
+      "source": "upstream-composer-surface.js",
+      "roots": [
+        "ComposerSurface"
+      ],
+      "imports": [
+        {
+          "module": "react/jsx-runtime",
+          "names": [
+            {
+              "imported": "jsx",
+              "local": "_jsx"
+            }
+          ]
+        },
+        {
+          "module": "~/lib/utils",
+          "names": [
+            {
+              "imported": "cn",
+              "local": "cn"
+            }
+          ]
+        }
+      ],
+      "selectedStatements": 8,
+      "totalStatements": 8,
+      "unresolvedIdentifiers": [],
+      "excludedUi": null
+    },
+    {
+      "name": "now-minute",
+      "source": "upstream-now-minute.js",
+      "roots": [
+        "useNowMinute"
+      ],
+      "imports": [
+        {
+          "module": "@t3tools/client-runtime/clock",
+          "names": [
+            {
+              "imported": "minuteTick",
+              "local": "minuteTick"
+            }
+          ]
+        },
+        {
+          "module": "react",
+          "names": [
+            {
+              "imported": "useSyncExternalStore",
+              "local": "useSyncExternalStore"
+            }
+          ]
+        }
+      ],
+      "selectedStatements": 3,
+      "totalStatements": 3,
+      "unresolvedIdentifiers": [],
+      "excludedUi": null
+    },
+    {
+      "name": "clock",
+      "source": "upstream-clock.js",
+      "roots": [
+        "minuteTick"
+      ],
+      "imports": [],
+      "selectedStatements": 2,
+      "totalStatements": 13,
+      "unresolvedIdentifiers": [
+        "Date",
+        "Set",
+        "clearTimeout",
+        "setTimeout"
+      ],
+      "excludedUi": null
+    },
+    {
+      "name": "provider-availability",
+      "source": "upstream-provider-availability.js",
+      "roots": [
+        "isProviderAvailable"
+      ],
+      "imports": [],
+      "selectedStatements": 1,
+      "totalStatements": 126,
+      "unresolvedIdentifiers": [],
+      "excludedUi": null
+    },
+    {
+      "name": "cn",
+      "source": "upstream-utils.js",
+      "roots": [
+        "cn"
+      ],
+      "imports": [
+        {
+          "module": "class-variance-authority",
+          "names": [
+            {
+              "imported": "cx",
+              "local": "cx"
+            }
+          ]
+        },
+        {
+          "module": "tailwind-merge",
+          "names": [
+            {
+              "imported": "extendTailwindMerge",
+              "local": "extendTailwindMerge"
+            }
+          ]
+        }
+      ],
+      "selectedStatements": 4,
+      "totalStatements": 17,
+      "unresolvedIdentifiers": [],
+      "excludedUi": null
+    },
+    {
+      "name": "context-format",
+      "source": "upstream-context-window.js",
+      "roots": [
+        "formatContextWindowTokens"
+      ],
+      "imports": [],
+      "selectedStatements": 1,
+      "totalStatements": 1,
+      "unresolvedIdentifiers": [
+        "Math",
+        "Number"
+      ],
+      "excludedUi": null
+    },
+    {
+      "name": "compaction",
+      "source": "upstream-compaction.js",
+      "roots": [
+        "formatContextWindowCompactionMessage"
+      ],
+      "imports": [],
+      "selectedStatements": 1,
+      "totalStatements": 4,
+      "unresolvedIdentifiers": [],
+      "excludedUi": null
+    },
+    {
+      "name": "button",
+      "source": "upstream-button.js",
+      "roots": [
+        "Button"
+      ],
+      "imports": [
+        {
+          "module": "@base-ui/react/merge-props",
+          "names": [
+            {
+              "imported": "mergeProps",
+              "local": "mergeProps"
+            }
+          ]
+        },
+        {
+          "module": "@base-ui/react/use-render",
+          "names": [
+            {
+              "imported": "useRender",
+              "local": "useRender"
+            }
+          ]
+        },
+        {
+          "module": "class-variance-authority",
+          "names": [
+            {
+              "imported": "cva",
+              "local": "cva"
+            }
+          ]
+        },
+        {
+          "module": "~/lib/utils",
+          "names": [
+            {
+              "imported": "cn",
+              "local": "cn"
+            }
+          ]
+        }
+      ],
+      "selectedStatements": 6,
+      "totalStatements": 9,
+      "unresolvedIdentifiers": [],
+      "excludedUi": null
+    },
+    {
+      "name": "tooltip",
+      "source": "upstream-tooltip.js",
+      "roots": [
+        "Tooltip",
+        "TooltipPopup",
+        "TooltipTrigger",
+        "TooltipProvider"
+      ],
+      "imports": [
+        {
+          "module": "react/jsx-runtime",
+          "names": [
+            {
+              "imported": "jsx",
+              "local": "_jsx"
+            }
+          ]
+        },
+        {
+          "module": "@base-ui/react/tooltip",
+          "names": [
+            {
+              "imported": "Tooltip",
+              "local": "TooltipPrimitive"
+            }
+          ]
+        },
+        {
+          "module": "react",
+          "names": [
+            {
+              "imported": "createContext",
+              "local": "createContext"
+            },
+            {
+              "imported": "use",
+              "local": "use"
+            },
+            {
+              "imported": "useEffect",
+              "local": "useEffect"
+            },
+            {
+              "imported": "useRef",
+              "local": "useRef"
+            }
+          ]
+        },
+        {
+          "module": "~/lib/utils",
+          "names": [
+            {
+              "imported": "cn",
+              "local": "cn"
+            }
+          ]
+        },
+        {
+          "module": "~/lib/windowControlsOverlay",
+          "names": [
+            {
+              "imported": "useNativeTitlebarHeight",
+              "local": "useNativeTitlebarHeight"
+            }
+          ]
+        }
+      ],
+      "selectedStatements": 13,
+      "totalStatements": 16,
+      "unresolvedIdentifiers": [],
+      "excludedUi": null
+    }
+  ]
+}

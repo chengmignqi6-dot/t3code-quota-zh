@@ -1,0 +1,240 @@
+{
+  "status": "intermediate-unlinked-not-installable",
+  "patchCommit": "bc64236511ee61dae9b75beef3ea0275eb71b2dd",
+  "telemetryCommit": "d1bb533d9b69165ce94f1add52f9dcb53dd15684",
+  "compiler": "5.9.3",
+  "modules": [
+    {
+      "source": "apps/web/src/components/chat/ComposerTelemetryStrip.tsx",
+      "gitBlob": "335b15a728d9ba240c1f7359fc41b7f36283f7ed",
+      "output": "upstream-composer-telemetry.js",
+      "sha256": "6d5a91d599c6d2c04726fbbbe9851de0d69f9c0e1e638a1621c70237cbd5b69d",
+      "unresolvedImports": [
+        "react/jsx-runtime",
+        "@t3tools/shared/usageLimits",
+        "lucide-react",
+        "../../hooks/useNowMinute",
+        "../../lib/contextWindow",
+        "../../lib/utils",
+        "../ui/button",
+        "../ui/popover",
+        "../ui/tooltip",
+        "./compaction.logic",
+        "./ComposerSurface",
+        "./turnTelemetry"
+      ]
+    },
+    {
+      "source": "apps/web/src/components/chat/TurnTelemetryMeta.tsx",
+      "gitBlob": "d42130be2832d42531c7acc5f4df71b62e15573f",
+      "output": "upstream-turn-telemetry-meta.js",
+      "sha256": "c1038df425daae8d64f8fea04069164539c5e97f0b5a3a863d92c52706bc6e9d",
+      "unresolvedImports": [
+        "react/jsx-runtime",
+        "~/lib/utils",
+        "../ui/tooltip",
+        "./turnTelemetry"
+      ]
+    },
+    {
+      "source": "apps/web/src/components/chat/turnTelemetry.ts",
+      "gitBlob": "8fe80bb6774c3739991ee26fbdf561c1fdb4ac2a",
+      "output": "upstream-turn-telemetry.js",
+      "sha256": "3d078ed5966e609f098dd7893decfb1ddddfe0ac4ac3d7e69e2ef1caf26167ad",
+      "unresolvedImports": [
+        "@t3tools/shared/usageLimits",
+        "effect/DateTime"
+      ]
+    },
+    {
+      "source": "apps/web/src/components/usage/UsageLimitsPooled.tsx",
+      "gitBlob": "8ec1c7a02afcd109490c82f4c16be2f757c79ac9",
+      "output": "upstream-usage-limits-pooled.js",
+      "sha256": "687aa2c85327d34d40617ede65b251da6b3e6f4bde2e06fb585366dd6c33b65f",
+      "unresolvedImports": [
+        "react/jsx-runtime",
+        "@t3tools/shared/usageLimits",
+        "@t3tools/client-runtime/state/provider-instance-display",
+        "lucide-react",
+        "react",
+        "../../localApi",
+        "../../hooks/useSettings",
+        "../../lib/utils",
+        "../../timestampFormat",
+        "../chat/ProviderInstanceIcon",
+        "../settings/providerDriverMeta",
+        "../settings/RedactedSensitiveText",
+        "../ui/button",
+        "../Icons",
+        "../ui/alert",
+        "../ui/popover",
+        "./UsageLimits"
+      ]
+    },
+    {
+      "source": "packages/shared/src/usageLimits.ts",
+      "gitBlob": "4995adb235cb4112687eeb37de0bf65f783d2780",
+      "output": "upstream-usage-limits-shared.js",
+      "sha256": "4e5d60f236890f50619c00bf8f0a4731d618b863657a71a42ab9e6fb04059b72",
+      "unresolvedImports": [
+        "@t3tools/contracts",
+        "effect/DateTime",
+        "./hostClassification.ts"
+      ]
+    },
+    {
+      "source": "packages/shared/src/usageFormat.ts",
+      "gitBlob": "f2a2d9c73e7648965f1ed618ca9a3c37b3982ab9",
+      "output": "upstream-usage-format.js",
+      "sha256": "0581be449eaa594a8f703bbc12a8f69cb98157252c9c13895e291932c9931a11",
+      "unresolvedImports": [
+        "@t3tools/contracts"
+      ]
+    },
+    {
+      "source": "apps/web/src/components/ui/button.tsx",
+      "gitBlob": "0830513e5be45fab7c19157e0f037aeb70983f1a",
+      "output": "upstream-button.js",
+      "sha256": "1246a240e12335367602d27562ef2a04b8bdacaf823eab23ab029ab2da35a0f9",
+      "unresolvedImports": [
+        "@base-ui/react/merge-props",
+        "@base-ui/react/use-render",
+        "class-variance-authority",
+        "~/lib/utils"
+      ]
+    },
+    {
+      "source": "apps/web/src/components/ui/tooltip.tsx",
+      "gitBlob": "577aa48da87fa817c7013ea1afe5e2d960c0bba0",
+      "output": "upstream-tooltip.js",
+      "sha256": "e296899a0cc5955c75fa80c5df5bcf4599ff560ad013ac7b3b52d83a965dd460",
+      "unresolvedImports": [
+        "react/jsx-runtime",
+        "@base-ui/react/tooltip",
+        "react",
+        "~/lib/utils",
+        "~/lib/windowControlsOverlay"
+      ]
+    },
+    {
+      "source": "apps/web/src/components/ui/popover.tsx",
+      "gitBlob": "05baa4b626496e94c114dbbe1debb024e7d20190",
+      "output": "upstream-popover.js",
+      "sha256": "ac1fb914c036c513497e4a9db58a65b9ecef96702a7b9644dd91ecf90b38bc5f",
+      "unresolvedImports": [
+        "react/jsx-runtime",
+        "@base-ui/react/popover",
+        "~/lib/utils",
+        "./closing-positioner"
+      ]
+    },
+    {
+      "source": "apps/web/src/components/ui/closing-positioner.tsx",
+      "gitBlob": "2adb81bec36b701aa65cddd7b1033f66e5b90567",
+      "output": "upstream-closing-positioner.js",
+      "sha256": "790d83a1dd5dde84dd56f2863e46e72b4e41838189cfcbf35e86db3f51bd6cc3",
+      "unresolvedImports": [
+        "react/jsx-runtime",
+        "react"
+      ]
+    },
+    {
+      "source": "apps/web/src/components/chat/ComposerSurface.tsx",
+      "gitBlob": "e9064f708a21ad23ecadfe668ef91130623e1c46",
+      "output": "upstream-composer-surface.js",
+      "sha256": "1fd9d14cab439c4d0b928a1f18f87d8d64251c57b901a8cdc8285a5acb7c7a1d",
+      "unresolvedImports": [
+        "react/jsx-runtime",
+        "~/lib/utils"
+      ]
+    },
+    {
+      "source": "apps/web/src/components/chat/compaction.logic.ts",
+      "gitBlob": "ff3edb8e66b93f981e1155341c867ef01c0bc297",
+      "output": "upstream-compaction.js",
+      "sha256": "8f3adf89b7ec30a32bf0d0e6e2c996c1667e0e3bad9b713daca2fbee9f917c6e",
+      "unresolvedImports": [
+        "../../providerInstances"
+      ]
+    },
+    {
+      "source": "apps/web/src/lib/contextWindow.ts",
+      "gitBlob": "1cf3eee799bb2d156ec39d9b018ef1132c8012bc",
+      "output": "upstream-context-window.js",
+      "sha256": "a935e6fd595109aa3806ccdccb656cec51b666ea36e6014e038b956d68140d3a",
+      "unresolvedImports": []
+    },
+    {
+      "source": "apps/web/src/lib/utils.ts",
+      "gitBlob": "747af2d52dd35966d69ec22cf3a61c35d1f6755f",
+      "output": "upstream-utils.js",
+      "sha256": "823c714f32fc6f3a0a170882231049eb642f9b09ce974c134a0614af4d4ae431",
+      "unresolvedImports": [
+        "@t3tools/contracts",
+        "@t3tools/shared/keybindings",
+        "class-variance-authority",
+        "effect/encoding/Hex",
+        "tailwind-merge",
+        "../composerDraftStore"
+      ]
+    },
+    {
+      "source": "apps/web/src/lib/windowControlsOverlay.ts",
+      "gitBlob": "9b2e90e6a754f7c335086c36f3c709ffb7911700",
+      "output": "upstream-window-controls.js",
+      "sha256": "a17f3911ab93fcc3156cf4eeaf6e97b6b130bcfb01485c853d9218391d7e585c",
+      "unresolvedImports": [
+        "react",
+        "~/env",
+        "./utils"
+      ]
+    },
+    {
+      "source": "apps/web/src/hooks/useNowMinute.ts",
+      "gitBlob": "cfb12ddf977c256e084c8ac438fb8503694f9f2e",
+      "output": "upstream-now-minute.js",
+      "sha256": "d3c3f7271f4306c1ec0ede77a855e6c28fd5f74a93141787d1c28b9d6968ca37",
+      "unresolvedImports": [
+        "@t3tools/client-runtime/clock",
+        "react"
+      ]
+    },
+    {
+      "source": "packages/client-runtime/src/clock.ts",
+      "gitBlob": "f8f1290730084e681ebffb7a478ca43775541b56",
+      "output": "upstream-clock.js",
+      "sha256": "63aa8d52eb0213aeebf8064865fc587c7c3712dbd32ac8062d890e4241a546e6",
+      "unresolvedImports": []
+    },
+    {
+      "source": "packages/contracts/src/server.ts",
+      "gitBlob": "f2e02c6b0a95eee2ae050e05b070abeb74d8935b",
+      "output": "upstream-provider-availability.js",
+      "sha256": "59d6da14972be31b2fe5195400b36af0181185771a9ebe36f5fde7217d51fdc2",
+      "unresolvedImports": [
+        "effect/Effect",
+        "effect/Schema",
+        "./acpRegistry.ts",
+        "./environment.ts",
+        "./auth.ts",
+        "./baseSchemas.ts",
+        "./keybindings.ts",
+        "./editor.ts",
+        "./managedPolicy.ts",
+        "./model.ts",
+        "./providerPolicy.ts",
+        "./providerInstance.ts",
+        "./providerUsageLimits.ts",
+        "./settings.ts",
+        "./ipc.ts"
+      ]
+    },
+    {
+      "source": "packages/shared/src/keybindingMatching.ts",
+      "gitBlob": "e6525b53d8777f5529b45eb3422832db8572fa7c",
+      "output": "upstream-keybinding-matching.js",
+      "sha256": "dc636a5dc351b47ef4ccf7f59155453f6f07a2a2e8fb2b57dc7064f428805166",
+      "unresolvedImports": []
+    }
+  ]
+}

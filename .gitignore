@@ -1,0 +1,10 @@
+node_modules/
+work/pristine/
+work/source-port/native-modules/
+work/source-port/native-stage/
+*.asar
+*.asar.*
+*.tmp
+*.log
+.DS_Store
+Thumbs.db

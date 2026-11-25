@@ -1,0 +1,280 @@
+[
+  {
+    "name": "@babel/runtime",
+    "version": "8.1.3",
+    "license": "MIT",
+    "licenseFiles": [
+      "licenses/dependencies/@babel__runtime/LICENSE"
+    ]
+  },
+  {
+    "name": "@base-ui/react",
+    "version": "1.9.0",
+    "license": "MIT",
+    "licenseFiles": [
+      "licenses/dependencies/@base-ui__react/LICENSE"
+    ]
+  },
+  {
+    "name": "@base-ui/utils",
+    "version": "0.5.0",
+    "license": "MIT",
+    "licenseFiles": [
+      "licenses/dependencies/@base-ui__utils/LICENSE"
+    ]
+  },
+  {
+    "name": "@esbuild/win32-x64",
+    "version": "0.25.12",
+    "license": "MIT",
+    "licenseFiles": []
+  },
+  {
+    "name": "@floating-ui/core",
+    "version": "1.8.0",
+    "license": "MIT",
+    "licenseFiles": [
+      "licenses/dependencies/@floating-ui__core/LICENSE"
+    ]
+  },
+  {
+    "name": "@floating-ui/dom",
+    "version": "1.8.0",
+    "license": "MIT",
+    "licenseFiles": [
+      "licenses/dependencies/@floating-ui__dom/LICENSE"
+    ]
+  },
+  {
+    "name": "@floating-ui/react-dom",
+    "version": "2.1.9",
+    "license": "MIT",
+    "licenseFiles": [
+      "licenses/dependencies/@floating-ui__react-dom/LICENSE"
+    ]
+  },
+  {
+    "name": "@floating-ui/utils",
+    "version": "0.2.12",
+    "license": "MIT",
+    "licenseFiles": [
+      "licenses/dependencies/@floating-ui__utils/LICENSE"
+    ]
+  },
+  {
+    "name": "@jridgewell/gen-mapping",
+    "version": "0.3.13",
+    "license": "MIT",
+    "licenseFiles": [
+      "licenses/dependencies/@jridgewell__gen-mapping/LICENSE"
+    ]
+  },
+  {
+    "name": "@jridgewell/remapping",
+    "version": "2.3.5",
+    "license": "MIT",
+    "licenseFiles": [
+      "licenses/dependencies/@jridgewell__remapping/LICENSE"
+    ]
+  },
+  {
+    "name": "@jridgewell/resolve-uri",
+    "version": "3.1.3",
+    "license": "MIT",
+    "licenseFiles": [
+      "licenses/dependencies/@jridgewell__resolve-uri/LICENSE"
+    ]
+  },
+  {
+    "name": "@jridgewell/sourcemap-codec",
+    "version": "1.6.0",
+    "license": "MIT",
+    "licenseFiles": [
+      "licenses/dependencies/@jridgewell__sourcemap-codec/LICENSE"
+    ]
+  },
+  {
+    "name": "@jridgewell/trace-mapping",
+    "version": "0.3.31",
+    "license": "MIT",
+    "licenseFiles": [
+      "licenses/dependencies/@jridgewell__trace-mapping/LICENSE"
+    ]
+  },
+  {
+    "name": "@tailwindcss/node",
+    "version": "4.2.1",
+    "license": "MIT",
+    "licenseFiles": [
+      "licenses/dependencies/@tailwindcss__node/LICENSE"
+    ]
+  },
+  {
+    "name": "class-variance-authority",
+    "version": "0.7.1",
+    "license": "Apache-2.0",
+    "licenseFiles": [
+      "licenses/dependencies/class-variance-authority/LICENSE"
+    ]
+  },
+  {
+    "name": "clsx",
+    "version": "2.1.1",
+    "license": "MIT",
+    "licenseFiles": [
+      "licenses/dependencies/clsx/license"
+    ]
+  },
+  {
+    "name": "detect-libc",
+    "version": "2.1.2",
+    "license": "Apache-2.0",
+    "licenseFiles": [
+      "licenses/dependencies/detect-libc/LICENSE"
+    ]
+  },
+  {
+    "name": "enhanced-resolve",
+    "version": "5.27.0",
+    "license": "MIT",
+    "licenseFiles": [
+      "licenses/dependencies/enhanced-resolve/LICENSE"
+    ]
+  },
+  {
+    "name": "esbuild",
+    "version": "0.25.12",
+    "license": "MIT",
+    "licenseFiles": [
+      "licenses/dependencies/esbuild/LICENSE.md"
+    ]
+  },
+  {
+    "name": "graceful-fs",
+    "version": "4.2.12",
+    "license": "BlueOak-1.0.0",
+    "licenseFiles": [
+      "licenses/dependencies/graceful-fs/LICENSE.md"
+    ]
+  },
+  {
+    "name": "jiti",
+    "version": "2.7.0",
+    "license": "MIT",
+    "licenseFiles": [
+      "licenses/dependencies/jiti/LICENSE"
+    ]
+  },
+  {
+    "name": "lightningcss",
+    "version": "1.31.1",
+    "license": "MPL-2.0",
+    "licenseFiles": [
+      "licenses/dependencies/lightningcss/LICENSE"
+    ]
+  },
+  {
+    "name": "lightningcss-win32-x64-msvc",
+    "version": "1.31.1",
+    "license": "MPL-2.0",
+    "licenseFiles": [
+      "licenses/dependencies/lightningcss-win32-x64-msvc/LICENSE"
+    ]
+  },
+  {
+    "name": "lucide-react",
+    "version": "0.564.0",
+    "license": "ISC",
+    "licenseFiles": [
+      "licenses/dependencies/lucide-react/LICENSE"
+    ]
+  },
+  {
+    "name": "magic-string",
+    "version": "0.30.21",
+    "license": "MIT",
+    "licenseFiles": [
+      "licenses/dependencies/magic-string/LICENSE"
+    ]
+  },
+  {
+    "name": "react",
+    "version": "19.3.1",
+    "license": "MIT",
+    "licenseFiles": [
+      "licenses/dependencies/react/LICENSE"
+    ]
+  },
+  {
+    "name": "react-dom",
+    "version": "19.3.1",
+    "license": "MIT",
+    "licenseFiles": [
+      "licenses/dependencies/react-dom/LICENSE"
+    ]
+  },
+  {
+    "name": "reselect",
+    "version": "5.3.0",
+    "license": "MIT",
+    "licenseFiles": [
+      "licenses/dependencies/reselect/LICENSE"
+    ]
+  },
+  {
+    "name": "scheduler",
+    "version": "0.28.0",
+    "license": "MIT",
+    "licenseFiles": [
+      "licenses/dependencies/scheduler/LICENSE"
+    ]
+  },
+  {
+    "name": "source-map-js",
+    "version": "1.2.4",
+    "license": "BSD-3-Clause",
+    "licenseFiles": [
+      "licenses/dependencies/source-map-js/LICENSE"
+    ]
+  },
+  {
+    "name": "tailwind-merge",
+    "version": "3.4.0",
+    "license": "MIT",
+    "licenseFiles": [
+      "licenses/dependencies/tailwind-merge/LICENSE.md"
+    ]
+  },
+  {
+    "name": "tailwindcss",
+    "version": "4.2.1",
+    "license": "MIT",
+    "licenseFiles": [
+      "licenses/dependencies/tailwindcss/LICENSE"
+    ]
+  },
+  {
+    "name": "tapable",
+    "version": "2.3.4",
+    "license": "MIT",
+    "licenseFiles": [
+      "licenses/dependencies/tapable/LICENSE"
+    ]
+  },
+  {
+    "name": "typescript",
+    "version": "5.9.3",
+    "license": "Apache-2.0",
+    "licenseFiles": [
+      "licenses/dependencies/typescript/LICENSE.txt"
+    ]
+  },
+  {
+    "name": "use-sync-external-store",
+    "version": "1.7.0",
+    "license": "MIT",
+    "licenseFiles": [
+      "licenses/dependencies/use-sync-external-store/LICENSE"
+    ]
+  }
+]

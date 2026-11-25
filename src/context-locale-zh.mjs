@@ -1,0 +1,3 @@
+// Labels only: no token/count/cache/percentage conversions; unknown provider labels pass through.
+const LABELS=new Map(Object.entries({'Cached context':'已缓存','Uncached context':'未缓存','Context':'上下文','Used context':'已用上下文','System prompt':'系统提示','System':'系统','Messages':'消息','Tools':'工具','Tool definitions':'工具定义','Skills':'技能','MCP tools':'MCP工具','Memory files':'记忆文件','Custom agents':'自定义代理','Context compacts automatically when needed.':'上下文按需自动压缩。'}));
+export function contextTextZh(value){if(typeof value!=='string')return value;return LABELS.get(value)??value.replace(/^Compacts automatically at about ([0-9,]+) tokens\.$/,'约$1词元时自动压缩。');}
