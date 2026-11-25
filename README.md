@@ -34,6 +34,20 @@
 
 每张图的逐项标注见 [图集说明](<docs/showcase/README.md>)。
 
+## 致敬与来源
+
+这个项目是**改造**出来的，不是从零写的。它站在三个 MIT 开源项目上：
+
+| 上游 | 作者 | 我们用了什么 |
+|---|---|---|
+| [T3 Code](https://github.com/pingdotgg/t3code) | T3 Tools Inc. | 整个客户端本体；只替换 `server.asar` 里的 10 个前端文件，后端与元数据不动 |
+| [Leobai03/t3code-quota-ui](https://github.com/Leobai03/t3code-quota-ui) v1.4.6 · `bc642365` | Leobai03 | 「紧凑额度栏 / 底部状态栏」的思路、费用页货币 toolbar、按账户分池与 `shared` 共享池展示；其 MIT 源码作为固定输入被 AST 复用 |
+| [nanami-0713/t3code](https://github.com/nanami-0713/t3code) · `d1bb533d` | nanami-0713 | 底栏的轮次 / 工具次数 / 词元速度 / 缓存统计 UI 与算法（统计口径原样保留） |
+
+本项目**不执行**上游 patcher、不分发它们的安装器，只复用 MIT 源码片段并针对 0.1.12 重新绑定锚点。逐项细节、许可与「我们的增量」见 [致敬与来源](<docs/CREDITS.md>)。
+
+如果上游作者认为某处引用不妥，请开 issue，我们会立即调整或移除。
+
 ## 下载与安装
 
 - [下载最新发行包](https://github.com/chengmignqi6-dot/t3code-quota-zh/releases/latest) → 选择 `t3code-quota-zh-1.1.1-windows.zip`，**完整解压**。
@@ -90,11 +104,7 @@ npm.cmd test
 
 ## 来源与许可
 
-- [T3 Code](https://github.com/pingdotgg/t3code)，MIT，T3 Tools Inc.
-- [Leobai03/t3code-quota-ui](https://github.com/Leobai03/t3code-quota-ui)，参考 v1.4.6 / `bc64236511ee61dae9b75beef3ea0275eb71b2dd`，MIT；公开源当前可能不可访问，已保留已有源码快照及许可记录。
-- [nanami-0713/t3code](https://github.com/nanami-0713/t3code)，`d1bb533d9b69165ce94f1add52f9dcb53dd15684`，MIT。
-
-本项目新增代码按 [MIT](<LICENSE>) 发布；第三方版权及依赖许可见 [THIRD_PARTY_NOTICES](<THIRD_PARTY_NOTICES.md>)。不代表上述项目或提供商的官方发行与背书。
+三处上游来源与「我们改了什么」见上方的 [致敬与来源](<docs/CREDITS.md>)。本项目新增代码按 [MIT](<LICENSE>) 发布；第三方版权及依赖许可见 [THIRD_PARTY_NOTICES](<THIRD_PARTY_NOTICES.md>)。不代表上述项目或提供商的官方发行与背书。
 
 ## 反馈
 

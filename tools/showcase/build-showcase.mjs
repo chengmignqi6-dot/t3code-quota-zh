@@ -347,6 +347,7 @@ function heroOverview(){
   S.push(t(96,y+46,desc,{size:12,fill:'#9a9aa8'}));
  });
  S.push(t(72,860,'演示数据 · 非真实项目 / 账号 / 会话',{size:11.5,fill:'#6b6b78'}));
+ S.push(t(1528,860,'基于 T3 Code · Leobai03/t3code-quota-ui · nanami-0713/t3code',{size:11.5,fill:'#6b6b78',anchor:'end'}));
  return svg(W,H,DEFS+S.join(''),{title:'T3 Code 精简额度栏 · 总览主图',desc:'深色主图：真实窗口中的精简底栏与原生控件。演示数据。'});
 }
 function heroStrip(){
@@ -367,6 +368,7 @@ function heroStrip(){
  S.push(r(1176,650,150,28,{fill:'#ffffff',rx:14,opacity:0.09}));
  S.push(t(1251,669,'点“周额度”',{size:12,fill:'#d4d4d8',anchor:'middle'}));
  S.push(t(72,860,'演示数据 · 非真实项目 / 账号 / 会话',{size:11.5,fill:'#6b6b78'}));
+ S.push(t(1528,860,'基于 T3 Code · Leobai03/t3code-quota-ui · nanami-0713/t3code',{size:11.5,fill:'#6b6b78',anchor:'end'}));
  return svg(W,H,DEFS+S.join(''),{title:'底栏与两个面板 · 主图',desc:'深色主图：底栏一行与上下文、额度两个弹层。演示数据。'});
 }
 function heroUsage(){
@@ -391,6 +393,7 @@ function heroUsage(){
  S.push(r(568,772,232,34,{fill:'#ffffff',rx:17,opacity:0.08}));
  S.push(t(684,794,'¥ CNY / $ USD',{size:12.5,fill:'#d4d4d8',anchor:'middle'}));
  S.push(t(72,860,'演示数据 · 非真实项目 / 账号 / 会话',{size:11.5,fill:'#6b6b78'}));
+ S.push(t(1528,860,'基于 T3 Code · Leobai03/t3code-quota-ui · nanami-0713/t3code',{size:11.5,fill:'#6b6b78',anchor:'end'}));
  return svg(W,H,DEFS+S.join(''),{title:'用量页 · 主图',desc:'深色主图：限制页与费用页并排。演示数据。'});
 }
 // ---------------- overview map ----------------
