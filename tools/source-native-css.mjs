@@ -32,8 +32,8 @@ export function guardOriginalEffortCss(css){
  for(const rule of unsafe){if(css.split(rule).length!==2)throw Error('Original effort visibility selector drift');css=css.replace(rule,'');}
  return css;
 }
-export async function buildNativeSourceCss({quietQuota=false}={}){
- const native=fs.readFileSync('work/pristine/apps/server/dist/client/assets/main-C7LLcwbG.css','utf8'),selectors=new Set(),properties=new Set(),keyframes=new Set();
+export async function buildNativeSourceCss({quietQuota=false,nativeCssPath='work/pristine/apps/server/dist/client/assets/main-C7LLcwbG.css'}={}){
+ const native=fs.readFileSync(nativeCssPath,'utf8'),selectors=new Set(),properties=new Set(),keyframes=new Set();
  parse(native,{Rule(rule){if(rule.type==='style')for(const selector of rule.value.selectors)selectors.add(JSON.stringify(selector));if(rule.type==='property')properties.add(rule.value.name);if(rule.type==='keyframes')keyframes.add(rule.value.name.value);}});
  const themePath='vendor/nanami-telemetry-d1bb533/apps/web/src/index.css',theme=fs.readFileSync(themePath),tree=JSON.parse(fs.readFileSync('work/upstream-telemetry-tree.json','utf8'));if(blob(theme)!==tree.tree.find(x=>x.path==='apps/web/src/index.css').sha)throw Error('Theme pin drift');
  const compiler=await compile(theme.toString(),{base:path.resolve('work/source-build-deps'),onDependency:()=>{}});

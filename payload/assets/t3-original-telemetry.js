@@ -32,7 +32,7 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
 ));
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
-// work/source-port/native-modules/react.js
+// work/source-port/native-modules-0.1.12/react.js
 var react_exports = {};
 __export(react_exports, {
   Activity: () => Activity,
@@ -84,7 +84,7 @@ __export(react_exports, {
 import { t as factory } from "./react-BP46yLMB.js";
 var React, react_default, Activity, Children, Component, Fragment, Profiler, PureComponent, StrictMode, Suspense, ViewTransition, __CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, __COMPILER_RUNTIME, addTransitionType, cache, cacheSignal, cloneElement, createContext, createElement, createRef, forwardRef, isValidElement, lazy, memo, startTransition, unstable_useCacheRefresh, use, useActionState, useCallback, useContext, useDebugValue, useDeferredValue, useEffect, useEffectEvent, useId, useImperativeHandle, useInsertionEffect, useLayoutEffect, useMemo, useOptimistic, useReducer, useRef, useState, useSyncExternalStore, useTransition, version;
 var init_react = __esm({
-  "work/source-port/native-modules/react.js"() {
+  "work/source-port/native-modules-0.1.12/react.js"() {
     React = factory();
     react_default = React;
     ({ Activity, Children, Component, Fragment, Profiler, PureComponent, StrictMode, Suspense, ViewTransition, __CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, __COMPILER_RUNTIME, addTransitionType, cache, cacheSignal, cloneElement, createContext, createElement, createRef, forwardRef, isValidElement, lazy, memo, startTransition, unstable_useCacheRefresh, use, useActionState, useCallback, useContext, useDebugValue, useDeferredValue, useEffect, useEffectEvent, useId, useImperativeHandle, useInsertionEffect, useLayoutEffect, useMemo, useOptimistic, useReducer, useRef, useState, useSyncExternalStore, useTransition, version } = React);
@@ -237,14 +237,53 @@ var require_with_selector = __commonJS({
   }
 });
 
-// src/quota-overview.jsx
+// src/original-composer-012-entry.jsx
 init_react();
+import { n as useNativeNavigate } from "./useNavigate-C3WU9Yd7.js";
 
-// work/source-port/native-modules/provider-availability.js
+// work/source-port/native-modules-0.1.12/context-locale.js
+var LABELS = new Map(Object.entries({ "Cached context": "\u5DF2\u7F13\u5B58", "Uncached context": "\u672A\u7F13\u5B58", "Context": "\u4E0A\u4E0B\u6587", "Used context": "\u5DF2\u7528\u4E0A\u4E0B\u6587", "System prompt": "\u7CFB\u7EDF\u63D0\u793A", "System": "\u7CFB\u7EDF", "Messages": "\u6D88\u606F", "Tools": "\u5DE5\u5177", "Tool definitions": "\u5DE5\u5177\u5B9A\u4E49", "Skills": "\u6280\u80FD", "MCP tools": "MCP\u5DE5\u5177", "Memory files": "\u8BB0\u5FC6\u6587\u4EF6", "Custom agents": "\u81EA\u5B9A\u4E49\u4EE3\u7406", "Context compacts automatically when needed.": "\u4E0A\u4E0B\u6587\u6309\u9700\u81EA\u52A8\u538B\u7F29\u3002" }));
+function contextTextZh(value) {
+  if (typeof value !== "string") return value;
+  return LABELS.get(value) ?? value.replace(/^Compacts automatically at about ([0-9,]+) tokens\.$/, "\u7EA6$1\u8BCD\u5143\u65F6\u81EA\u52A8\u538B\u7F29\u3002");
+}
+
+// work/source-port/native-modules-0.1.12/quota-locale.js
+var TEXT = new Map(Object.entries({ "Google account": "Google\u8D26\u53F7", "Other model pools": "\u5176\u4ED6\u989D\u5EA6", "Full limits panel": "\u5168\u90E8\u989D\u5EA6", "Refresh quota": "\u5237\u65B0", "Refreshing quota": "\u5237\u65B0\u4E2D", "routed": "\u8DEF\u7531", "Quota unavailable": "\u989D\u5EA6\u6682\u4E0D\u53EF\u7528", "Temporarily unavailable": "\u6682\u4E0D\u53EF\u7528", "Unavailable": "\u6682\u4E0D\u53EF\u7528", "Session": "\u672C\u6B21\u989D\u5EA6", "session": "\u672C\u6B21\u989D\u5EA6" }));
+function quotaTextZh(text) {
+  return TEXT.get(text) ?? text;
+}
+function quotaShortLabelZh(label) {
+  if (typeof label !== "string") return label;
+  if (label === "7d") return "\u5468\u989D\u5EA6";
+  const match = label.match(/^(\d+(?:\.\d+)?)([mhd])$/);
+  return match ? match[1] + { m: "\u5206", h: "\u5C0F\u65F6", d: "\u5929" }[match[2]] : quotaTextZh(label);
+}
+function quotaPoolLabelZh(label) {
+  if (typeof label !== "string") return label;
+  return label.replace(/Claude\s*&\s*GPT\s*\(shared\)/gi, "Claude/GPT\uFF08\u5171\u4EAB\uFF09").replace(/\b(\d+)\s*(?:-hour|hours?)\b/gi, "$1\u5C0F\u65F6").replace(/\bWeekly\b/gi, "\u5468\u989D\u5EA6").replace(/\bMonthly\b/gi, "\u6708\u989D\u5EA6").replace(/\bDaily\b/gi, "\u6BCF\u65E5\u989D\u5EA6");
+}
+function quotaPrimaryLabelZh(label, shortLabel) {
+  const short = quotaShortLabelZh(shortLabel);
+  if (typeof label === "string" && /\bClaude\b/i.test(label) && /\bGPT\b/i.test(label) && !(typeof short === "string" && /^(?:\d+(?:\.\d+)?(?:分|小时|天)|周额度|本次额度)$/.test(short))) return "\u989D\u5EA6";
+  return typeof short === "string" && /^(?:\d+(?:\.\d+)?(?:分|小时|天)|周额度|本次额度)$/.test(short) ? short : quotaPoolLabelZh(label);
+}
+function quotaResetZh(formatted) {
+  if (formatted === "0m" || formatted === "now") return "\u5373\u5C06\u91CD\u7F6E";
+  if (formatted === "<1m" || formatted === "< 1m") return "\u4E0D\u8DB31\u5206\u949F\u540E\u91CD\u7F6E";
+  if (typeof formatted !== "string" || !/^\d+[dhm](?:\s+\d+[dhm])*$/.test(formatted)) return "\u91CD\u7F6E\u65F6\u95F4\u672A\u77E5";
+  return formatted.replace(/(\d+)d/g, "$1\u5929").replace(/(\d+)h/g, "$1\u5C0F\u65F6").replace(/(\d+)m/g, "$1\u5206").replace(/\s+/g, "") + "\u540E\u91CD\u7F6E";
+}
+
+// work/source-port/native-modules-0.1.12/jsx-runtime.js
+import { i as factory2 } from "./with-selector-ehz1dnGQ.js";
+var { jsx, jsxs, Fragment: Fragment2 } = factory2();
+
+// work/source-port/native-modules-0.1.12/provider-availability.js
 var isProviderAvailable = (snapshot) => snapshot.availability !== "unavailable";
 
-// work/source-port/native-modules/date-time.js
-import { Of as nativeFormatIso } from "./network-DzfmnD4s.js";
+// work/source-port/native-modules-0.1.12/date-time.js
+import { Xf as nativeFormatIso } from "./network-IO1fFe6J.js";
 var formatIso = nativeFormatIso;
 function toEpochMillis(value) {
   return Date.parse(nativeFormatIso(value));
@@ -254,7 +293,7 @@ function makeUnsafe(epochMilliseconds) {
   return { epochMilliseconds };
 }
 
-// work/source-port/native-modules/shared.js
+// work/source-port/native-modules-0.1.12/shared.js
 var MINUTE = 6e4;
 var HOUR = 60 * MINUTE;
 var DAY = 24 * HOUR;
@@ -436,1252 +475,6 @@ function collectProviderUsageLimits(instanceId, providers, sources, now) {
   return { createdAt: formatIso(makeUnsafe(now)), accounts, notices };
 }
 
-// work/source-port/native-modules/metrics.js
-var MIN_TPS_DURATION_MS = 100;
-var MAX_REASONABLE_TTFT_MS = 36e5;
-function toEpochMs(value) {
-  if (value == null)
-    return null;
-  if (typeof value === "string") {
-    const parsed = Date.parse(value);
-    return Number.isFinite(parsed) ? parsed : null;
-  }
-  const ms = toEpochMillis(value);
-  return Number.isFinite(ms) ? ms : null;
-}
-function asPositiveNumber(value) {
-  return typeof value === "number" && Number.isFinite(value) && value >= 0 ? value : null;
-}
-function sumMergedIntervalDurationMs(intervals) {
-  const valid = intervals.filter((interval) => Number.isFinite(interval.start) && Number.isFinite(interval.end) && interval.end > interval.start).toSorted((left, right) => left.start - right.start);
-  if (valid.length === 0)
-    return 0;
-  let total = 0;
-  let currentStart = valid[0].start;
-  let currentEnd = valid[0].end;
-  for (let index2 = 1; index2 < valid.length; index2 += 1) {
-    const next = valid[index2];
-    if (next.start <= currentEnd) {
-      if (next.end > currentEnd)
-        currentEnd = next.end;
-    } else {
-      total += currentEnd - currentStart;
-      currentStart = next.start;
-      currentEnd = next.end;
-    }
-  }
-  return total + (currentEnd - currentStart);
-}
-function isModelGenerationItem(type) {
-  return type === "reasoning" || type === "assistant_message";
-}
-function isNonWorkItem(type) {
-  return type === "user_message" || type === "notification" || type === "system_notice" || type === "handoff" || type === "fork" || type === "checkpoint" || type === "compaction";
-}
-function resolveTurnBaselineMs(turn, attempt, run) {
-  return toEpochMs(turn.startedAt) ?? toEpochMs(attempt?.startedAt) ?? toEpochMs(run?.startedAt) ?? toEpochMs(run?.requestedAt);
-}
-function resolveTurnUsage(turn) {
-  const ttu = turn.turnTokenUsage;
-  const tu = turn.tokenUsage;
-  const inputTokens = asPositiveNumber(ttu?.inputTokens) ?? asPositiveNumber(tu?.inputTokens);
-  const cachedInputTokens = asPositiveNumber(ttu?.cachedInputTokens) ?? asPositiveNumber(tu?.cachedInputTokens);
-  const cacheCreationTokens = asPositiveNumber(ttu?.cacheCreationTokens);
-  const outputTokens = asPositiveNumber(ttu?.outputTokens) ?? asPositiveNumber(tu?.outputTokens);
-  const reasoningTokens = asPositiveNumber(ttu?.reasoningTokens) ?? asPositiveNumber(tu?.reasoningOutputTokens);
-  const usageStatus = ttu?.usageStatus ?? (tu !== void 0 ? "complete" : null);
-  return {
-    inputTokens,
-    cachedInputTokens,
-    cacheCreationTokens,
-    outputTokens,
-    reasoningTokens,
-    usageStatus
-  };
-}
-function computeRate(tokens, durationMs) {
-  if (tokens === null || tokens <= 0 || durationMs === null || durationMs < MIN_TPS_DURATION_MS) {
-    return null;
-  }
-  return tokens / (durationMs / 1e3);
-}
-function buildSnapshot(input) {
-  let firstModelOutputMs = null;
-  let firstToolMs = null;
-  let firstAnswerStartMs = null;
-  const generationIntervals = [];
-  const toolIntervals = [];
-  for (const item of input.items) {
-    if (isNonWorkItem(item.type))
-      continue;
-    const itemStart = toEpochMs(item.startedAt);
-    const itemEnd = toEpochMs(item.completedAt);
-    if (isModelGenerationItem(item.type)) {
-      if (itemStart !== null && (firstModelOutputMs === null || itemStart < firstModelOutputMs)) {
-        firstModelOutputMs = itemStart;
-      }
-      if (item.type === "assistant_message" && itemStart !== null && (firstAnswerStartMs === null || itemStart < firstAnswerStartMs)) {
-        firstAnswerStartMs = itemStart;
-      }
-      if (itemStart !== null && itemEnd !== null && itemEnd > itemStart) {
-        generationIntervals.push({ start: itemStart, end: itemEnd });
-      }
-    } else {
-      if (itemStart !== null && (firstToolMs === null || itemStart < firstToolMs)) {
-        firstToolMs = itemStart;
-      }
-      if (itemStart !== null && itemEnd !== null && itemEnd > itemStart) {
-        toolIntervals.push({ start: itemStart, end: itemEnd });
-      }
-    }
-  }
-  const firstTokenMs = firstModelOutputMs ?? firstToolMs;
-  const rawTtft = input.startMs !== null && firstTokenMs !== null ? Math.max(0, firstTokenMs - input.startMs) : null;
-  const ttftMs = rawTtft !== null && rawTtft <= MAX_REASONABLE_TTFT_MS ? rawTtft : null;
-  const rawFirstAnswer = input.startMs !== null && firstAnswerStartMs !== null ? Math.max(0, firstAnswerStartMs - input.startMs) : null;
-  const firstAnswerMs = rawFirstAnswer !== null && rawFirstAnswer <= MAX_REASONABLE_TTFT_MS && (ttftMs === null || Math.abs(rawFirstAnswer - ttftMs) >= 250) ? rawFirstAnswer : null;
-  const totalDurationMs = input.startMs !== null && input.endMs !== null && input.endMs > input.startMs ? input.endMs - input.startMs : null;
-  const mergedGenMs = sumMergedIntervalDurationMs(generationIntervals);
-  const generationDurationMs = mergedGenMs > 0 ? mergedGenMs : null;
-  const mergedToolMs = sumMergedIntervalDurationMs(toolIntervals);
-  const toolDurationMs = mergedToolMs > 0 ? mergedToolMs : null;
-  const effectiveGenMs = generationDurationMs !== null && generationDurationMs >= MIN_TPS_DURATION_MS ? generationDurationMs : totalDurationMs;
-  const generationTps = computeRate(input.outputTokens, effectiveGenMs);
-  const endToEndTps = computeRate(input.outputTokens, totalDurationMs);
-  const cacheHitPercent = input.inputTokens !== null && input.inputTokens > 0 && input.cachedInputTokens !== null ? Math.min(100, input.cachedInputTokens / input.inputTokens * 100) : null;
-  return {
-    providerTurnId: input.providerTurnId,
-    runId: input.runId,
-    status: input.status,
-    ttftMs,
-    firstAnswerMs,
-    generationDurationMs,
-    toolDurationMs,
-    totalDurationMs,
-    inputTokens: input.inputTokens,
-    cachedInputTokens: input.cachedInputTokens,
-    cacheCreationTokens: input.cacheCreationTokens,
-    cacheHitPercent,
-    outputTokens: input.outputTokens,
-    reasoningTokens: input.reasoningTokens,
-    generationTps,
-    endToEndTps,
-    usageStatus: input.usageStatus
-  };
-}
-function deriveTurnTelemetryIndex(projection) {
-  const byProviderTurnId = /* @__PURE__ */ new Map();
-  const byRunId = /* @__PURE__ */ new Map();
-  if (!projection || projection.providerTurns.length === 0) {
-    return {
-      byProviderTurnId,
-      byRunId,
-      latest: null,
-      latestWithCache: null,
-      sessionCacheHitPercent: null,
-      sessionCacheTurnCount: 0
-    };
-  }
-  const runsById = new Map(projection.runs.map((run) => [run.id, run]));
-  const attemptsById = new Map(projection.attempts.map((attempt) => [attempt.id, attempt]));
-  const itemsByTurnId = /* @__PURE__ */ new Map();
-  const itemsByRunId = /* @__PURE__ */ new Map();
-  for (const item of projection.turnItems) {
-    if (item.providerTurnId !== null) {
-      const list = itemsByTurnId.get(item.providerTurnId);
-      if (list)
-        list.push(item);
-      else
-        itemsByTurnId.set(item.providerTurnId, [item]);
-    }
-    if (item.runId !== null) {
-      const list = itemsByRunId.get(item.runId);
-      if (list)
-        list.push(item);
-      else
-        itemsByRunId.set(item.runId, [item]);
-    }
-  }
-  const turnsByRunId = /* @__PURE__ */ new Map();
-  let latest = null;
-  let latestSortMs = -1;
-  let latestWithCache = null;
-  let latestCacheSortMs = -1;
-  let totalCacheInput = 0;
-  let totalCacheRead = 0;
-  let sessionCacheTurnCount = 0;
-  for (const turn of projection.providerTurns) {
-    const attempt = turn.runAttemptId !== null ? attemptsById.get(turn.runAttemptId) : void 0;
-    const run = attempt !== void 0 ? runsById.get(attempt.runId) : void 0;
-    const runId = run?.id ?? attempt?.runId ?? null;
-    const turnItems = itemsByTurnId.get(turn.id) ?? [];
-    const startMs = resolveTurnBaselineMs(turn, attempt, run);
-    const endMs = toEpochMs(turn.completedAt) ?? toEpochMs(attempt?.completedAt);
-    const usage = resolveTurnUsage(turn);
-    const snapshot = buildSnapshot({
-      providerTurnId: turn.id,
-      runId,
-      status: turn.status,
-      startMs,
-      endMs,
-      items: turnItems,
-      ...usage
-    });
-    byProviderTurnId.set(turn.id, snapshot);
-    const sortMs = endMs ?? startMs ?? 0;
-    if (sortMs >= latestSortMs) {
-      latestSortMs = sortMs;
-      latest = snapshot;
-    }
-    if (snapshot.cacheHitPercent !== null && snapshot.inputTokens !== null && snapshot.inputTokens > 0) {
-      totalCacheInput += snapshot.inputTokens;
-      totalCacheRead += snapshot.cachedInputTokens ?? 0;
-      sessionCacheTurnCount += 1;
-      if (sortMs >= latestCacheSortMs) {
-        latestCacheSortMs = sortMs;
-        latestWithCache = snapshot;
-      }
-    }
-    if (runId !== null) {
-      const list = turnsByRunId.get(runId);
-      if (list)
-        list.push(turn);
-      else
-        turnsByRunId.set(runId, [turn]);
-    }
-  }
-  for (const [runId, turns] of turnsByRunId) {
-    if (turns.length === 1) {
-      const single = byProviderTurnId.get(turns[0].id);
-      if (single)
-        byRunId.set(runId, single);
-      continue;
-    }
-    const ordered = turns.toSorted((left, right) => left.ordinal - right.ordinal);
-    const firstTurn = ordered[0];
-    const lastTurn = ordered[ordered.length - 1];
-    const run = runsById.get(runId);
-    const firstAttempt = firstTurn.runAttemptId !== null ? attemptsById.get(firstTurn.runAttemptId) : void 0;
-    const startMs = resolveTurnBaselineMs(firstTurn, firstAttempt, run);
-    const endMs = toEpochMs(lastTurn.completedAt) ?? toEpochMs(run?.completedAt);
-    let inputTokens = null;
-    let cachedInputTokens = null;
-    let cacheCreationTokens = null;
-    let outputTokens = null;
-    let reasoningTokens = null;
-    let usageStatus = null;
-    for (const turn of ordered) {
-      const usage = resolveTurnUsage(turn);
-      if (usage.inputTokens !== null)
-        inputTokens = (inputTokens ?? 0) + usage.inputTokens;
-      if (usage.cachedInputTokens !== null) {
-        cachedInputTokens = (cachedInputTokens ?? 0) + usage.cachedInputTokens;
-      }
-      if (usage.cacheCreationTokens !== null) {
-        cacheCreationTokens = (cacheCreationTokens ?? 0) + usage.cacheCreationTokens;
-      }
-      if (usage.outputTokens !== null)
-        outputTokens = (outputTokens ?? 0) + usage.outputTokens;
-      if (usage.reasoningTokens !== null) {
-        reasoningTokens = (reasoningTokens ?? 0) + usage.reasoningTokens;
-      }
-      if (usage.usageStatus === "complete") {
-        usageStatus ??= "complete";
-      } else if (usage.usageStatus === "partial") {
-        usageStatus = "partial";
-      } else if (usage.usageStatus === "unavailable" && usageStatus === null) {
-        usageStatus = "unavailable";
-      }
-    }
-    byRunId.set(runId, buildSnapshot({
-      providerTurnId: lastTurn.id,
-      runId,
-      status: lastTurn.status,
-      startMs,
-      endMs,
-      items: itemsByRunId.get(runId) ?? [],
-      inputTokens,
-      cachedInputTokens,
-      cacheCreationTokens,
-      outputTokens,
-      reasoningTokens,
-      usageStatus
-    }));
-  }
-  const sessionCacheHitPercent = totalCacheInput > 0 ? Math.min(100, totalCacheRead / totalCacheInput * 100) : null;
-  return {
-    byProviderTurnId,
-    byRunId,
-    latest,
-    latestWithCache,
-    sessionCacheHitPercent,
-    sessionCacheTurnCount
-  };
-}
-function lookupTurnTelemetry(index2, target) {
-  if (!index2)
-    return null;
-  if (target.runId != null) {
-    const byRun = index2.byRunId.get(target.runId);
-    if (byRun)
-      return byRun;
-  }
-  if (target.providerTurnId != null) {
-    return index2.byProviderTurnId.get(target.providerTurnId) ?? null;
-  }
-  return null;
-}
-function formatLatencyMs(ms) {
-  if (!Number.isFinite(ms) || ms < 0)
-    return "0ms";
-  if (ms < 1e3)
-    return `${Math.round(ms)}ms`;
-  const seconds = ms / 1e3;
-  if (seconds < 60) {
-    return `${seconds.toFixed(1)}s`;
-  }
-  const wholeMinutes = Math.floor(seconds / 60);
-  const remainderSeconds = Math.round(seconds % 60);
-  return remainderSeconds === 60 ? `${wholeMinutes + 1}m` : remainderSeconds === 0 ? `${wholeMinutes}m` : `${wholeMinutes}m ${remainderSeconds}s`;
-}
-function formatCompactTokenCount(value) {
-  if (!Number.isFinite(value) || value <= 0)
-    return "0";
-  if (value < 1e3)
-    return `${Math.round(value)}`;
-  if (value < 1e4)
-    return `${(value / 1e3).toFixed(1).replace(/\.0$/, "")}k`;
-  if (value < 999500)
-    return `${Math.round(value / 1e3)}k`;
-  return `${(value / 1e6).toFixed(2).replace(/\.?0+$/, "")}m`;
-}
-var ROUTE_PREFIX_TO_DRIVER = {
-  antigravity: "antigravity",
-  codex: "codex",
-  openai: "codex",
-  claude: "claudeAgent",
-  anthropic: "claudeAgent",
-  cursor: "cursor",
-  grok: "grok",
-  xai: "grok",
-  opencode: "opencode",
-  "opencode-go": "opencode"
-};
-var NON_CLAUDE_MODEL_PREFIXES = [
-  "glm-",
-  "glm4",
-  "glm5",
-  "deepseek",
-  "qwen",
-  "kimi",
-  "moonshot",
-  "minimax",
-  "doubao",
-  "gpt-",
-  "o1",
-  "o3",
-  "o4",
-  "gemini-",
-  "grok-",
-  "llama",
-  "mistral"
-];
-function stripContextSuffix(model) {
-  return model.trim().replace(/\[[^\]]+\]$/, "");
-}
-function parseModelQuotaTarget(model) {
-  if (!model?.trim())
-    return null;
-  const raw = model.trim();
-  const normalized = stripContextSuffix(raw);
-  const slashIndex = normalized.indexOf("/");
-  if (slashIndex > 0) {
-    const routePrefix = normalized.slice(0, slashIndex).trim().toLowerCase();
-    const bareModel = normalized.slice(slashIndex + 1).trim();
-    const targetDriver = ROUTE_PREFIX_TO_DRIVER[routePrefix] ?? null;
-    return {
-      raw,
-      normalized,
-      routePrefix,
-      bareModel: bareModel || normalized,
-      targetDriver,
-      externalVendor: targetDriver === null ? routePrefix : null
-    };
-  }
-  return {
-    raw,
-    normalized,
-    routePrefix: null,
-    bareModel: normalized,
-    targetDriver: null,
-    externalVendor: null
-  };
-}
-function isNonClaudeModelOnClaudeDriver(driver, parsed) {
-  if (driver !== "claudeAgent" || parsed === null)
-    return false;
-  if (parsed.externalVendor !== null)
-    return true;
-  if (parsed.targetDriver !== null && parsed.targetDriver !== "claudeAgent")
-    return true;
-  const lower = parsed.bareModel.toLowerCase();
-  return NON_CLAUDE_MODEL_PREFIXES.some((prefix) => lower.startsWith(prefix));
-}
-function isCustomApiInstance(provider) {
-  if (!provider)
-    return false;
-  if (provider.usageLimits?.unavailable?.reason === "unsupported")
-    return true;
-  const authLabel = provider.auth.label?.toLowerCase() ?? "";
-  return authLabel.includes("custom api") || authLabel.includes("api key");
-}
-var WINDOW_KIND_PRIORITY = {
-  session: 0,
-  weekly: 1,
-  monthly: 2,
-  other: 3
-};
-var DRIVER_NATIVE_PROVIDER_IDS = {
-  claudeAgent: ["claude", "anthropic"],
-  codex: ["codex", "openai"],
-  antigravity: ["antigravity"],
-  cursor: ["cursor"],
-  grok: ["grok", "xai"],
-  opencode: ["opencode", "opencode-go"]
-};
-function matchesActiveModel(window2, driver, model) {
-  if (!model)
-    return true;
-  const parsed = parseModelQuotaTarget(model);
-  const bare = parsed?.bareModel ?? model;
-  const bareLower = bare.toLowerCase();
-  const normalizedLower = (parsed?.normalized ?? model).toLowerCase();
-  if (window2.modelIds !== void 0 && !window2.modelIds.some((id) => id === model || id.toLowerCase() === normalizedLower || stripContextSuffix(id).toLowerCase() === bareLower)) {
-    return false;
-  }
-  if (window2.providerIds !== void 0) {
-    const prefix = parsed?.routePrefix ?? "";
-    if (prefix) {
-      if (!window2.providerIds.some((id) => id.toLowerCase() === prefix)) {
-        return false;
-      }
-    } else if (driver !== null) {
-      const nativeIds = DRIVER_NATIVE_PROVIDER_IDS[String(driver)] ?? [
-        String(driver).toLowerCase()
-      ];
-      if (!window2.providerIds.some((id) => nativeIds.includes(id.toLowerCase()))) {
-        return false;
-      }
-    }
-  }
-  if (driver === "antigravity") {
-    const idLower = window2.id.toLowerCase();
-    if (bareLower.includes("argon") && idLower.startsWith("gemini-carbon-"))
-      return false;
-    if (bareLower.includes("carbon") && idLower.startsWith("gemini-argon-"))
-      return false;
-    const family = bareLower.match(/^(gemini|claude|gpt)-/)?.[1];
-    const pool = idLower.match(/^(gemini|claude|gpt|3p)-/)?.[1];
-    if (family !== void 0 && pool !== void 0) {
-      return pool === family || pool === "3p" && (family === "claude" || family === "gpt");
-    }
-  }
-  return true;
-}
-function modelSpecificPoolBonus(window2, driver, activeModel) {
-  if (driver !== "antigravity" || !activeModel)
-    return 0;
-  const bareLower = (parseModelQuotaTarget(activeModel)?.bareModel ?? activeModel).toLowerCase();
-  const idLower = window2.id.toLowerCase();
-  if (bareLower.includes("argon") && idLower.startsWith("gemini-argon-"))
-    return -1;
-  if (bareLower.includes("carbon") && idLower.startsWith("gemini-carbon-"))
-    return -1;
-  return 0;
-}
-function selectPrimaryUsageWindows(input) {
-  const all = input.limits?.windows ?? [];
-  if (all.length === 0)
-    return { inline: [], sibling: [], all: [], overflowCount: 0 };
-  const maxInline = input.maxInline ?? 2;
-  const matching = all.filter((window2) => matchesActiveModel(window2, input.driver, input.activeModel));
-  const pool = matching.length > 0 ? matching : all;
-  const ranked = pool.toSorted((left, right) => {
-    const kindDiff = WINDOW_KIND_PRIORITY[left.kind] - WINDOW_KIND_PRIORITY[right.kind];
-    if (kindDiff !== 0)
-      return kindDiff;
-    const bonusDiff = modelSpecificPoolBonus(left, input.driver, input.activeModel) - modelSpecificPoolBonus(right, input.driver, input.activeModel);
-    if (bonusDiff !== 0)
-      return bonusDiff;
-    return remainingPercent(left) - remainingPercent(right);
-  });
-  const inline4 = [];
-  const seenKinds = /* @__PURE__ */ new Set();
-  for (const window2 of ranked) {
-    if (inline4.length >= maxInline)
-      break;
-    if (!seenKinds.has(window2.kind)) {
-      inline4.push(window2);
-      seenKinds.add(window2.kind);
-    }
-  }
-  for (const window2 of ranked) {
-    if (inline4.length >= maxInline)
-      break;
-    if (!inline4.some((entry) => entry.id === window2.id)) {
-      inline4.push(window2);
-    }
-  }
-  const inlineIds = new Set(inline4.map((window2) => window2.id));
-  const sibling = all.filter((window2) => !inlineIds.has(window2.id));
-  return {
-    inline: inline4,
-    sibling,
-    all,
-    overflowCount: sibling.length
-  };
-}
-function accountProviderIds(account) {
-  const ids = /* @__PURE__ */ new Set();
-  for (const window2 of account.usageLimits.windows) {
-    for (const id of window2.providerIds ?? []) {
-      const normalized = id.trim().toLowerCase();
-      if (normalized)
-        ids.add(normalized);
-    }
-  }
-  return ids;
-}
-function formatSourceAccountPlan(plan, totalMatches) {
-  const trimmed = plan?.trim() || null;
-  if (totalMatches > 1) {
-    return trimmed ? `${trimmed} \xB7 ${totalMatches} accts` : `${totalMatches} accts`;
-  }
-  return trimmed;
-}
-function scoreSourceAccount(account, activeModel) {
-  const windows2 = account.usageLimits.windows;
-  const matching = windows2.filter((window2) => matchesActiveModel(window2, account.driver, activeModel));
-  const pool = matching.length > 0 ? matching : windows2;
-  const hasSpecificBonus = pool.some((window2) => modelSpecificPoolBonus(window2, account.driver, activeModel) < 0);
-  const maxUsed = pool.reduce((max2, window2) => Math.max(max2, window2.usedPercent), 0);
-  const minRemaining = pool.reduce((min2, window2) => Math.min(min2, remainingPercent(window2)), 100);
-  const isActivelySpending = maxUsed > 0 && minRemaining > 0;
-  let score = 0;
-  if (hasSpecificBonus)
-    score += 1e3;
-  if (isActivelySpending)
-    score += 500 + maxUsed;
-  else if (minRemaining > 0)
-    score += 200;
-  else
-    score += minRemaining;
-  return score;
-}
-function resolveUsableSourceAccount(input) {
-  const vendor = input.vendorPrefix?.trim().toLowerCase() || null;
-  const driver = input.driver ?? null;
-  const nativeDriverIds = driver !== null ? new Set(DRIVER_NATIVE_PROVIDER_IDS[String(driver)] ?? [String(driver).toLowerCase()]) : null;
-  const candidates = [];
-  for (const source of input.sources) {
-    for (const account of source.accounts) {
-      if (limitsNotice(account.usageLimits) !== null || account.usageLimits.windows.length === 0) {
-        continue;
-      }
-      const providerIds = accountProviderIds(account);
-      let matched = false;
-      if (vendor !== null) {
-        matched = providerIds.has(vendor) || account.id.toLowerCase().startsWith(`${vendor}:`);
-      } else if (driver !== null && account.driver === driver) {
-        if (providerIds.size === 0) {
-          matched = true;
-        } else if (nativeDriverIds !== null) {
-          matched = [...providerIds].some((id) => nativeDriverIds.has(id));
-        }
-      }
-      if (!matched)
-        continue;
-      candidates.push({
-        source,
-        account,
-        score: scoreSourceAccount(account, input.activeModel)
-      });
-    }
-  }
-  if (candidates.length === 0)
-    return null;
-  candidates.sort((left, right) => right.score - left.score);
-  const winner = candidates[0];
-  const label = winner.account.displayName?.trim() || winner.source.label || String(winner.account.driver);
-  return {
-    source: winner.source,
-    account: winner.account,
-    label,
-    plan: formatSourceAccountPlan(winner.account.plan, candidates.length),
-    sourceLabel: winner.source.kind === "magpie" ? "Magpie" : winner.source.label
-  };
-}
-function collectOtherActiveSubscriptions(providers, sources, now, excludeInstanceId) {
-  const seenPools = /* @__PURE__ */ new Set();
-  const summaries = [];
-  for (const provider of providers) {
-    if (!provider.enabled || !provider.installed)
-      continue;
-    if (excludeInstanceId !== null && provider.instanceId === excludeInstanceId)
-      continue;
-    const report = collectProviderUsageLimits(provider.instanceId, providers, sources, now);
-    const account = report?.accounts.find((entry) => entry.instanceId === provider.instanceId);
-    const limits = account?.limits ?? provider.usageLimits;
-    if (!limits || limitsNotice(limits) !== null || limits.windows.length === 0)
-      continue;
-    const poolKey = `driver:${provider.driver}`;
-    if (seenPools.has(poolKey))
-      continue;
-    seenPools.add(poolKey);
-    const picked = selectPrimaryUsageWindows({ limits, driver: provider.driver, maxInline: 2 });
-    summaries.push({
-      instanceId: String(provider.instanceId),
-      driver: provider.driver,
-      label: account?.displayName ?? provider.displayName ?? String(provider.driver),
-      plan: account?.plan ?? provider.auth.label ?? null,
-      windows: picked.inline
-    });
-  }
-  const groupedSources = /* @__PURE__ */ new Map();
-  for (const source of sources) {
-    for (const account of source.accounts) {
-      if (limitsNotice(account.usageLimits) !== null || account.usageLimits.windows.length === 0) {
-        continue;
-      }
-      const providerIds = [...accountProviderIds(account)];
-      const vendorKey = providerIds[0] ?? String(account.driver);
-      const nativeKey = `driver:${account.driver}`;
-      if (providerIds.length === 0 && seenPools.has(nativeKey)) {
-        continue;
-      }
-      if (providerIds.length > 0 && (DRIVER_NATIVE_PROVIDER_IDS[String(account.driver)] ?? []).includes(vendorKey) && seenPools.has(nativeKey)) {
-        continue;
-      }
-      const list = groupedSources.get(vendorKey);
-      if (list)
-        list.push({ source, account });
-      else
-        groupedSources.set(vendorKey, [{ source, account }]);
-    }
-  }
-  for (const [vendorKey, entries] of groupedSources) {
-    if (seenPools.has(`vendor:${vendorKey}`))
-      continue;
-    seenPools.add(`vendor:${vendorKey}`);
-    const ranked = entries.toSorted((left, right) => scoreSourceAccount(right.account, null) - scoreSourceAccount(left.account, null));
-    const winner = ranked[0];
-    const picked = selectPrimaryUsageWindows({
-      limits: winner.account.usageLimits,
-      driver: winner.account.driver,
-      maxInline: 2
-    });
-    if (picked.inline.length === 0)
-      continue;
-    summaries.push({
-      instanceId: `${winner.source.id}:${winner.account.id}`,
-      driver: winner.account.driver,
-      label: winner.account.displayName?.trim() || vendorKey,
-      plan: formatSourceAccountPlan(winner.account.plan, entries.length),
-      windows: picked.inline
-    });
-  }
-  return summaries;
-}
-function resolveUsableProviderForDriver(input) {
-  for (const provider of input.providers) {
-    if (provider.driver !== input.driver || !provider.enabled || !provider.installed)
-      continue;
-    const report = collectProviderUsageLimits(provider.instanceId, input.providers, input.sources, input.now);
-    const account = report?.accounts.find((entry) => entry.instanceId === provider.instanceId);
-    const limits = account?.limits ?? provider.usageLimits;
-    if (!limits || limitsNotice(limits) !== null || limits.windows.length === 0)
-      continue;
-    return {
-      provider,
-      limits,
-      plan: account?.plan ?? provider.auth.label ?? null,
-      label: account?.displayName ?? provider.displayName ?? String(provider.driver)
-    };
-  }
-  return null;
-}
-function resolveModelQuotaState(input) {
-  const selected = input.providerInstanceId !== null ? input.providers.find((provider) => provider.instanceId === input.providerInstanceId) : void 0;
-  const parsed = parseModelQuotaTarget(input.activeModel);
-  if (parsed?.externalVendor) {
-    const vendorSource = resolveUsableSourceAccount({
-      sources: input.sources,
-      vendorPrefix: parsed.externalVendor,
-      activeModel: parsed.normalized
-    });
-    if (vendorSource) {
-      const picked = selectPrimaryUsageWindows({
-        limits: vendorSource.account.usageLimits,
-        driver: vendorSource.account.driver,
-        activeModel: parsed.normalized,
-        maxInline: 2
-      });
-      return {
-        kind: "subscription",
-        label: vendorSource.label,
-        plan: vendorSource.plan,
-        modelLabel: parsed.bareModel,
-        driver: vendorSource.account.driver,
-        matchedInstanceId: null,
-        isRoutedMatch: true,
-        sourceLabel: vendorSource.sourceLabel,
-        limits: vendorSource.account.usageLimits,
-        primaryWindows: picked.inline,
-        siblingWindows: picked.sibling,
-        unavailableNotice: null
-      };
-    }
-  }
-  if (parsed?.targetDriver && selected && parsed.targetDriver !== selected.driver) {
-    const routed = resolveUsableProviderForDriver({
-      driver: parsed.targetDriver,
-      providers: input.providers,
-      sources: input.sources,
-      now: input.now
-    });
-    if (routed) {
-      const picked = selectPrimaryUsageWindows({
-        limits: routed.limits,
-        driver: routed.provider.driver,
-        activeModel: parsed.bareModel,
-        maxInline: 2
-      });
-      return {
-        kind: "subscription",
-        label: routed.label,
-        plan: routed.plan,
-        modelLabel: parsed.bareModel,
-        driver: routed.provider.driver,
-        matchedInstanceId: routed.provider.instanceId,
-        isRoutedMatch: true,
-        limits: routed.limits,
-        primaryWindows: picked.inline,
-        siblingWindows: picked.sibling,
-        unavailableNotice: null
-      };
-    }
-    const routedSource = resolveUsableSourceAccount({
-      sources: input.sources,
-      vendorPrefix: parsed.routePrefix,
-      driver: parsed.targetDriver,
-      activeModel: parsed.bareModel
-    });
-    if (routedSource) {
-      const picked = selectPrimaryUsageWindows({
-        limits: routedSource.account.usageLimits,
-        driver: routedSource.account.driver,
-        activeModel: parsed.bareModel,
-        maxInline: 2
-      });
-      return {
-        kind: "subscription",
-        label: routedSource.label,
-        plan: routedSource.plan,
-        modelLabel: parsed.bareModel,
-        driver: routedSource.account.driver,
-        matchedInstanceId: null,
-        isRoutedMatch: true,
-        sourceLabel: routedSource.sourceLabel,
-        limits: routedSource.account.usageLimits,
-        primaryWindows: picked.inline,
-        siblingWindows: picked.sibling,
-        unavailableNotice: null
-      };
-    }
-  }
-  const customEndpoint = isCustomApiInstance(selected);
-  const foreignModel = isNonClaudeModelOnClaudeDriver(selected?.driver ?? null, parsed);
-  if (selected && foreignModel && parsed && !parsed.externalVendor) {
-    const lowerBare = parsed.bareModel.toLowerCase();
-    const inferredVendor = lowerBare.startsWith("glm") ? "zcode" : null;
-    if (inferredVendor) {
-      const inferredSource = resolveUsableSourceAccount({
-        sources: input.sources,
-        vendorPrefix: inferredVendor,
-        activeModel: `${inferredVendor}/${parsed.bareModel}`
-      });
-      if (inferredSource) {
-        const picked = selectPrimaryUsageWindows({
-          limits: inferredSource.account.usageLimits,
-          driver: inferredSource.account.driver,
-          activeModel: `${inferredVendor}/${parsed.bareModel}`,
-          maxInline: 2
-        });
-        return {
-          kind: "subscription",
-          label: inferredSource.label,
-          plan: inferredSource.plan,
-          modelLabel: parsed.bareModel,
-          driver: inferredSource.account.driver,
-          matchedInstanceId: null,
-          isRoutedMatch: true,
-          sourceLabel: inferredSource.sourceLabel,
-          limits: inferredSource.account.usageLimits,
-          primaryWindows: picked.inline,
-          siblingWindows: picked.sibling,
-          unavailableNotice: null
-        };
-      }
-    }
-  }
-  if (selected && (foreignModel || customEndpoint && parsed?.externalVendor !== null)) {
-    const vendorLabel = parsed?.externalVendor ?? parsed?.routePrefix ?? "API";
-    const hostLabel = selected.displayName?.trim() || String(selected.instanceId);
-    return {
-      kind: "unmetered-model",
-      vendorLabel,
-      modelLabel: parsed?.bareModel ?? null,
-      hostLabel,
-      reason: `Routed via ${vendorLabel} (${hostLabel}); no model-level subscription quota reported.`,
-      otherSubscriptions: collectOtherActiveSubscriptions(input.providers, input.sources, input.now, selected.instanceId)
-    };
-  }
-  if (!selected)
-    return { kind: "none" };
-  if (!customEndpoint) {
-    const report = collectProviderUsageLimits(selected.instanceId, input.providers, input.sources, input.now);
-    const reportAccount = report?.accounts.find((entry) => entry.instanceId === selected.instanceId);
-    const limits = reportAccount?.limits ?? selected.usageLimits ?? null;
-    if (limits && limitsNotice(limits) === null && limits.windows.length > 0) {
-      const picked = selectPrimaryUsageWindows({
-        limits,
-        driver: selected.driver,
-        activeModel: parsed?.bareModel ?? input.activeModel,
-        maxInline: 2
-      });
-      return {
-        kind: "subscription",
-        label: reportAccount?.displayName ?? selected.displayName ?? String(selected.driver),
-        plan: reportAccount?.plan ?? selected.auth.label ?? null,
-        modelLabel: parsed?.bareModel ?? null,
-        driver: selected.driver,
-        matchedInstanceId: selected.instanceId,
-        isRoutedMatch: false,
-        limits,
-        primaryWindows: picked.inline,
-        siblingWindows: picked.sibling,
-        unavailableNotice: null
-      };
-    }
-  }
-  const driverSource = resolveUsableSourceAccount({
-    sources: input.sources,
-    driver: selected.driver,
-    activeModel: parsed?.bareModel ?? input.activeModel
-  });
-  if (driverSource) {
-    const picked = selectPrimaryUsageWindows({
-      limits: driverSource.account.usageLimits,
-      driver: driverSource.account.driver,
-      activeModel: parsed?.bareModel ?? input.activeModel,
-      maxInline: 2
-    });
-    return {
-      kind: "subscription",
-      label: driverSource.label,
-      plan: driverSource.plan,
-      modelLabel: parsed?.bareModel ?? null,
-      driver: driverSource.account.driver,
-      matchedInstanceId: null,
-      isRoutedMatch: true,
-      sourceLabel: driverSource.sourceLabel,
-      limits: driverSource.account.usageLimits,
-      primaryWindows: picked.inline,
-      siblingWindows: picked.sibling,
-      unavailableNotice: null
-    };
-  }
-  if (customEndpoint) {
-    const hostLabel = selected.displayName?.trim() || String(selected.instanceId);
-    return {
-      kind: "unmetered-model",
-      vendorLabel: parsed?.routePrefix ?? "API",
-      modelLabel: parsed?.bareModel ?? null,
-      hostLabel,
-      reason: `${hostLabel} uses a custom API endpoint without subscription limits for this model.`,
-      otherSubscriptions: collectOtherActiveSubscriptions(input.providers, input.sources, input.now, selected.instanceId)
-    };
-  }
-  const fallbackLimits = selected.usageLimits ?? null;
-  if (!fallbackLimits)
-    return { kind: "none" };
-  const notice = limitsNotice(fallbackLimits);
-  if (!notice)
-    return { kind: "none" };
-  return {
-    kind: "subscription",
-    label: selected.displayName ?? String(selected.driver),
-    plan: selected.auth.label ?? null,
-    modelLabel: parsed?.bareModel ?? null,
-    driver: selected.driver,
-    matchedInstanceId: selected.instanceId,
-    isRoutedMatch: false,
-    limits: fallbackLimits,
-    primaryWindows: [],
-    siblingWindows: [],
-    unavailableNotice: notice
-  };
-}
-function deriveQuotaWindowMetrics(window2, now) {
-  const remaining = remainingPercent(window2);
-  const used = Math.max(0, Math.min(100, 100 - remaining));
-  const timeRemaining = paceRemainingPercent(window2, now);
-  const pace = paceOf(window2, now);
-  const headroomDelta = timeRemaining !== null ? Math.round(remaining - timeRemaining) : null;
-  const parsedReset = window2.resetsAt ? Date.parse(window2.resetsAt) : Number.NaN;
-  const resetsAtMs = Number.isFinite(parsedReset) ? parsedReset : null;
-  const resetsInMs = resetsAtMs !== null && resetsAtMs > now ? resetsAtMs - now : null;
-  let projectedRunwayMs = null;
-  if (used >= 5 && remaining > 0 && timeRemaining !== null && timeRemaining < 98 && resetsInMs !== null && typeof window2.windowDurationMins === "number" && window2.windowDurationMins > 0) {
-    const windowMs = window2.windowDurationMins * 6e4;
-    const elapsedMs = windowMs * ((100 - timeRemaining) / 100);
-    if (elapsedMs > 0) {
-      const runwayMs = remaining / used * elapsedMs;
-      if (Number.isFinite(runwayMs) && runwayMs > 0 && runwayMs < resetsInMs * 0.95) {
-        projectedRunwayMs = runwayMs;
-      }
-    }
-  }
-  return {
-    remaining,
-    used,
-    timeRemaining,
-    pace,
-    headroomDelta,
-    resetsAtMs,
-    resetsInMs,
-    projectedRunwayMs
-  };
-}
-function toneForContextCategory(id, name, index2) {
-  const key = (id ?? name).toLowerCase();
-  if (key.includes("message"))
-    return "sky";
-  if (key.includes("mcp"))
-    return "amber";
-  if (key.includes("system_prompt") || key.includes("system prompt"))
-    return "emerald";
-  if (key.includes("system_tool") || key.includes("system tool"))
-    return "violet";
-  if (key.includes("skill") || key.includes("memory") || key.includes("agent") || key.includes("custom")) {
-    return "slate";
-  }
-  const palette = ["sky", "amber", "emerald", "violet", "slate"];
-  return palette[index2 % palette.length] ?? "slate";
-}
-function deriveContextWindowBreakdown(input) {
-  const usedTokens = Math.max(0, Math.round(input.usage.usedTokens));
-  const maxTokens = input.usage.maxTokens != null && input.usage.maxTokens > 0 ? Math.round(input.usage.maxTokens) : null;
-  const usedPercent = maxTokens !== null && input.usage.usedPercentage !== null ? Math.max(0, Math.min(100, input.usage.usedPercentage)) : maxTokens !== null ? Math.min(100, usedTokens / maxTokens * 100) : null;
-  const remainingTokens = maxTokens !== null ? Math.max(0, maxTokens - usedTokens) : null;
-  const percentOfMax = (tokens) => maxTokens !== null ? tokens / maxTokens * 100 : null;
-  const autoCompactThreshold = input.usage.autoCompactThreshold != null && input.usage.autoCompactThreshold > 0 ? Math.round(input.usage.autoCompactThreshold) : null;
-  const snapInput = input.usage.lastInputTokens ?? input.usage.inputTokens ?? null;
-  const snapCached = input.usage.lastCachedInputTokens ?? input.usage.cachedInputTokens ?? null;
-  const turn = input.latestTurn;
-  const lastCacheHitPercent = turn?.cacheHitPercent ?? (snapInput !== null && snapInput > 0 && snapCached !== null ? Math.min(100, snapCached / snapInput * 100) : null);
-  const sessionCacheHitPercent = input.sessionCacheHitPercent ?? null;
-  const sessionCacheTurnCount = input.sessionCacheTurnCount ?? 0;
-  const nativeBreakdown = input.usage.contextBreakdown ?? null;
-  if (nativeBreakdown !== null && nativeBreakdown.categories.length > 0) {
-    const segments2 = [];
-    const deferredRows = [];
-    let bufferTokens = null;
-    let freeTokens = null;
-    for (const [index2, category] of nativeBreakdown.categories.entries()) {
-      if (category.kind === "used") {
-        if (category.tokens <= 0)
-          continue;
-        segments2.push({
-          id: category.id ?? `cat-${index2}`,
-          label: category.name,
-          tokens: category.tokens,
-          percentOfMax: percentOfMax(category.tokens),
-          tone: toneForContextCategory(category.id, category.name, index2)
-        });
-      } else if (category.kind === "buffer") {
-        if (category.tokens > 0)
-          bufferTokens = (bufferTokens ?? 0) + category.tokens;
-      } else if (category.kind === "free") {
-        freeTokens = (freeTokens ?? 0) + category.tokens;
-      } else if (category.kind === "deferred") {
-        if (category.tokens <= 0)
-          continue;
-        deferredRows.push({
-          id: category.id ?? `deferred-${index2}`,
-          label: category.name,
-          tokens: category.tokens
-        });
-      }
-    }
-    const fallbackBuffer = maxTokens !== null && autoCompactThreshold !== null && autoCompactThreshold < maxTokens ? Math.max(0, maxTokens - autoCompactThreshold) : null;
-    const autoCompactBufferTokens2 = bufferTokens ?? fallbackBuffer;
-    const autoCompactBufferPercent2 = autoCompactBufferTokens2 !== null ? percentOfMax(autoCompactBufferTokens2) : null;
-    const freeSpaceTokens2 = freeTokens ?? (remainingTokens !== null ? Math.max(0, remainingTokens - (autoCompactBufferTokens2 ?? 0)) : null);
-    const freeSpacePercent2 = freeSpaceTokens2 !== null ? percentOfMax(freeSpaceTokens2) : null;
-    return {
-      mode: "categories",
-      usedTokens,
-      maxTokens,
-      usedPercent,
-      remainingTokens,
-      autoCompactThreshold,
-      autoCompactBufferTokens: autoCompactBufferTokens2,
-      autoCompactBufferPercent: autoCompactBufferPercent2,
-      freeSpaceTokens: freeSpaceTokens2,
-      freeSpacePercent: freeSpacePercent2,
-      segments: segments2,
-      deferredRows,
-      turnCount: input.turnCount,
-      toolCallCount: input.toolCallCount,
-      skillCount: nativeBreakdown.skillCount ?? input.skillCount,
-      mcpToolCount: nativeBreakdown.mcpToolCount ?? null,
-      memoryFileCount: nativeBreakdown.memoryFileCount ?? null,
-      customAgentCount: nativeBreakdown.customAgentCount ?? null,
-      lastCacheHitPercent,
-      sessionCacheHitPercent,
-      sessionCacheTurnCount
-    };
-  }
-  const autoCompactBufferTokens = maxTokens !== null && autoCompactThreshold !== null && autoCompactThreshold < maxTokens ? Math.max(0, maxTokens - autoCompactThreshold) : null;
-  const autoCompactBufferPercent = autoCompactBufferTokens !== null ? percentOfMax(autoCompactBufferTokens) : null;
-  const freeSpaceTokens = remainingTokens !== null ? Math.max(0, remainingTokens - (autoCompactBufferTokens ?? 0)) : null;
-  const freeSpacePercent = freeSpaceTokens !== null ? percentOfMax(freeSpaceTokens) : null;
-  const segments = [];
-  let mode = "total-only";
-  if (usedTokens > 0 && lastCacheHitPercent !== null) {
-    mode = "cache-split";
-    const cachedTokens = Math.min(usedTokens, Math.round(usedTokens * lastCacheHitPercent / 100));
-    const uncachedTokens = Math.max(0, usedTokens - cachedTokens);
-    if (cachedTokens > 0) {
-      segments.push({
-        id: "cached",
-        label: "Cached context",
-        tokens: cachedTokens,
-        percentOfMax: percentOfMax(cachedTokens),
-        tone: "sky"
-      });
-    }
-    if (uncachedTokens > 0) {
-      segments.push({
-        id: "uncached",
-        label: "Uncached context",
-        tokens: uncachedTokens,
-        percentOfMax: percentOfMax(uncachedTokens),
-        tone: "amber"
-      });
-    }
-  } else if (usedTokens > 0) {
-    segments.push({
-      id: "active",
-      label: "Used context",
-      tokens: usedTokens,
-      percentOfMax: percentOfMax(usedTokens),
-      tone: "sky"
-    });
-  }
-  return {
-    mode,
-    usedTokens,
-    maxTokens,
-    usedPercent,
-    remainingTokens,
-    autoCompactThreshold,
-    autoCompactBufferTokens,
-    autoCompactBufferPercent,
-    freeSpaceTokens,
-    freeSpacePercent,
-    segments,
-    deferredRows: [],
-    turnCount: input.turnCount,
-    toolCallCount: input.toolCallCount,
-    skillCount: input.skillCount,
-    mcpToolCount: null,
-    memoryFileCount: null,
-    customAgentCount: null,
-    lastCacheHitPercent,
-    sessionCacheHitPercent,
-    sessionCacheTurnCount
-  };
-}
-function countThreadToolCalls(projection) {
-  if (!projection)
-    return 0;
-  let count = 0;
-  for (const item of projection.turnItems) {
-    if (!isNonWorkItem(item.type) && !isModelGenerationItem(item.type)) {
-      count += 1;
-    }
-  }
-  return count;
-}
-function formatShortWindowLabel(window2) {
-  const duration = window2.windowDurationMins;
-  if (typeof duration === "number" && Number.isFinite(duration) && duration > 0) {
-    if (duration < 60)
-      return `${Math.round(duration)}m`;
-    if (duration < 1440 && duration % 60 === 0)
-      return `${duration / 60}h`;
-    if (duration === 10080)
-      return "7d";
-    if (duration >= 1440 && duration % 1440 === 0)
-      return `${duration / 1440}d`;
-  }
-  const lower = window2.label.toLowerCase();
-  const hourMatch = lower.match(/\b(\d+)\s*(?:h|hr|hour|hours)\b/);
-  if (hourMatch?.[1])
-    return `${hourMatch[1]}h`;
-  if (lower.includes("week") || window2.kind === "weekly")
-    return "7d";
-  if (lower.includes("month") || window2.kind === "monthly")
-    return "30d";
-  if (lower.includes("day") || lower.includes("daily"))
-    return "1d";
-  return window2.label.length <= 8 ? window2.label : `${window2.label.slice(0, 7)}\u2026`;
-}
-
-// src/quota-overview-data.mjs
-function createQuotaOverview({ remainingPercent: remainingPercent2, formatShortWindowLabel: formatShortWindowLabel2, limitsNotice: limitsNotice2 }) {
-  if ([remainingPercent2, formatShortWindowLabel2, limitsNotice2].some((f) => typeof f !== "function")) throw Error("Pinned quota dependencies are required");
-  return function overview2(providers, now) {
-    if (!Number.isFinite(now)) throw Error("A finite display clock is required");
-    return (Array.isArray(providers) ? providers : []).filter((e) => e?.enabled === true && e.installed === true && typeof e.instanceId === "string" && e.instanceId.trim()).map((e) => {
-      const limits = e.usageLimits ?? e.snapshot?.usageLimits, auth = e.auth ?? e.snapshot?.auth, blocked = e.isAvailable === false || e.availability === "unavailable" || e.snapshot?.availability === "unavailable" || ["unavailable", "error", "disconnected", "disabled"].includes(e.status) || auth?.status === "unauthenticated", notice = blocked ? "Temporarily unavailable." : limits ? limitsNotice2({ ...limits, windows: Array.isArray(limits.windows) ? limits.windows : [] }) : "No limits reported.";
-      const supplied = (Array.isArray(limits?.windows) ? limits.windows : []).filter((w) => w && w.kind !== "custom_api" && w.id !== "custom_api");
-      const unavailable = blocked || Boolean(notice && notice !== "No limits reported.");
-      const windows2 = supplied.map((w, index2) => {
-        const reset = w.resetsAt == null ? null : Date.parse(w.resetsAt);
-        let status = unavailable ? "unavailable" : !Number.isFinite(w.usedPercent) ? "not-provided" : reset !== null && !Number.isFinite(reset) ? "unavailable" : reset !== null && reset <= now ? "refreshing" : "available";
-        const value = status === "available" ? remainingPercent2(w) : null, remaining = Number.isFinite(value) ? value : null;
-        if (status === "available" && remaining === null) status = "not-provided";
-        return { id: String(w.id ?? index2), label: formatShortWindowLabel2({ ...w, label: typeof w.label === "string" ? w.label : "Quota" }), fullLabel: typeof w.label === "string" ? w.label : "", remaining, resetsAt: Number.isFinite(reset) ? reset : null, status, tone: remaining === null ? "normal" : remaining <= 10 ? "critical" : remaining <= 20 ? "warning" : "normal" };
-      });
-      return { id: e.instanceId, displayName: e.displayName?.trim() || String(e.snapshot?.driver ?? e.driverKind ?? "Account"), driver: e.snapshot?.driver ?? e.driver ?? e.driverKind ?? null, status: unavailable ? "unavailable" : windows2.length ? "available" : "not-provided", notice: unavailable ? notice || "Temporarily unavailable." : windows2.length ? null : "No limits reported.", windows: windows2 };
-    });
-  };
-}
-
-// work/source-port/native-modules/jsx-runtime.js
-import { t as factory2 } from "./jsx-runtime-BQExFN_X.js";
-var { jsx, jsxs, Fragment: Fragment2 } = factory2();
-
-// src/quota-overview.jsx
-var overview = createQuotaOverview({ remainingPercent, limitsNotice, formatShortWindowLabel });
-function QuotaOverview({ providers, now, locale = "en", onOpenUsageLimits }) {
-  const rows = overview(providers, now);
-  if (!rows.length) return null;
-  const zh = locale.toLowerCase().startsWith("zh"), text = zh ? { quota: "\u989D\u5EA6", remaining: "\u5269\u4F59", weekly: "\u5468\u989D\u5EA6", five: "5\u5C0F\u65F6", reset: "\u540E\u91CD\u7F6E", unknownReset: "\u91CD\u7F6E\u65F6\u95F4\u672A\u63D0\u4F9B", missing: "\u672A\u63D0\u4F9B\u989D\u5EA6", unavailable: "\u6682\u4E0D\u53EF\u7528", refreshing: "\u7B49\u5F85\u5237\u65B0", all: "\u5168\u90E8\u989D\u5EA6" } : { quota: "Quotas", remaining: "left", weekly: "Weekly", five: "5h", reset: "until reset", unknownReset: "Reset time not reported", missing: "Limits not reported", unavailable: "Temporarily unavailable", refreshing: "Awaiting refresh", all: "All limits" };
-  function windowLabel(w) {
-    const cadence = w.label === "7d" ? text.weekly : w.label === "5h" ? text.five : w.label, raw = w.fullLabel;
-    if (!raw || /^(?:weekly|week|5\s*(?:h|hours?))$/i.test(raw.trim())) return cadence;
-    return raw === w.label ? raw : `${raw} \xB7 ${cadence}`;
-  }
-  return /* @__PURE__ */ jsxs("section", { className: "t3q-overview", "data-quota-overview": true, "aria-label": text.quota, children: [
-    /* @__PURE__ */ jsx("div", { className: "t3q-accounts", children: rows.map((row) => /* @__PURE__ */ jsxs("section", { className: "t3q-account", "data-quota-account": row.id, "aria-label": row.displayName, children: [
-      /* @__PURE__ */ jsx("div", { className: "t3q-account-name", children: row.displayName }),
-      row.windows.length ? /* @__PURE__ */ jsx("div", { className: "t3q-windows", children: row.windows.map((w) => /* @__PURE__ */ jsxs("div", { className: "t3q-window", "data-quota-window": w.id, "data-status": w.status, "data-tone": w.tone, children: [
-        /* @__PURE__ */ jsxs("div", { className: "t3q-window-heading", children: [
-          /* @__PURE__ */ jsx("span", { className: "t3q-window-label", title: w.fullLabel || w.label, children: windowLabel(w) }),
-          /* @__PURE__ */ jsxs("span", { className: "t3q-balance", children: [
-            w.remaining === null ? "\u2014" : `${w.remaining}%`,
-            /* @__PURE__ */ jsxs("span", { className: "t3q-remaining", children: [
-              " ",
-              text.remaining
-            ] })
-          ] })
-        ] }),
-        /* @__PURE__ */ jsx("div", { className: "t3q-meter", "aria-hidden": "true", children: /* @__PURE__ */ jsx("span", { style: { width: `${w.remaining ?? 0}%` } }) }),
-        /* @__PURE__ */ jsx("span", { className: "t3q-reset", title: w.resetsAt === null ? void 0 : new Intl.DateTimeFormat(locale, { dateStyle: "medium", timeStyle: "short" }).format(w.resetsAt), children: w.status !== "available" ? w.status === "refreshing" ? text.refreshing : w.status === "not-provided" ? text.missing : text.unavailable : w.resetsAt === null ? text.unknownReset : `${formatDuration(w.resetsAt - now)} ${text.reset}` })
-      ] }, w.id)) }) : /* @__PURE__ */ jsx("span", { className: "t3q-empty", title: row.notice ?? void 0, children: row.status === "unavailable" ? text.unavailable : text.missing })
-    ] }, row.id)) }),
-    onOpenUsageLimits ? /* @__PURE__ */ jsxs("button", { type: "button", className: "t3q-all", onClick: onOpenUsageLimits, children: [
-      text.all,
-      /* @__PURE__ */ jsx("span", { "aria-hidden": "true", children: " \u2197" })
-    ] }) : null
-  ] });
-}
-function NativeQuotaOverview(props) {
-  const [now, setNow] = useState(Date.now);
-  useEffect(() => {
-    const id = setInterval(() => setNow(Date.now()), 6e4);
-    return () => clearInterval(id);
-  }, []);
-  const locale = typeof document !== "undefined" ? document.documentElement.lang || "en" : "en";
-  return /* @__PURE__ */ jsx(QuotaOverview, { ...props, now, locale });
-}
-
-// src/native-quota-overview-input.mjs
-function createNativeQuotaProviders(providers, sources, collectAccounts) {
-  const entries = Array.isArray(providers) ? providers : [], configured = Array.isArray(sources) ? sources : [];
-  if (!configured.length) return entries;
-  if (typeof collectAccounts !== "function") throw Error("Native quota account collector required");
-  const environmentId = "quota-overview-current", resolved = collectAccounts(/* @__PURE__ */ new Map([[environmentId, { entry: { target: { label: "Current environment" } }, serverConfig: { providers: entries, usageLimitSources: configured } }]]));
-  const byKey = new Map(resolved.map((account) => [account.key, account]));
-  const native = entries.map((entry) => {
-    const account = byKey.get(`${environmentId}:${entry.instanceId}`);
-    return account ? { ...entry, usageLimits: account.limits } : entry;
-  });
-  const external = resolved.filter((account) => account.environments.length === 0).map((account) => ({
-    // These flags satisfy the presentation adapter's eligibility contract only;
-    // the origin marks an explicitly configured source account, not an installed agent.
-    origin: "configured_quota_source",
-    instanceId: `source:${account.key}`,
-    enabled: true,
-    installed: true,
-    displayName: account.displayName || `${String(account.driver)}${account.email ? " \xB7 " + account.email : account.sourceLabel ? " \xB7 " + account.sourceLabel : ""}`,
-    driver: account.driver,
-    usageLimits: account.limits
-  }));
-  return [...native, ...external];
-}
-
-// src/original-composer-entry.jsx
-init_react();
-
-// work/source-port/native-modules/context-locale.js
-var LABELS = new Map(Object.entries({ "Cached context": "\u5DF2\u7F13\u5B58", "Uncached context": "\u672A\u7F13\u5B58", "Context": "\u4E0A\u4E0B\u6587", "Used context": "\u5DF2\u7528\u4E0A\u4E0B\u6587", "System prompt": "\u7CFB\u7EDF\u63D0\u793A", "System": "\u7CFB\u7EDF", "Messages": "\u6D88\u606F", "Tools": "\u5DE5\u5177", "Tool definitions": "\u5DE5\u5177\u5B9A\u4E49", "Skills": "\u6280\u80FD", "MCP tools": "MCP\u5DE5\u5177", "Memory files": "\u8BB0\u5FC6\u6587\u4EF6", "Custom agents": "\u81EA\u5B9A\u4E49\u4EE3\u7406", "Context compacts automatically when needed.": "\u4E0A\u4E0B\u6587\u6309\u9700\u81EA\u52A8\u538B\u7F29\u3002" }));
-function contextTextZh(value) {
-  if (typeof value !== "string") return value;
-  return LABELS.get(value) ?? value.replace(/^Compacts automatically at about ([0-9,]+) tokens\.$/, "\u7EA6$1\u8BCD\u5143\u65F6\u81EA\u52A8\u538B\u7F29\u3002");
-}
-
-// work/source-port/native-modules/quota-locale.js
-var TEXT = new Map(Object.entries({ "Google account": "Google\u8D26\u53F7", "Other model pools": "\u5176\u4ED6\u989D\u5EA6", "Full limits panel": "\u5168\u90E8\u989D\u5EA6", "Refresh quota": "\u5237\u65B0", "Refreshing quota": "\u5237\u65B0\u4E2D", "routed": "\u8DEF\u7531", "Quota unavailable": "\u989D\u5EA6\u6682\u4E0D\u53EF\u7528", "Temporarily unavailable": "\u6682\u4E0D\u53EF\u7528", "Unavailable": "\u6682\u4E0D\u53EF\u7528", "Session": "\u672C\u6B21\u989D\u5EA6", "session": "\u672C\u6B21\u989D\u5EA6" }));
-function quotaTextZh(text) {
-  return TEXT.get(text) ?? text;
-}
-function quotaShortLabelZh(label) {
-  if (typeof label !== "string") return label;
-  if (label === "7d") return "\u5468\u989D\u5EA6";
-  const match = label.match(/^(\d+(?:\.\d+)?)([mhd])$/);
-  return match ? match[1] + { m: "\u5206", h: "\u5C0F\u65F6", d: "\u5929" }[match[2]] : quotaTextZh(label);
-}
-function quotaPoolLabelZh(label) {
-  if (typeof label !== "string") return label;
-  return label.replace(/Claude\s*&\s*GPT\s*\(shared\)/gi, "Claude/GPT\uFF08\u5171\u4EAB\uFF09").replace(/\b(\d+)\s*(?:-hour|hours?)\b/gi, "$1\u5C0F\u65F6").replace(/\bWeekly\b/gi, "\u5468\u989D\u5EA6").replace(/\bMonthly\b/gi, "\u6708\u989D\u5EA6").replace(/\bDaily\b/gi, "\u6BCF\u65E5\u989D\u5EA6");
-}
-function quotaPrimaryLabelZh(label, shortLabel) {
-  const short = quotaShortLabelZh(shortLabel);
-  if (typeof label === "string" && /\bClaude\b/i.test(label) && /\bGPT\b/i.test(label) && !(typeof short === "string" && /^(?:\d+(?:\.\d+)?(?:分|小时|天)|周额度|本次额度)$/.test(short))) return "\u989D\u5EA6";
-  return typeof short === "string" && /^(?:\d+(?:\.\d+)?(?:分|小时|天)|周额度|本次额度)$/.test(short) ? short : quotaPoolLabelZh(label);
-}
-function quotaResetZh(formatted) {
-  if (formatted === "0m" || formatted === "now") return "\u5373\u5C06\u91CD\u7F6E";
-  if (formatted === "<1m" || formatted === "< 1m") return "\u4E0D\u8DB31\u5206\u949F\u540E\u91CD\u7F6E";
-  if (typeof formatted !== "string" || !/^\d+[dhm](?:\s+\d+[dhm])*$/.test(formatted)) return "\u91CD\u7F6E\u65F6\u95F4\u672A\u77E5";
-  return formatted.replace(/(\d+)d/g, "$1\u5929").replace(/(\d+)h/g, "$1\u5C0F\u65F6").replace(/(\d+)m/g, "$1\u5206").replace(/\s+/g, "") + "\u540E\u91CD\u7F6E";
-}
-
 // work/source-build-deps/node_modules/lucide-react/dist/esm/createLucideIcon.js
 init_react();
 
@@ -1787,7 +580,7 @@ var __iconNode = [
 ];
 var RotateCw = createLucideIcon("rotate-cw", __iconNode);
 
-// work/source-port/native-modules/clock.js
+// work/source-port/native-modules-0.1.12/clock.js
 function makeTickStore(read, periodMs) {
   let value = read();
   let timer;
@@ -1829,13 +622,13 @@ function makeTickStore(read, periodMs) {
 }
 var minuteTick = makeTickStore(() => (/* @__PURE__ */ new Date()).toISOString().slice(0, 16), 6e4);
 
-// work/source-port/native-modules/now-minute.js
+// work/source-port/native-modules-0.1.12/now-minute.js
 init_react();
 function useNowMinute() {
   return useSyncExternalStore(minuteTick.subscribe, minuteTick.getSnapshot, minuteTick.getSnapshot);
 }
 
-// work/source-port/native-modules/context-format.js
+// work/source-port/native-modules-0.1.12/context-format.js
 function formatContextWindowTokens(value) {
   if (value === null || !Number.isFinite(value)) {
     return "0";
@@ -4965,12 +3758,12 @@ var mergeArrayProperties = (baseObject, mergeObject, key) => {
 };
 var extendTailwindMerge = (configExtension, ...createConfig) => typeof configExtension === "function" ? createTailwindMerge(getDefaultConfig, configExtension, ...createConfig) : createTailwindMerge(() => mergeConfigs(getDefaultConfig(), configExtension), ...createConfig);
 
-// work/source-port/native-modules/keybinding-matching.js
+// work/source-port/native-modules-0.1.12/keybinding-matching.js
 function isMacPlatform(platform3) {
   return /mac|iphone|ipad|ipod/i.test(platform3);
 }
 
-// work/source-port/native-modules/cn.js
+// work/source-port/native-modules-0.1.12/cn.js
 var twMerge = extendTailwindMerge({
   extend: {
     theme: { text: ["2xs", "3xs", "4xs", "5xs"] },
@@ -5414,7 +4207,7 @@ function useRender(params) {
   return useRenderElement(params.defaultTagName ?? "div", params, params);
 }
 
-// work/source-port/native-modules/button.js
+// work/source-port/native-modules-0.1.12/button.js
 var buttonVariants = cva("[--control-icon-color:currentColor] [&_svg]:-mx-0.5 relative inline-flex shrink-0 cursor-pointer items-center justify-center gap-2 whitespace-nowrap rounded-[var(--control-radius)] border font-medium text-base outline-none transition-[box-shadow,scale] [&:not([aria-haspopup]):not(:disabled):not([aria-disabled=true])]:will-change-[scale] [&:active:not([aria-haspopup])]:scale-[0.97] before:pointer-events-none before:absolute before:inset-0 before:rounded-[calc(var(--control-radius)-1px)] pointer-coarse:after:absolute pointer-coarse:after:size-full pointer-coarse:after:min-h-11 pointer-coarse:after:min-w-11 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-64 aria-disabled:cursor-not-allowed aria-disabled:opacity-64 sm:text-sm [&_svg:not([class*='text-'])]:text-[var(--control-icon-color)] [&_svg:not([class*='size-'])]:size-4.5 sm:[&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0", {
   defaultVariants: {
     size: "default",
@@ -7110,8 +5903,8 @@ function markOthers(avoidElements, options = {}) {
 // work/source-build-deps/node_modules/@base-ui/react/floating-ui-react/components/FloatingPortal.mjs
 init_react();
 
-// work/source-port/native-modules/react-dom.js
-import { t as factory3 } from "./react-dom-BEKrT875.js";
+// work/source-port/native-modules-0.1.12/react-dom.js
+import { r as factory3 } from "./with-selector-ehz1dnGQ.js";
 var DOM = factory3();
 var { __DOM_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, browser, createPortal, flushSync, preconnect, prefetchDNS, preinit, preinitModule, preload, preloadModule, requestFormReset, unstable_batchedUpdates, useFormState, useFormStatus, version: version2 } = DOM;
 
@@ -14896,7 +13689,7 @@ function createPopoverHandle() {
   return new PopoverHandle();
 }
 
-// work/source-port/native-modules/closing-positioner.js
+// work/source-port/native-modules-0.1.12/closing-positioner.js
 init_react();
 var PLACEMENT_KEYS = ["position", "top", "right", "bottom", "left", "transform"];
 function ClosingPositioner({ open: open2, style, ...props }) {
@@ -14911,7 +13704,7 @@ function renderClosingPositioner(props, state) {
   return jsx(ClosingPositioner, { ...props, open: state.open });
 }
 
-// work/source-port/native-modules/popover.js
+// work/source-port/native-modules-0.1.12/popover.js
 var Popover = index_parts_exports.Root;
 function PopoverTrigger3({ className, children, ...props }) {
   return jsx(index_parts_exports.Trigger, { className, "data-slot": "popover-trigger", ...props, children });
@@ -15695,16 +14488,16 @@ function createTooltipHandle() {
   return new TooltipHandle();
 }
 
-// work/source-port/native-modules/tooltip.js
+// work/source-port/native-modules-0.1.12/tooltip.js
 init_react();
 
-// work/source-port/native-modules/window-controls.js
+// work/source-port/native-modules-0.1.12/window-controls.js
 init_react();
 
-// work/source-port/native-modules/env.js
+// work/source-port/native-modules-0.1.12/env.js
 var isElectron = typeof document !== "undefined" && document.documentElement.classList.contains("electron");
 
-// work/source-port/native-modules/window-controls.js
+// work/source-port/native-modules-0.1.12/window-controls.js
 var MACOS_TITLEBAR_HEIGHT = 52;
 function getWindowControlsOverlay() {
   if (typeof navigator === "undefined") {
@@ -15727,7 +14520,7 @@ function useNativeTitlebarHeight() {
   return useSyncExternalStore(subscribeTitlebarArea, getNativeTitlebarHeight, () => 0);
 }
 
-// work/source-port/native-modules/tooltip.js
+// work/source-port/native-modules-0.1.12/tooltip.js
 var COLLISION_PADDING = 5;
 var TooltipProvider3 = index_parts_exports2.Provider;
 var TooltipHoverContext = createContext(null);
@@ -15769,7 +14562,7 @@ function TooltipPopup3({ className, align = "center", sideOffset = 4, side = "to
   return jsx(index_parts_exports2.Portal, { children: jsx(TooltipPositioner3, { align, anchor, side, sideOffset, children: jsx(index_parts_exports2.Popup, { className: cn("relative flex origin-(--transform-origin) rounded-md text-popover-foreground text-xs transition-[scale,opacity] before:pointer-events-none before:absolute before:inset-0 before:rounded-[calc(var(--radius-md)-1px)] before:shadow-[0_1px_--theme(--color-black/4%)] data-ending-style:scale-98 data-starting-style:scale-98 data-ending-style:opacity-0 data-starting-style:opacity-0 data-instant:duration-0 dark:before:shadow-[0_-1px_--theme(--color-white/6%)]", variant === "glass" ? "dropdown-glass shadow-xl shadow-black/25 before:hidden" : "border bg-popover not-dark:bg-clip-padding shadow-md/5", variant === "code" ? "max-w-120 wrap-anywhere text-left font-mono text-[11px] leading-relaxed" : "max-w-80 wrap-anywhere whitespace-normal leading-snug", className), "data-slot": "tooltip-popup", ...props, children: jsx("div", { className: "min-w-0 px-2 py-1", "data-slot": "tooltip-viewport", children }) }) }) });
 }
 
-// work/source-port/native-modules/compaction.js
+// work/source-port/native-modules-0.1.12/compaction.js
 function formatContextWindowCompactionMessage(autoCompactThreshold) {
   if (typeof autoCompactThreshold === "number" && autoCompactThreshold > 0) {
     return `Compacts automatically at about ${autoCompactThreshold.toLocaleString("en-US")} tokens.`;
@@ -15777,7 +14570,7 @@ function formatContextWindowCompactionMessage(autoCompactThreshold) {
   return "Context compacts automatically when needed.";
 }
 
-// work/source-port/native-modules/composer-surface.js
+// work/source-port/native-modules-0.1.12/composer-surface.js
 function Shell({ contextRow = false, className, ...props }) {
   return jsx("div", { "data-slot": "composer-shell", "data-context-row": contextRow || void 0, className: cn(
     "@container/composer-surface group/composer-surface relative isolate mx-auto w-full max-w-(--chat-content-max-width)",
@@ -15806,7 +14599,1121 @@ function ContextStrip({ className, ...props }) {
 }
 var ComposerSurface = { Shell, Host, Main, ContextStrip };
 
-// work/source-port/native-modules/cards.js
+// work/source-port/native-modules-0.1.12/metrics.js
+var MIN_TPS_DURATION_MS = 100;
+var MAX_REASONABLE_TTFT_MS = 36e5;
+function toEpochMs(value) {
+  if (value == null)
+    return null;
+  if (typeof value === "string") {
+    const parsed = Date.parse(value);
+    return Number.isFinite(parsed) ? parsed : null;
+  }
+  const ms = toEpochMillis(value);
+  return Number.isFinite(ms) ? ms : null;
+}
+function asPositiveNumber(value) {
+  return typeof value === "number" && Number.isFinite(value) && value >= 0 ? value : null;
+}
+function sumMergedIntervalDurationMs(intervals) {
+  const valid = intervals.filter((interval) => Number.isFinite(interval.start) && Number.isFinite(interval.end) && interval.end > interval.start).toSorted((left, right) => left.start - right.start);
+  if (valid.length === 0)
+    return 0;
+  let total = 0;
+  let currentStart = valid[0].start;
+  let currentEnd = valid[0].end;
+  for (let index2 = 1; index2 < valid.length; index2 += 1) {
+    const next = valid[index2];
+    if (next.start <= currentEnd) {
+      if (next.end > currentEnd)
+        currentEnd = next.end;
+    } else {
+      total += currentEnd - currentStart;
+      currentStart = next.start;
+      currentEnd = next.end;
+    }
+  }
+  return total + (currentEnd - currentStart);
+}
+function isModelGenerationItem(type) {
+  return type === "reasoning" || type === "assistant_message";
+}
+function isNonWorkItem(type) {
+  return type === "user_message" || type === "notification" || type === "system_notice" || type === "handoff" || type === "fork" || type === "checkpoint" || type === "compaction";
+}
+function resolveTurnBaselineMs(turn, attempt, run) {
+  return toEpochMs(turn.startedAt) ?? toEpochMs(attempt?.startedAt) ?? toEpochMs(run?.startedAt) ?? toEpochMs(run?.requestedAt);
+}
+function resolveTurnUsage(turn) {
+  const ttu = turn.turnTokenUsage;
+  const tu = turn.tokenUsage;
+  const inputTokens = asPositiveNumber(ttu?.inputTokens) ?? asPositiveNumber(tu?.inputTokens);
+  const cachedInputTokens = asPositiveNumber(ttu?.cachedInputTokens) ?? asPositiveNumber(tu?.cachedInputTokens);
+  const cacheCreationTokens = asPositiveNumber(ttu?.cacheCreationTokens);
+  const outputTokens = asPositiveNumber(ttu?.outputTokens) ?? asPositiveNumber(tu?.outputTokens);
+  const reasoningTokens = asPositiveNumber(ttu?.reasoningTokens) ?? asPositiveNumber(tu?.reasoningOutputTokens);
+  const usageStatus = ttu?.usageStatus ?? (tu !== void 0 ? "complete" : null);
+  return {
+    inputTokens,
+    cachedInputTokens,
+    cacheCreationTokens,
+    outputTokens,
+    reasoningTokens,
+    usageStatus
+  };
+}
+function computeRate(tokens, durationMs) {
+  if (tokens === null || tokens <= 0 || durationMs === null || durationMs < MIN_TPS_DURATION_MS) {
+    return null;
+  }
+  return tokens / (durationMs / 1e3);
+}
+function buildSnapshot(input) {
+  let firstModelOutputMs = null;
+  let firstToolMs = null;
+  let firstAnswerStartMs = null;
+  const generationIntervals = [];
+  const toolIntervals = [];
+  for (const item of input.items) {
+    if (isNonWorkItem(item.type))
+      continue;
+    const itemStart = toEpochMs(item.startedAt);
+    const itemEnd = toEpochMs(item.completedAt);
+    if (isModelGenerationItem(item.type)) {
+      if (itemStart !== null && (firstModelOutputMs === null || itemStart < firstModelOutputMs)) {
+        firstModelOutputMs = itemStart;
+      }
+      if (item.type === "assistant_message" && itemStart !== null && (firstAnswerStartMs === null || itemStart < firstAnswerStartMs)) {
+        firstAnswerStartMs = itemStart;
+      }
+      if (itemStart !== null && itemEnd !== null && itemEnd > itemStart) {
+        generationIntervals.push({ start: itemStart, end: itemEnd });
+      }
+    } else {
+      if (itemStart !== null && (firstToolMs === null || itemStart < firstToolMs)) {
+        firstToolMs = itemStart;
+      }
+      if (itemStart !== null && itemEnd !== null && itemEnd > itemStart) {
+        toolIntervals.push({ start: itemStart, end: itemEnd });
+      }
+    }
+  }
+  const firstTokenMs = firstModelOutputMs ?? firstToolMs;
+  const rawTtft = input.startMs !== null && firstTokenMs !== null ? Math.max(0, firstTokenMs - input.startMs) : null;
+  const ttftMs = rawTtft !== null && rawTtft <= MAX_REASONABLE_TTFT_MS ? rawTtft : null;
+  const rawFirstAnswer = input.startMs !== null && firstAnswerStartMs !== null ? Math.max(0, firstAnswerStartMs - input.startMs) : null;
+  const firstAnswerMs = rawFirstAnswer !== null && rawFirstAnswer <= MAX_REASONABLE_TTFT_MS && (ttftMs === null || Math.abs(rawFirstAnswer - ttftMs) >= 250) ? rawFirstAnswer : null;
+  const totalDurationMs = input.startMs !== null && input.endMs !== null && input.endMs > input.startMs ? input.endMs - input.startMs : null;
+  const mergedGenMs = sumMergedIntervalDurationMs(generationIntervals);
+  const generationDurationMs = mergedGenMs > 0 ? mergedGenMs : null;
+  const mergedToolMs = sumMergedIntervalDurationMs(toolIntervals);
+  const toolDurationMs = mergedToolMs > 0 ? mergedToolMs : null;
+  const effectiveGenMs = generationDurationMs !== null && generationDurationMs >= MIN_TPS_DURATION_MS ? generationDurationMs : totalDurationMs;
+  const generationTps = computeRate(input.outputTokens, effectiveGenMs);
+  const endToEndTps = computeRate(input.outputTokens, totalDurationMs);
+  const cacheHitPercent = input.inputTokens !== null && input.inputTokens > 0 && input.cachedInputTokens !== null ? Math.min(100, input.cachedInputTokens / input.inputTokens * 100) : null;
+  return {
+    providerTurnId: input.providerTurnId,
+    runId: input.runId,
+    status: input.status,
+    ttftMs,
+    firstAnswerMs,
+    generationDurationMs,
+    toolDurationMs,
+    totalDurationMs,
+    inputTokens: input.inputTokens,
+    cachedInputTokens: input.cachedInputTokens,
+    cacheCreationTokens: input.cacheCreationTokens,
+    cacheHitPercent,
+    outputTokens: input.outputTokens,
+    reasoningTokens: input.reasoningTokens,
+    generationTps,
+    endToEndTps,
+    usageStatus: input.usageStatus
+  };
+}
+function deriveTurnTelemetryIndex(projection) {
+  const byProviderTurnId = /* @__PURE__ */ new Map();
+  const byRunId = /* @__PURE__ */ new Map();
+  if (!projection || projection.providerTurns.length === 0) {
+    return {
+      byProviderTurnId,
+      byRunId,
+      latest: null,
+      latestWithCache: null,
+      sessionCacheHitPercent: null,
+      sessionCacheTurnCount: 0
+    };
+  }
+  const runsById = new Map(projection.runs.map((run) => [run.id, run]));
+  const attemptsById = new Map(projection.attempts.map((attempt) => [attempt.id, attempt]));
+  const itemsByTurnId = /* @__PURE__ */ new Map();
+  const itemsByRunId = /* @__PURE__ */ new Map();
+  for (const item of projection.turnItems) {
+    if (item.providerTurnId !== null) {
+      const list = itemsByTurnId.get(item.providerTurnId);
+      if (list)
+        list.push(item);
+      else
+        itemsByTurnId.set(item.providerTurnId, [item]);
+    }
+    if (item.runId !== null) {
+      const list = itemsByRunId.get(item.runId);
+      if (list)
+        list.push(item);
+      else
+        itemsByRunId.set(item.runId, [item]);
+    }
+  }
+  const turnsByRunId = /* @__PURE__ */ new Map();
+  let latest = null;
+  let latestSortMs = -1;
+  let latestWithCache = null;
+  let latestCacheSortMs = -1;
+  let totalCacheInput = 0;
+  let totalCacheRead = 0;
+  let sessionCacheTurnCount = 0;
+  for (const turn of projection.providerTurns) {
+    const attempt = turn.runAttemptId !== null ? attemptsById.get(turn.runAttemptId) : void 0;
+    const run = attempt !== void 0 ? runsById.get(attempt.runId) : void 0;
+    const runId = run?.id ?? attempt?.runId ?? null;
+    const turnItems = itemsByTurnId.get(turn.id) ?? [];
+    const startMs = resolveTurnBaselineMs(turn, attempt, run);
+    const endMs = toEpochMs(turn.completedAt) ?? toEpochMs(attempt?.completedAt);
+    const usage = resolveTurnUsage(turn);
+    const snapshot = buildSnapshot({
+      providerTurnId: turn.id,
+      runId,
+      status: turn.status,
+      startMs,
+      endMs,
+      items: turnItems,
+      ...usage
+    });
+    byProviderTurnId.set(turn.id, snapshot);
+    const sortMs = endMs ?? startMs ?? 0;
+    if (sortMs >= latestSortMs) {
+      latestSortMs = sortMs;
+      latest = snapshot;
+    }
+    if (snapshot.cacheHitPercent !== null && snapshot.inputTokens !== null && snapshot.inputTokens > 0) {
+      totalCacheInput += snapshot.inputTokens;
+      totalCacheRead += snapshot.cachedInputTokens ?? 0;
+      sessionCacheTurnCount += 1;
+      if (sortMs >= latestCacheSortMs) {
+        latestCacheSortMs = sortMs;
+        latestWithCache = snapshot;
+      }
+    }
+    if (runId !== null) {
+      const list = turnsByRunId.get(runId);
+      if (list)
+        list.push(turn);
+      else
+        turnsByRunId.set(runId, [turn]);
+    }
+  }
+  for (const [runId, turns] of turnsByRunId) {
+    if (turns.length === 1) {
+      const single = byProviderTurnId.get(turns[0].id);
+      if (single)
+        byRunId.set(runId, single);
+      continue;
+    }
+    const ordered = turns.toSorted((left, right) => left.ordinal - right.ordinal);
+    const firstTurn = ordered[0];
+    const lastTurn = ordered[ordered.length - 1];
+    const run = runsById.get(runId);
+    const firstAttempt = firstTurn.runAttemptId !== null ? attemptsById.get(firstTurn.runAttemptId) : void 0;
+    const startMs = resolveTurnBaselineMs(firstTurn, firstAttempt, run);
+    const endMs = toEpochMs(lastTurn.completedAt) ?? toEpochMs(run?.completedAt);
+    let inputTokens = null;
+    let cachedInputTokens = null;
+    let cacheCreationTokens = null;
+    let outputTokens = null;
+    let reasoningTokens = null;
+    let usageStatus = null;
+    for (const turn of ordered) {
+      const usage = resolveTurnUsage(turn);
+      if (usage.inputTokens !== null)
+        inputTokens = (inputTokens ?? 0) + usage.inputTokens;
+      if (usage.cachedInputTokens !== null) {
+        cachedInputTokens = (cachedInputTokens ?? 0) + usage.cachedInputTokens;
+      }
+      if (usage.cacheCreationTokens !== null) {
+        cacheCreationTokens = (cacheCreationTokens ?? 0) + usage.cacheCreationTokens;
+      }
+      if (usage.outputTokens !== null)
+        outputTokens = (outputTokens ?? 0) + usage.outputTokens;
+      if (usage.reasoningTokens !== null) {
+        reasoningTokens = (reasoningTokens ?? 0) + usage.reasoningTokens;
+      }
+      if (usage.usageStatus === "complete") {
+        usageStatus ??= "complete";
+      } else if (usage.usageStatus === "partial") {
+        usageStatus = "partial";
+      } else if (usage.usageStatus === "unavailable" && usageStatus === null) {
+        usageStatus = "unavailable";
+      }
+    }
+    byRunId.set(runId, buildSnapshot({
+      providerTurnId: lastTurn.id,
+      runId,
+      status: lastTurn.status,
+      startMs,
+      endMs,
+      items: itemsByRunId.get(runId) ?? [],
+      inputTokens,
+      cachedInputTokens,
+      cacheCreationTokens,
+      outputTokens,
+      reasoningTokens,
+      usageStatus
+    }));
+  }
+  const sessionCacheHitPercent = totalCacheInput > 0 ? Math.min(100, totalCacheRead / totalCacheInput * 100) : null;
+  return {
+    byProviderTurnId,
+    byRunId,
+    latest,
+    latestWithCache,
+    sessionCacheHitPercent,
+    sessionCacheTurnCount
+  };
+}
+function lookupTurnTelemetry(index2, target) {
+  if (!index2)
+    return null;
+  if (target.runId != null) {
+    const byRun = index2.byRunId.get(target.runId);
+    if (byRun)
+      return byRun;
+  }
+  if (target.providerTurnId != null) {
+    return index2.byProviderTurnId.get(target.providerTurnId) ?? null;
+  }
+  return null;
+}
+function formatLatencyMs(ms) {
+  if (!Number.isFinite(ms) || ms < 0)
+    return "0ms";
+  if (ms < 1e3)
+    return `${Math.round(ms)}ms`;
+  const seconds = ms / 1e3;
+  if (seconds < 60) {
+    return `${seconds.toFixed(1)}s`;
+  }
+  const wholeMinutes = Math.floor(seconds / 60);
+  const remainderSeconds = Math.round(seconds % 60);
+  return remainderSeconds === 60 ? `${wholeMinutes + 1}m` : remainderSeconds === 0 ? `${wholeMinutes}m` : `${wholeMinutes}m ${remainderSeconds}s`;
+}
+function formatCompactTokenCount(value) {
+  if (!Number.isFinite(value) || value <= 0)
+    return "0";
+  if (value < 1e3)
+    return `${Math.round(value)}`;
+  if (value < 1e4)
+    return `${(value / 1e3).toFixed(1).replace(/\.0$/, "")}k`;
+  if (value < 999500)
+    return `${Math.round(value / 1e3)}k`;
+  return `${(value / 1e6).toFixed(2).replace(/\.?0+$/, "")}m`;
+}
+var ROUTE_PREFIX_TO_DRIVER = {
+  antigravity: "antigravity",
+  codex: "codex",
+  openai: "codex",
+  claude: "claudeAgent",
+  anthropic: "claudeAgent",
+  cursor: "cursor",
+  grok: "grok",
+  xai: "grok",
+  opencode: "opencode",
+  "opencode-go": "opencode"
+};
+var NON_CLAUDE_MODEL_PREFIXES = [
+  "glm-",
+  "glm4",
+  "glm5",
+  "deepseek",
+  "qwen",
+  "kimi",
+  "moonshot",
+  "minimax",
+  "doubao",
+  "gpt-",
+  "o1",
+  "o3",
+  "o4",
+  "gemini-",
+  "grok-",
+  "llama",
+  "mistral"
+];
+function stripContextSuffix(model) {
+  return model.trim().replace(/\[[^\]]+\]$/, "");
+}
+function parseModelQuotaTarget(model) {
+  if (!model?.trim())
+    return null;
+  const raw = model.trim();
+  const normalized = stripContextSuffix(raw);
+  const slashIndex = normalized.indexOf("/");
+  if (slashIndex > 0) {
+    const routePrefix = normalized.slice(0, slashIndex).trim().toLowerCase();
+    const bareModel = normalized.slice(slashIndex + 1).trim();
+    const targetDriver = ROUTE_PREFIX_TO_DRIVER[routePrefix] ?? null;
+    return {
+      raw,
+      normalized,
+      routePrefix,
+      bareModel: bareModel || normalized,
+      targetDriver,
+      externalVendor: targetDriver === null ? routePrefix : null
+    };
+  }
+  return {
+    raw,
+    normalized,
+    routePrefix: null,
+    bareModel: normalized,
+    targetDriver: null,
+    externalVendor: null
+  };
+}
+function isNonClaudeModelOnClaudeDriver(driver, parsed) {
+  if (driver !== "claudeAgent" || parsed === null)
+    return false;
+  if (parsed.externalVendor !== null)
+    return true;
+  if (parsed.targetDriver !== null && parsed.targetDriver !== "claudeAgent")
+    return true;
+  const lower = parsed.bareModel.toLowerCase();
+  return NON_CLAUDE_MODEL_PREFIXES.some((prefix) => lower.startsWith(prefix));
+}
+function isCustomApiInstance(provider) {
+  if (!provider)
+    return false;
+  if (provider.usageLimits?.unavailable?.reason === "unsupported")
+    return true;
+  const authLabel = provider.auth.label?.toLowerCase() ?? "";
+  return authLabel.includes("custom api") || authLabel.includes("api key");
+}
+var WINDOW_KIND_PRIORITY = {
+  session: 0,
+  weekly: 1,
+  monthly: 2,
+  other: 3
+};
+var DRIVER_NATIVE_PROVIDER_IDS = {
+  claudeAgent: ["claude", "anthropic"],
+  codex: ["codex", "openai"],
+  antigravity: ["antigravity"],
+  cursor: ["cursor"],
+  grok: ["grok", "xai"],
+  opencode: ["opencode", "opencode-go"]
+};
+function matchesActiveModel(window2, driver, model) {
+  if (!model)
+    return true;
+  const parsed = parseModelQuotaTarget(model);
+  const bare = parsed?.bareModel ?? model;
+  const bareLower = bare.toLowerCase();
+  const normalizedLower = (parsed?.normalized ?? model).toLowerCase();
+  if (window2.modelIds !== void 0 && !window2.modelIds.some((id) => id === model || id.toLowerCase() === normalizedLower || stripContextSuffix(id).toLowerCase() === bareLower)) {
+    return false;
+  }
+  if (window2.providerIds !== void 0) {
+    const prefix = parsed?.routePrefix ?? "";
+    if (prefix) {
+      if (!window2.providerIds.some((id) => id.toLowerCase() === prefix)) {
+        return false;
+      }
+    } else if (driver !== null) {
+      const nativeIds = DRIVER_NATIVE_PROVIDER_IDS[String(driver)] ?? [
+        String(driver).toLowerCase()
+      ];
+      if (!window2.providerIds.some((id) => nativeIds.includes(id.toLowerCase()))) {
+        return false;
+      }
+    }
+  }
+  if (driver === "antigravity") {
+    const idLower = window2.id.toLowerCase();
+    if (bareLower.includes("argon") && idLower.startsWith("gemini-carbon-"))
+      return false;
+    if (bareLower.includes("carbon") && idLower.startsWith("gemini-argon-"))
+      return false;
+    const family = bareLower.match(/^(gemini|claude|gpt)-/)?.[1];
+    const pool = idLower.match(/^(gemini|claude|gpt|3p)-/)?.[1];
+    if (family !== void 0 && pool !== void 0) {
+      return pool === family || pool === "3p" && (family === "claude" || family === "gpt");
+    }
+  }
+  return true;
+}
+function modelSpecificPoolBonus(window2, driver, activeModel) {
+  if (driver !== "antigravity" || !activeModel)
+    return 0;
+  const bareLower = (parseModelQuotaTarget(activeModel)?.bareModel ?? activeModel).toLowerCase();
+  const idLower = window2.id.toLowerCase();
+  if (bareLower.includes("argon") && idLower.startsWith("gemini-argon-"))
+    return -1;
+  if (bareLower.includes("carbon") && idLower.startsWith("gemini-carbon-"))
+    return -1;
+  return 0;
+}
+function selectPrimaryUsageWindows(input) {
+  const all = input.limits?.windows ?? [];
+  if (all.length === 0)
+    return { inline: [], sibling: [], all: [], overflowCount: 0 };
+  const maxInline = input.maxInline ?? 2;
+  const matching = all.filter((window2) => matchesActiveModel(window2, input.driver, input.activeModel));
+  const pool = matching.length > 0 ? matching : all;
+  const ranked = pool.toSorted((left, right) => {
+    const kindDiff = WINDOW_KIND_PRIORITY[left.kind] - WINDOW_KIND_PRIORITY[right.kind];
+    if (kindDiff !== 0)
+      return kindDiff;
+    const bonusDiff = modelSpecificPoolBonus(left, input.driver, input.activeModel) - modelSpecificPoolBonus(right, input.driver, input.activeModel);
+    if (bonusDiff !== 0)
+      return bonusDiff;
+    return remainingPercent(left) - remainingPercent(right);
+  });
+  const inline4 = [];
+  const seenKinds = /* @__PURE__ */ new Set();
+  for (const window2 of ranked) {
+    if (inline4.length >= maxInline)
+      break;
+    if (!seenKinds.has(window2.kind)) {
+      inline4.push(window2);
+      seenKinds.add(window2.kind);
+    }
+  }
+  for (const window2 of ranked) {
+    if (inline4.length >= maxInline)
+      break;
+    if (!inline4.some((entry) => entry.id === window2.id)) {
+      inline4.push(window2);
+    }
+  }
+  const inlineIds = new Set(inline4.map((window2) => window2.id));
+  const sibling = all.filter((window2) => !inlineIds.has(window2.id));
+  return {
+    inline: inline4,
+    sibling,
+    all,
+    overflowCount: sibling.length
+  };
+}
+function accountProviderIds(account) {
+  const ids = /* @__PURE__ */ new Set();
+  for (const window2 of account.usageLimits.windows) {
+    for (const id of window2.providerIds ?? []) {
+      const normalized = id.trim().toLowerCase();
+      if (normalized)
+        ids.add(normalized);
+    }
+  }
+  return ids;
+}
+function formatSourceAccountPlan(plan, totalMatches) {
+  const trimmed = plan?.trim() || null;
+  if (totalMatches > 1) {
+    return trimmed ? `${trimmed} \xB7 ${totalMatches} accts` : `${totalMatches} accts`;
+  }
+  return trimmed;
+}
+function scoreSourceAccount(account, activeModel) {
+  const windows2 = account.usageLimits.windows;
+  const matching = windows2.filter((window2) => matchesActiveModel(window2, account.driver, activeModel));
+  const pool = matching.length > 0 ? matching : windows2;
+  const hasSpecificBonus = pool.some((window2) => modelSpecificPoolBonus(window2, account.driver, activeModel) < 0);
+  const maxUsed = pool.reduce((max2, window2) => Math.max(max2, window2.usedPercent), 0);
+  const minRemaining = pool.reduce((min2, window2) => Math.min(min2, remainingPercent(window2)), 100);
+  const isActivelySpending = maxUsed > 0 && minRemaining > 0;
+  let score = 0;
+  if (hasSpecificBonus)
+    score += 1e3;
+  if (isActivelySpending)
+    score += 500 + maxUsed;
+  else if (minRemaining > 0)
+    score += 200;
+  else
+    score += minRemaining;
+  return score;
+}
+function resolveUsableSourceAccount(input) {
+  const vendor = input.vendorPrefix?.trim().toLowerCase() || null;
+  const driver = input.driver ?? null;
+  const nativeDriverIds = driver !== null ? new Set(DRIVER_NATIVE_PROVIDER_IDS[String(driver)] ?? [String(driver).toLowerCase()]) : null;
+  const candidates = [];
+  for (const source of input.sources) {
+    for (const account of source.accounts) {
+      if (limitsNotice(account.usageLimits) !== null || account.usageLimits.windows.length === 0) {
+        continue;
+      }
+      const providerIds = accountProviderIds(account);
+      let matched = false;
+      if (vendor !== null) {
+        matched = providerIds.has(vendor) || account.id.toLowerCase().startsWith(`${vendor}:`);
+      } else if (driver !== null && account.driver === driver) {
+        if (providerIds.size === 0) {
+          matched = true;
+        } else if (nativeDriverIds !== null) {
+          matched = [...providerIds].some((id) => nativeDriverIds.has(id));
+        }
+      }
+      if (!matched)
+        continue;
+      candidates.push({
+        source,
+        account,
+        score: scoreSourceAccount(account, input.activeModel)
+      });
+    }
+  }
+  if (candidates.length === 0)
+    return null;
+  candidates.sort((left, right) => right.score - left.score);
+  const winner = candidates[0];
+  const label = winner.account.displayName?.trim() || winner.source.label || String(winner.account.driver);
+  return {
+    source: winner.source,
+    account: winner.account,
+    label,
+    plan: formatSourceAccountPlan(winner.account.plan, candidates.length),
+    sourceLabel: winner.source.kind === "magpie" ? "Magpie" : winner.source.label
+  };
+}
+function collectOtherActiveSubscriptions(providers, sources, now, excludeInstanceId) {
+  const seenPools = /* @__PURE__ */ new Set();
+  const summaries = [];
+  for (const provider of providers) {
+    if (!provider.enabled || !provider.installed)
+      continue;
+    if (excludeInstanceId !== null && provider.instanceId === excludeInstanceId)
+      continue;
+    const report = collectProviderUsageLimits(provider.instanceId, providers, sources, now);
+    const account = report?.accounts.find((entry) => entry.instanceId === provider.instanceId);
+    const limits = account?.limits ?? provider.usageLimits;
+    if (!limits || limitsNotice(limits) !== null || limits.windows.length === 0)
+      continue;
+    const poolKey = `driver:${provider.driver}`;
+    if (seenPools.has(poolKey))
+      continue;
+    seenPools.add(poolKey);
+    const picked = selectPrimaryUsageWindows({ limits, driver: provider.driver, maxInline: 2 });
+    summaries.push({
+      instanceId: String(provider.instanceId),
+      driver: provider.driver,
+      label: account?.displayName ?? provider.displayName ?? String(provider.driver),
+      plan: account?.plan ?? provider.auth.label ?? null,
+      windows: picked.inline
+    });
+  }
+  const groupedSources = /* @__PURE__ */ new Map();
+  for (const source of sources) {
+    for (const account of source.accounts) {
+      if (limitsNotice(account.usageLimits) !== null || account.usageLimits.windows.length === 0) {
+        continue;
+      }
+      const providerIds = [...accountProviderIds(account)];
+      const vendorKey = providerIds[0] ?? String(account.driver);
+      const nativeKey = `driver:${account.driver}`;
+      if (providerIds.length === 0 && seenPools.has(nativeKey)) {
+        continue;
+      }
+      if (providerIds.length > 0 && (DRIVER_NATIVE_PROVIDER_IDS[String(account.driver)] ?? []).includes(vendorKey) && seenPools.has(nativeKey)) {
+        continue;
+      }
+      const list = groupedSources.get(vendorKey);
+      if (list)
+        list.push({ source, account });
+      else
+        groupedSources.set(vendorKey, [{ source, account }]);
+    }
+  }
+  for (const [vendorKey, entries] of groupedSources) {
+    if (seenPools.has(`vendor:${vendorKey}`))
+      continue;
+    seenPools.add(`vendor:${vendorKey}`);
+    const ranked = entries.toSorted((left, right) => scoreSourceAccount(right.account, null) - scoreSourceAccount(left.account, null));
+    const winner = ranked[0];
+    const picked = selectPrimaryUsageWindows({
+      limits: winner.account.usageLimits,
+      driver: winner.account.driver,
+      maxInline: 2
+    });
+    if (picked.inline.length === 0)
+      continue;
+    summaries.push({
+      instanceId: `${winner.source.id}:${winner.account.id}`,
+      driver: winner.account.driver,
+      label: winner.account.displayName?.trim() || vendorKey,
+      plan: formatSourceAccountPlan(winner.account.plan, entries.length),
+      windows: picked.inline
+    });
+  }
+  return summaries;
+}
+function resolveUsableProviderForDriver(input) {
+  for (const provider of input.providers) {
+    if (provider.driver !== input.driver || !provider.enabled || !provider.installed)
+      continue;
+    const report = collectProviderUsageLimits(provider.instanceId, input.providers, input.sources, input.now);
+    const account = report?.accounts.find((entry) => entry.instanceId === provider.instanceId);
+    const limits = account?.limits ?? provider.usageLimits;
+    if (!limits || limitsNotice(limits) !== null || limits.windows.length === 0)
+      continue;
+    return {
+      provider,
+      limits,
+      plan: account?.plan ?? provider.auth.label ?? null,
+      label: account?.displayName ?? provider.displayName ?? String(provider.driver)
+    };
+  }
+  return null;
+}
+function resolveModelQuotaState(input) {
+  const selected = input.providerInstanceId !== null ? input.providers.find((provider) => provider.instanceId === input.providerInstanceId) : void 0;
+  const parsed = parseModelQuotaTarget(input.activeModel);
+  if (parsed?.externalVendor) {
+    const vendorSource = resolveUsableSourceAccount({
+      sources: input.sources,
+      vendorPrefix: parsed.externalVendor,
+      activeModel: parsed.normalized
+    });
+    if (vendorSource) {
+      const picked = selectPrimaryUsageWindows({
+        limits: vendorSource.account.usageLimits,
+        driver: vendorSource.account.driver,
+        activeModel: parsed.normalized,
+        maxInline: 2
+      });
+      return {
+        kind: "subscription",
+        label: vendorSource.label,
+        plan: vendorSource.plan,
+        modelLabel: parsed.bareModel,
+        driver: vendorSource.account.driver,
+        matchedInstanceId: null,
+        isRoutedMatch: true,
+        sourceLabel: vendorSource.sourceLabel,
+        limits: vendorSource.account.usageLimits,
+        primaryWindows: picked.inline,
+        siblingWindows: picked.sibling,
+        unavailableNotice: null
+      };
+    }
+  }
+  if (parsed?.targetDriver && selected && parsed.targetDriver !== selected.driver) {
+    const routed = resolveUsableProviderForDriver({
+      driver: parsed.targetDriver,
+      providers: input.providers,
+      sources: input.sources,
+      now: input.now
+    });
+    if (routed) {
+      const picked = selectPrimaryUsageWindows({
+        limits: routed.limits,
+        driver: routed.provider.driver,
+        activeModel: parsed.bareModel,
+        maxInline: 2
+      });
+      return {
+        kind: "subscription",
+        label: routed.label,
+        plan: routed.plan,
+        modelLabel: parsed.bareModel,
+        driver: routed.provider.driver,
+        matchedInstanceId: routed.provider.instanceId,
+        isRoutedMatch: true,
+        limits: routed.limits,
+        primaryWindows: picked.inline,
+        siblingWindows: picked.sibling,
+        unavailableNotice: null
+      };
+    }
+    const routedSource = resolveUsableSourceAccount({
+      sources: input.sources,
+      vendorPrefix: parsed.routePrefix,
+      driver: parsed.targetDriver,
+      activeModel: parsed.bareModel
+    });
+    if (routedSource) {
+      const picked = selectPrimaryUsageWindows({
+        limits: routedSource.account.usageLimits,
+        driver: routedSource.account.driver,
+        activeModel: parsed.bareModel,
+        maxInline: 2
+      });
+      return {
+        kind: "subscription",
+        label: routedSource.label,
+        plan: routedSource.plan,
+        modelLabel: parsed.bareModel,
+        driver: routedSource.account.driver,
+        matchedInstanceId: null,
+        isRoutedMatch: true,
+        sourceLabel: routedSource.sourceLabel,
+        limits: routedSource.account.usageLimits,
+        primaryWindows: picked.inline,
+        siblingWindows: picked.sibling,
+        unavailableNotice: null
+      };
+    }
+  }
+  const customEndpoint = isCustomApiInstance(selected);
+  const foreignModel = isNonClaudeModelOnClaudeDriver(selected?.driver ?? null, parsed);
+  if (selected && foreignModel && parsed && !parsed.externalVendor) {
+    const lowerBare = parsed.bareModel.toLowerCase();
+    const inferredVendor = lowerBare.startsWith("glm") ? "zcode" : null;
+    if (inferredVendor) {
+      const inferredSource = resolveUsableSourceAccount({
+        sources: input.sources,
+        vendorPrefix: inferredVendor,
+        activeModel: `${inferredVendor}/${parsed.bareModel}`
+      });
+      if (inferredSource) {
+        const picked = selectPrimaryUsageWindows({
+          limits: inferredSource.account.usageLimits,
+          driver: inferredSource.account.driver,
+          activeModel: `${inferredVendor}/${parsed.bareModel}`,
+          maxInline: 2
+        });
+        return {
+          kind: "subscription",
+          label: inferredSource.label,
+          plan: inferredSource.plan,
+          modelLabel: parsed.bareModel,
+          driver: inferredSource.account.driver,
+          matchedInstanceId: null,
+          isRoutedMatch: true,
+          sourceLabel: inferredSource.sourceLabel,
+          limits: inferredSource.account.usageLimits,
+          primaryWindows: picked.inline,
+          siblingWindows: picked.sibling,
+          unavailableNotice: null
+        };
+      }
+    }
+  }
+  if (selected && (foreignModel || customEndpoint && parsed?.externalVendor !== null)) {
+    const vendorLabel = parsed?.externalVendor ?? parsed?.routePrefix ?? "API";
+    const hostLabel = selected.displayName?.trim() || String(selected.instanceId);
+    return {
+      kind: "unmetered-model",
+      vendorLabel,
+      modelLabel: parsed?.bareModel ?? null,
+      hostLabel,
+      reason: `Routed via ${vendorLabel} (${hostLabel}); no model-level subscription quota reported.`,
+      otherSubscriptions: collectOtherActiveSubscriptions(input.providers, input.sources, input.now, selected.instanceId)
+    };
+  }
+  if (!selected)
+    return { kind: "none" };
+  if (!customEndpoint) {
+    const report = collectProviderUsageLimits(selected.instanceId, input.providers, input.sources, input.now);
+    const reportAccount = report?.accounts.find((entry) => entry.instanceId === selected.instanceId);
+    const limits = reportAccount?.limits ?? selected.usageLimits ?? null;
+    if (limits && limitsNotice(limits) === null && limits.windows.length > 0) {
+      const picked = selectPrimaryUsageWindows({
+        limits,
+        driver: selected.driver,
+        activeModel: parsed?.bareModel ?? input.activeModel,
+        maxInline: 2
+      });
+      return {
+        kind: "subscription",
+        label: reportAccount?.displayName ?? selected.displayName ?? String(selected.driver),
+        plan: reportAccount?.plan ?? selected.auth.label ?? null,
+        modelLabel: parsed?.bareModel ?? null,
+        driver: selected.driver,
+        matchedInstanceId: selected.instanceId,
+        isRoutedMatch: false,
+        limits,
+        primaryWindows: picked.inline,
+        siblingWindows: picked.sibling,
+        unavailableNotice: null
+      };
+    }
+  }
+  const driverSource = resolveUsableSourceAccount({
+    sources: input.sources,
+    driver: selected.driver,
+    activeModel: parsed?.bareModel ?? input.activeModel
+  });
+  if (driverSource) {
+    const picked = selectPrimaryUsageWindows({
+      limits: driverSource.account.usageLimits,
+      driver: driverSource.account.driver,
+      activeModel: parsed?.bareModel ?? input.activeModel,
+      maxInline: 2
+    });
+    return {
+      kind: "subscription",
+      label: driverSource.label,
+      plan: driverSource.plan,
+      modelLabel: parsed?.bareModel ?? null,
+      driver: driverSource.account.driver,
+      matchedInstanceId: null,
+      isRoutedMatch: true,
+      sourceLabel: driverSource.sourceLabel,
+      limits: driverSource.account.usageLimits,
+      primaryWindows: picked.inline,
+      siblingWindows: picked.sibling,
+      unavailableNotice: null
+    };
+  }
+  if (customEndpoint) {
+    const hostLabel = selected.displayName?.trim() || String(selected.instanceId);
+    return {
+      kind: "unmetered-model",
+      vendorLabel: parsed?.routePrefix ?? "API",
+      modelLabel: parsed?.bareModel ?? null,
+      hostLabel,
+      reason: `${hostLabel} uses a custom API endpoint without subscription limits for this model.`,
+      otherSubscriptions: collectOtherActiveSubscriptions(input.providers, input.sources, input.now, selected.instanceId)
+    };
+  }
+  const fallbackLimits = selected.usageLimits ?? null;
+  if (!fallbackLimits)
+    return { kind: "none" };
+  const notice = limitsNotice(fallbackLimits);
+  if (!notice)
+    return { kind: "none" };
+  return {
+    kind: "subscription",
+    label: selected.displayName ?? String(selected.driver),
+    plan: selected.auth.label ?? null,
+    modelLabel: parsed?.bareModel ?? null,
+    driver: selected.driver,
+    matchedInstanceId: selected.instanceId,
+    isRoutedMatch: false,
+    limits: fallbackLimits,
+    primaryWindows: [],
+    siblingWindows: [],
+    unavailableNotice: notice
+  };
+}
+function deriveQuotaWindowMetrics(window2, now) {
+  const remaining = remainingPercent(window2);
+  const used = Math.max(0, Math.min(100, 100 - remaining));
+  const timeRemaining = paceRemainingPercent(window2, now);
+  const pace = paceOf(window2, now);
+  const headroomDelta = timeRemaining !== null ? Math.round(remaining - timeRemaining) : null;
+  const parsedReset = window2.resetsAt ? Date.parse(window2.resetsAt) : Number.NaN;
+  const resetsAtMs = Number.isFinite(parsedReset) ? parsedReset : null;
+  const resetsInMs = resetsAtMs !== null && resetsAtMs > now ? resetsAtMs - now : null;
+  let projectedRunwayMs = null;
+  if (used >= 5 && remaining > 0 && timeRemaining !== null && timeRemaining < 98 && resetsInMs !== null && typeof window2.windowDurationMins === "number" && window2.windowDurationMins > 0) {
+    const windowMs = window2.windowDurationMins * 6e4;
+    const elapsedMs = windowMs * ((100 - timeRemaining) / 100);
+    if (elapsedMs > 0) {
+      const runwayMs = remaining / used * elapsedMs;
+      if (Number.isFinite(runwayMs) && runwayMs > 0 && runwayMs < resetsInMs * 0.95) {
+        projectedRunwayMs = runwayMs;
+      }
+    }
+  }
+  return {
+    remaining,
+    used,
+    timeRemaining,
+    pace,
+    headroomDelta,
+    resetsAtMs,
+    resetsInMs,
+    projectedRunwayMs
+  };
+}
+function toneForContextCategory(id, name, index2) {
+  const key = (id ?? name).toLowerCase();
+  if (key.includes("message"))
+    return "sky";
+  if (key.includes("mcp"))
+    return "amber";
+  if (key.includes("system_prompt") || key.includes("system prompt"))
+    return "emerald";
+  if (key.includes("system_tool") || key.includes("system tool"))
+    return "violet";
+  if (key.includes("skill") || key.includes("memory") || key.includes("agent") || key.includes("custom")) {
+    return "slate";
+  }
+  const palette = ["sky", "amber", "emerald", "violet", "slate"];
+  return palette[index2 % palette.length] ?? "slate";
+}
+function deriveContextWindowBreakdown(input) {
+  const usedTokens = Math.max(0, Math.round(input.usage.usedTokens));
+  const maxTokens = input.usage.maxTokens != null && input.usage.maxTokens > 0 ? Math.round(input.usage.maxTokens) : null;
+  const usedPercent = maxTokens !== null && input.usage.usedPercentage !== null ? Math.max(0, Math.min(100, input.usage.usedPercentage)) : maxTokens !== null ? Math.min(100, usedTokens / maxTokens * 100) : null;
+  const remainingTokens = maxTokens !== null ? Math.max(0, maxTokens - usedTokens) : null;
+  const percentOfMax = (tokens) => maxTokens !== null ? tokens / maxTokens * 100 : null;
+  const autoCompactThreshold = input.usage.autoCompactThreshold != null && input.usage.autoCompactThreshold > 0 ? Math.round(input.usage.autoCompactThreshold) : null;
+  const snapInput = input.usage.lastInputTokens ?? input.usage.inputTokens ?? null;
+  const snapCached = input.usage.lastCachedInputTokens ?? input.usage.cachedInputTokens ?? null;
+  const turn = input.latestTurn;
+  const lastCacheHitPercent = turn?.cacheHitPercent ?? (snapInput !== null && snapInput > 0 && snapCached !== null ? Math.min(100, snapCached / snapInput * 100) : null);
+  const sessionCacheHitPercent = input.sessionCacheHitPercent ?? null;
+  const sessionCacheTurnCount = input.sessionCacheTurnCount ?? 0;
+  const nativeBreakdown = input.usage.contextBreakdown ?? null;
+  if (nativeBreakdown !== null && nativeBreakdown.categories.length > 0) {
+    const segments2 = [];
+    const deferredRows = [];
+    let bufferTokens = null;
+    let freeTokens = null;
+    for (const [index2, category] of nativeBreakdown.categories.entries()) {
+      if (category.kind === "used") {
+        if (category.tokens <= 0)
+          continue;
+        segments2.push({
+          id: category.id ?? `cat-${index2}`,
+          label: category.name,
+          tokens: category.tokens,
+          percentOfMax: percentOfMax(category.tokens),
+          tone: toneForContextCategory(category.id, category.name, index2)
+        });
+      } else if (category.kind === "buffer") {
+        if (category.tokens > 0)
+          bufferTokens = (bufferTokens ?? 0) + category.tokens;
+      } else if (category.kind === "free") {
+        freeTokens = (freeTokens ?? 0) + category.tokens;
+      } else if (category.kind === "deferred") {
+        if (category.tokens <= 0)
+          continue;
+        deferredRows.push({
+          id: category.id ?? `deferred-${index2}`,
+          label: category.name,
+          tokens: category.tokens
+        });
+      }
+    }
+    const fallbackBuffer = maxTokens !== null && autoCompactThreshold !== null && autoCompactThreshold < maxTokens ? Math.max(0, maxTokens - autoCompactThreshold) : null;
+    const autoCompactBufferTokens2 = bufferTokens ?? fallbackBuffer;
+    const autoCompactBufferPercent2 = autoCompactBufferTokens2 !== null ? percentOfMax(autoCompactBufferTokens2) : null;
+    const freeSpaceTokens2 = freeTokens ?? (remainingTokens !== null ? Math.max(0, remainingTokens - (autoCompactBufferTokens2 ?? 0)) : null);
+    const freeSpacePercent2 = freeSpaceTokens2 !== null ? percentOfMax(freeSpaceTokens2) : null;
+    return {
+      mode: "categories",
+      usedTokens,
+      maxTokens,
+      usedPercent,
+      remainingTokens,
+      autoCompactThreshold,
+      autoCompactBufferTokens: autoCompactBufferTokens2,
+      autoCompactBufferPercent: autoCompactBufferPercent2,
+      freeSpaceTokens: freeSpaceTokens2,
+      freeSpacePercent: freeSpacePercent2,
+      segments: segments2,
+      deferredRows,
+      turnCount: input.turnCount,
+      toolCallCount: input.toolCallCount,
+      skillCount: nativeBreakdown.skillCount ?? input.skillCount,
+      mcpToolCount: nativeBreakdown.mcpToolCount ?? null,
+      memoryFileCount: nativeBreakdown.memoryFileCount ?? null,
+      customAgentCount: nativeBreakdown.customAgentCount ?? null,
+      lastCacheHitPercent,
+      sessionCacheHitPercent,
+      sessionCacheTurnCount
+    };
+  }
+  const autoCompactBufferTokens = maxTokens !== null && autoCompactThreshold !== null && autoCompactThreshold < maxTokens ? Math.max(0, maxTokens - autoCompactThreshold) : null;
+  const autoCompactBufferPercent = autoCompactBufferTokens !== null ? percentOfMax(autoCompactBufferTokens) : null;
+  const freeSpaceTokens = remainingTokens !== null ? Math.max(0, remainingTokens - (autoCompactBufferTokens ?? 0)) : null;
+  const freeSpacePercent = freeSpaceTokens !== null ? percentOfMax(freeSpaceTokens) : null;
+  const segments = [];
+  let mode = "total-only";
+  if (usedTokens > 0 && lastCacheHitPercent !== null) {
+    mode = "cache-split";
+    const cachedTokens = Math.min(usedTokens, Math.round(usedTokens * lastCacheHitPercent / 100));
+    const uncachedTokens = Math.max(0, usedTokens - cachedTokens);
+    if (cachedTokens > 0) {
+      segments.push({
+        id: "cached",
+        label: "Cached context",
+        tokens: cachedTokens,
+        percentOfMax: percentOfMax(cachedTokens),
+        tone: "sky"
+      });
+    }
+    if (uncachedTokens > 0) {
+      segments.push({
+        id: "uncached",
+        label: "Uncached context",
+        tokens: uncachedTokens,
+        percentOfMax: percentOfMax(uncachedTokens),
+        tone: "amber"
+      });
+    }
+  } else if (usedTokens > 0) {
+    segments.push({
+      id: "active",
+      label: "Used context",
+      tokens: usedTokens,
+      percentOfMax: percentOfMax(usedTokens),
+      tone: "sky"
+    });
+  }
+  return {
+    mode,
+    usedTokens,
+    maxTokens,
+    usedPercent,
+    remainingTokens,
+    autoCompactThreshold,
+    autoCompactBufferTokens,
+    autoCompactBufferPercent,
+    freeSpaceTokens,
+    freeSpacePercent,
+    segments,
+    deferredRows: [],
+    turnCount: input.turnCount,
+    toolCallCount: input.toolCallCount,
+    skillCount: input.skillCount,
+    mcpToolCount: null,
+    memoryFileCount: null,
+    customAgentCount: null,
+    lastCacheHitPercent,
+    sessionCacheHitPercent,
+    sessionCacheTurnCount
+  };
+}
+function countThreadToolCalls(projection) {
+  if (!projection)
+    return 0;
+  let count = 0;
+  for (const item of projection.turnItems) {
+    if (!isNonWorkItem(item.type) && !isModelGenerationItem(item.type)) {
+      count += 1;
+    }
+  }
+  return count;
+}
+function formatShortWindowLabel(window2) {
+  const duration = window2.windowDurationMins;
+  if (typeof duration === "number" && Number.isFinite(duration) && duration > 0) {
+    if (duration < 60)
+      return `${Math.round(duration)}m`;
+    if (duration < 1440 && duration % 60 === 0)
+      return `${duration / 60}h`;
+    if (duration === 10080)
+      return "7d";
+    if (duration >= 1440 && duration % 1440 === 0)
+      return `${duration / 1440}d`;
+  }
+  const lower = window2.label.toLowerCase();
+  const hourMatch = lower.match(/\b(\d+)\s*(?:h|hr|hour|hours)\b/);
+  if (hourMatch?.[1])
+    return `${hourMatch[1]}h`;
+  if (lower.includes("week") || window2.kind === "weekly")
+    return "7d";
+  if (lower.includes("month") || window2.kind === "monthly")
+    return "30d";
+  if (lower.includes("day") || lower.includes("daily"))
+    return "1d";
+  return window2.label.length <= 8 ? window2.label : `${window2.label.slice(0, 7)}\u2026`;
+}
+
+// work/source-port/native-modules-0.1.12/cards.js
 var SEGMENT_SWATCH_CLASS = {
   sky: "bg-info",
   amber: "bg-warning",
@@ -15971,7 +15878,7 @@ function ComposerTelemetryStrip({ summary = null, contextWindow, providerInstanc
   return jsxs(ComposerSurface.ContextStrip, { "data-slot": "composer-telemetry-strip", className: "justify-between gap-2 pt-1.5 pb-0.5", children: [jsxs("div", { className: "flex min-w-0 items-center gap-1.5", children: [contextWindow ? jsx(ContextWindowControl, { usage: contextWindow, latestTurn: contextCacheTurn, sessionCacheHitPercent, sessionCacheTurnCount, turnCount, toolCallCount, skillCount, compact: false, onCompactContext, compactDisabled }) : null, liveTtftMs !== null ? jsxs("span", { "data-composer-telemetry": "live-ttft", className: "inline-flex h-5 items-center gap-1 px-1 font-mono text-2xs leading-none tabular-nums text-muted-foreground/70", children: [contextWindow ? jsx("span", { "aria-hidden": true, className: "me-0.5 text-muted-foreground/35", children: "\xB7" }) : null, jsx("span", { className: "text-muted-foreground/55", children: "\u9996\u5B57\u8017\u65F6" }), jsx("span", { children: formatLatencyMs(liveTtftMs) })] }) : null] }), summary, jsx("div", { className: "ms-auto flex shrink-0 items-center", children: jsx(SubscriptionQuotaControl, { providerInstanceId, activeModel, providers, sources, onOpenUsageLimits, onRefreshQuota, isRefreshingQuota }) })] });
 }
 
-// work/source-port/native-modules/summary.js
+// work/source-port/native-modules-0.1.12/summary.js
 init_react();
 function __T3TelemetryPill({ usage, liveTurn, latestTurn, turnCount, toolCallCount, cacheHitPercent, isWorking }) {
   const [, setTick] = (0, useState)(0);
@@ -16051,17 +15958,21 @@ function createNativeTelemetryReader({ deriveTurnTelemetryIndex: deriveTurnTelem
   };
 }
 
-// src/original-composer-entry.jsx
+// src/original-composer-012-entry.jsx
 var readTelemetry = createNativeTelemetryReader({ deriveTurnTelemetryIndex, lookupTurnTelemetry, countThreadToolCalls });
 function NativeComposerTelemetry({ projection, contextWindow, isWorking, activeRunId, providerInstanceId, activeModel, providers, sources }) {
   const data = useMemo(() => readTelemetry({ projection, contextWindow, isWorking, activeRunId }), [projection, contextWindow, isWorking, activeRunId]);
+  const navigate = useNativeNavigate();
+  const openLimits = useCallback(async () => {
+    const page = await import("./_chat.usage-B0MA-7bB.js");
+    page.__t3SelectNativeLimits();
+    void navigate({ to: "/usage" });
+  }, [navigate]);
   const summary = originalSummaryProps(data);
-  return /* @__PURE__ */ jsx(ComposerTelemetryStrip, { ...data, summary: summary ? /* @__PURE__ */ jsx(__T3TelemetryPill, { ...summary }) : null, providerInstanceId, activeModel, providers, sources });
+  return /* @__PURE__ */ jsx(ComposerTelemetryStrip, { ...data, summary: summary ? /* @__PURE__ */ jsx(__T3TelemetryPill, { ...summary }) : null, providerInstanceId, activeModel, providers, sources, onOpenUsageLimits: openLimits });
 }
 export {
-  NativeComposerTelemetry,
-  NativeQuotaOverview,
-  createNativeQuotaProviders
+  NativeComposerTelemetry
 };
 /*! Bundled license information:
 

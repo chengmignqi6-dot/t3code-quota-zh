@@ -1,5 +1,9 @@
 node_modules/
+.showcase-renders/
 work/pristine/
+work/pristine-0.1.12/
+work/source-port/native-modules-0.1.12/
+work/source-port/native-stage-0.1.12/
 work/source-port/native-modules/
 work/source-port/native-stage/
 *.asar

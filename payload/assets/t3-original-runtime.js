@@ -43,7 +43,7 @@ function createCurrencyStore(storage2) {
   });
 }
 
-// work/source-port/native-modules/burn.js
+// work/source-port/native-modules-0.1.12/burn.js
 function getLang() {
   return "en";
 }
@@ -143,7 +143,7 @@ function computeBurnForecast(poolOrWin, nowInput) {
   };
 }
 
-// work/source-port/native-modules/quota-math.js
+// work/source-port/native-modules-0.1.12/quota-math.js
 var WINDOW_LABELS_ZH = {
   "Session": "\u5F53\u524D\u4F1A\u8BDD",
   "Weekly": "\u6BCF\u5468\u989D\u5EA6",
@@ -388,7 +388,7 @@ function buildTopbarPills(providers, nowInput) {
   return pills;
 }
 
-// work/source-port/native-modules/topbar-popover.js
+// work/source-port/native-modules-0.1.12/topbar-popover.js
 function getLang3() {
   return "en";
 }

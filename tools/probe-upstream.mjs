@@ -11,7 +11,7 @@ const source=fs.readFileSync('vendor/t3code-quota-ui-v1.4.6/scripts/patch-asar.m
 const bytes=Buffer.from(source);
 if(crypto.createHash('sha1').update(`blob ${bytes.length}\0`).update(bytes).digest('hex')!=='da89945cbd3cd023aebff23310fd4d27a39cbb1f')throw Error('Pinned source mismatch');
 const ast=ts.createSourceFile('patch-asar.mjs',source,ts.ScriptTarget.Latest,true,ts.ScriptKind.JS);
-function select(name,stop){
+export function selectPinnedFrontendTransform(name,stop){
  const nodes=ast.statements.filter(x=>ts.isFunctionDeclaration(x)&&x.name?.text===name);
  if(nodes.length!==1)throw Error('Ambiguous upstream function '+name);
  const text=nodes[0].getText(ast),pos=text.indexOf(stop);
@@ -30,7 +30,7 @@ export function portNativeQuotaAssets(){
 const files=new Map(),report={status:'probe-only-not-installable',transforms:[]};
 for(const item of transforms){
  const original=fs.readFileSync(path.join('work/pristine/apps/server/dist/client/assets',item.file),'utf8');
- let output=select(item.name,item.stop)(original);
+ let output=selectPinnedFrontendTransform(item.name,item.stop)(original);
  const upstreamUnadaptedMissing=item.required.filter(x=>!output.includes(x));
  const compatibilityAdaptations=[];
  if(item.name==='patchUsageLimitsView'&&upstreamUnadaptedMissing.includes('t3-quota-col-1')){output=adaptNativePoolSection(output);compatibilityAdaptations.push('PoolSection: preserve original upstream layout; retain 0.1.11 locale hook; remove incompatible compiler memo indices');}

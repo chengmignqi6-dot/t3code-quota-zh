@@ -8,16 +8,16 @@ const require=createRequire(import.meta.url),ts=require('../work/source-build-de
 const parse=(s,name='cost.js')=>ts.createSourceFile(name,s,ts.ScriptTarget.Latest,true,ts.ScriptKind.JS);
 function oneReplace(text,before,after){if(text.split(before).length!==2)throw Error('Nonunique native/source anchor: '+before.slice(0,80));return text.replace(before,after);}
 function evaluate(text,values={}){return new vm.Script('('+text+')').runInNewContext(values,{timeout:1000,contextCodeGeneration:{strings:false,wasm:false}});}
-function pinnedCostSource(){
+export function pinnedCostSource(){
  const bytes=fs.readFileSync('vendor/t3code-quota-ui-v1.4.6/scripts/patch-asar.mjs'),source=bytes.toString();
  if(crypto.createHash('sha1').update(`blob ${bytes.length}\0`).update(bytes).digest('hex')!=='da89945cbd3cd023aebff23310fd4d27a39cbb1f')throw Error('Source pin mismatch');
  const nodes=parse(source).statements.filter(n=>ts.isFunctionDeclaration(n)&&n.name?.text==='patchChatUsageBundle');
  if(nodes.length!==1)throw Error('Upstream function missing');return nodes[0];
 }
-export function buildCostHelpers(){
+export function buildCostHelpers({reactNs='Z',jsxNs='$',toggleGroupIdent='Ze',toggleItemIdent='$e'}={}){
  const node=pinnedCostSource(),footer=node.body.statements.flatMap(s=>ts.isVariableStatement(s)?[...s.declarationList.declarations]:[]).find(d=>d.name.getText()==='helperFooter');
  if(!footer||!ts.isTemplateExpression(footer.initializer))throw Error('Original helper footer missing');
- let helper=evaluate(footer.initializer.getText(),{reactNs:'Z',jsxNs:'$',toggleGroupIdent:'Ze',toggleItemIdent:'$e',currButtonExpr:'__currSeg'});
+ let helper=evaluate(footer.initializer.getText(),{reactNs,jsxNs,toggleGroupIdent,toggleItemIdent,currButtonExpr:'__currSeg'});
  // Delete precisely the rejected language/cache controls; preserve original currency JSX unchanged.
  const ast=parse(helper),toggle=ast.statements.find(n=>ts.isFunctionDeclaration(n)&&n.name.text==='__t3RenderToolbarToggles');
  const deletions=toggle.body.statements.filter(s=>ts.isVariableStatement(s)&&s.declarationList.declarations.some(d=>['__langTip','__langSeg','__cacheBtn'].includes(d.name.getText(ast))));

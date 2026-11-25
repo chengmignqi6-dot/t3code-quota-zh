@@ -1,0 +1,72 @@
+[
+  {
+    "path": "assets/ProviderModelPicker-Tx_dd0AL.js",
+    "size": 57940,
+    "sha256": "a668e10b39007fa1b39cbaa88d62003aa73aff2bcb124d367a9ce1badfa4ff79"
+  },
+  {
+    "path": "assets/ReadOnlyThreadTimeline-DzTmFOfJ.js",
+    "size": 492757,
+    "sha256": "4f05fa222be71b9cb2fc21f98580cc78c11453e98e06285456718594b0082231"
+  },
+  {
+    "path": "assets/ThreadRouteView-jIIdWstE.js",
+    "size": 1020729,
+    "sha256": "d54743d08ba7971a22d5dc50a422f1974e3db92b1c277b3e72645fbe2e5b74ce"
+  },
+  {
+    "path": "assets/UsageLimits-DJoUW9my.js",
+    "size": 40696,
+    "sha256": "fa7ab269279fac0db714e9e2a41ac5e4440b0a8e159ea4b23a0eea8ffe4d2143"
+  },
+  {
+    "path": "assets/_chat.usage-B0MA-7bB.js",
+    "size": 99541,
+    "sha256": "4875f054a8cdbfbf047794009640ec6237f7e6298b549264337a439aec0da08b"
+  },
+  {
+    "path": "assets/entities-CWYEGgSe.js",
+    "size": 30147,
+    "sha256": "2057e27f17a864f01e56a9cb2545953af368509ead4c3e8a7589f24bd680e14f"
+  },
+  {
+    "path": "assets/main-DYJdcEdq.css",
+    "size": 556615,
+    "sha256": "2315d710e3f160408e84d483513bad0723887ddde1e0013da0bc9749f6906fe4"
+  },
+  {
+    "path": "assets/network-IO1fFe6J.js",
+    "size": 604382,
+    "sha256": "fd5dd7dcfde322577b9301f0a492fe028c6f4fa02121fd19831149f6a7b271a5"
+  },
+  {
+    "path": "assets/react-BP46yLMB.js",
+    "size": 7919,
+    "sha256": "d2f2d7895c28ad28ffdbcfc848c7f3a9f6d34ed9c48e57f62947e6c154cfd56c"
+  },
+  {
+    "path": "assets/runtime-CerGdK8c.js",
+    "size": 295006,
+    "sha256": "e36294a0e3d088b4ae42e03fc2eb60203a894b3ce67c87683091c404c4c79622"
+  },
+  {
+    "path": "assets/usageFormat-D1we3jzL.js",
+    "size": 4660,
+    "sha256": "87a116b84c930923ff8485bf1fc928585f26b999cfcc10ea28b5b98caa76990a"
+  },
+  {
+    "path": "assets/useNavigate-C3WU9Yd7.js",
+    "size": 967,
+    "sha256": "010b64626f11eb27b35465285370737a2c8a44cdc8b5197a8cd39c9838c8b66b"
+  },
+  {
+    "path": "assets/with-selector-ehz1dnGQ.js",
+    "size": 6055,
+    "sha256": "4a390285a8a5c85b2bc170b4e37febac68b2dd3db66b304c3abafd1a565a90f3"
+  },
+  {
+    "path": "index.html",
+    "size": 23506,
+    "sha256": "ef0486daef54b4742e5aa15f1d0cd8587a9f38e1f84b56523d70d2b625d72b01"
+  }
+]
