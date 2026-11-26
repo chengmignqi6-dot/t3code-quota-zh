@@ -27,6 +27,7 @@
 | [上下文面板](<docs/showcase/detail-context.jpg>) · [SVG](<docs/showcase/detail-context.svg>) | 点「上下文」 | 已用 48%、分段条、已缓存 / 未缓存 / 剩余空间、缓存命中 |
 | [额度面板](<docs/showcase/detail-quota.jpg>) · [SVG](<docs/showcase/detail-quota.svg>) | 点「周额度」 | 5 小时与周额度各一张卡片、重置倒计时、全部额度入口 |
 | [模型选择器](<docs/showcase/detail-picker.jpg>) · [SVG](<docs/showcase/detail-picker.svg>) | 点模型按钮 | 两个提供方对照：Antigravity 有每模型额度，Codex 没有 |
+| [窄窗口](<docs/showcase/detail-responsive.jpg>) · [SVG](<docs/showcase/detail-responsive.svg>) | 窗口缩小时 | 四档宽度逐级收起次要信息，一行永不叠字 |
 | [用量页 · 限制](<docs/showcase/detail-limits.jpg>) · [SVG](<docs/showcase/detail-limits.svg>) | 点「全部额度」 | 按提供商分组的额度卡片，共享池原样标注 |
 | [用量页 · 费用](<docs/showcase/detail-cost.jpg>) · [SVG](<docs/showcase/detail-cost.svg>) | 点「费用」 | 人民币总额、每小时图表、统计口径、明细表 |
 | [用量页 · token](<docs/showcase/detail-token.jpg>) · [SVG](<docs/showcase/detail-token.svg>) | 点「token」 | 同一份数据的 token 视角，区分缓存与非缓存 |
@@ -50,7 +51,7 @@
 
 ## 下载与安装
 
-- [下载最新发行包](https://github.com/chengmignqi6-dot/t3code-quota-zh/releases/latest) → 选择 `t3code-quota-zh-1.1.1-windows.zip`，**完整解压**。
+- [下载最新发行包](https://github.com/chengmignqi6-dot/t3code-quota-zh/releases/latest) → 选择 `t3code-quota-zh-1.1.3-windows.zip`，**完整解压**。
 - 安装 [Node.js 22 或更新版本](https://nodejs.org/)，无需为安装补丁运行 npm install。
 - 先运行 [Check.cmd](<Check.cmd>)，再**自行完全退出 T3 Code**。
 - 运行 [Install.cmd](<Install.cmd>)，阅读提示，输入 `YES` 才会写入；完成后自行打开 T3。
@@ -61,6 +62,7 @@
 ## 做了什么
 
 - **一行底栏**：上下文进度条与 `已用/上限`、轮次 · 工具次数 · 词元/秒、会话词元与缓存命中，以及 5 小时与周额度两个入口；不再在顶部另挂一排总览。
+- **窄窗口自适应**：窗口变窄时按可用宽度逐级收起次要信息（先「词元 · 命中」、再整组统计、最后文字标签），一行永不换行叠字；被收起的内容仍可在两个面板里看到。
 - **中文上下文面板**：已用、已缓存、未缓存、剩余空间、压缩预留、缓存命中；数值与格式仍来自原生统计。
 - **额度面板**：所选提供方实例与模型、账号归属、5 小时与周额度两张卡片、分格额度条、下次重置时间，并提供「全部额度」。
 - **模型选择器**：保留原生选择器与思考强度子菜单，在 Antigravity 的每个模型行显示所属池剩余额度；Codex 没有额度数据时不显示任何百分比。
@@ -76,7 +78,7 @@
 | T3 Code | 0.1.12，原生提交 `ca81b7b97a1c` |
 | 官方 server.asar SHA-256 | `0714162c59487f54ffac6009dd283d5d5f12183d90486795ca13e07c23f1ca71` |
 | app.asar SHA-256 | `fbf20eaa6e050e15f36a092bfe1b55994275256f03647618e3c148e052b3c498` |
-| 补丁后 server.asar SHA-256 | `21cb1a0ac7b5bb9e971e41b9e43f9d522ebd6ef421aad7f3d08cf462182970d8` |
+| 补丁后 server.asar SHA-256 | `27bbe0a17ba4c22c4d5b858db559eea3127b28850ec0f8316a29103e076df81c` |
 
 工具只允许更改 10 个指定前端文件，重新审计 ASAR 后端字节、目录/文件元数据与完整性。它不读取聊天数据库或登录令牌，不自动关闭/启动客户端，不切换模型或账号，不发送 AI 消息。应用自动更新后**不可套用旧补丁或旧备份**。
 
@@ -86,7 +88,7 @@
 - 上游动态错误并非全部中文化。例如 Antigravity 登录过期提示仍可能是英文；需要用户在 T3 自行续登。
 - `498k / 1m` 是上下文词元使用量/容量，不是汉字数，也不是订阅剩余额度；缓存占比不代表免费额度。
 - 上游缓存估算回退公式保留；缓存数据不一定是逐词元直接计量。`工具 118 次` 是调用次数，不是秒数。
-- 已在本机验证固定构建上的原生界面与全部入口；**未验证其他机器、窄窗口布局、所有 GPT/Claude 数值额度**。
+- 已在本机验证固定构建上的原生界面与全部入口，并按 1200 / 900 / 700 / 580 px 四档窗口宽度核对底栏；**未验证其他机器、系统缩放与超高 DPI、所有 GPT/Claude 数值额度**。
 - 图集是按真实界面重绘的示意图（演示数据），用于说明布局与交互，不是账号余额证据。
 
 ## 源码与复现

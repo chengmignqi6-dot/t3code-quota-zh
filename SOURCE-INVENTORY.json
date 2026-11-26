@@ -19,7 +19,7 @@
     },
     {
       "path": "payload/assets/t3-original-source.css",
-      "sha256": "7e95585f0e2e743bce38752a01bc7283151ec8ec76edb489642defcadfa2ab13"
+      "sha256": "45ac47a38dc3921d9f2b0213db4366ed8d327084067534de7cf3c5943924c18b"
     },
     {
       "path": "payload/assets/t3-original-telemetry.js",
@@ -43,7 +43,7 @@
     },
     {
       "path": "payload/manifest.json",
-      "sha256": "957dfe062e062d151d550e640a27a1c552d6bf72592fa9808d07640e4563aeb2"
+      "sha256": "bb15543d6ce0dbd78c830cd124c407aa645cac5290ab8d15e4cad00cc5d5e633"
     },
     {
       "path": "src/context-locale-zh.mjs",
@@ -119,7 +119,7 @@
     },
     {
       "path": "tools/showcase/build-showcase.mjs",
-      "sha256": "a19903c8779952e59709903f258164bb7e6f50d8208abd90c81c97fc395825d5"
+      "sha256": "2fb2ba8e1bb1ddeeb8d6614f9106d01d94ceea155f777adca0e329b909eaeefe"
     },
     {
       "path": "tools/showcase/png-to-jpg.py",
@@ -151,7 +151,7 @@
     },
     {
       "path": "tools/source-native-css.mjs",
-      "sha256": "f9528ee28d99cd400d5af34453972bcf79a6143994dab2962b548080a9cbaeef"
+      "sha256": "7dc51e07630382c6ce0b2c3200768ccecdfdb7fc5585d20ecae9ce333109f777"
     },
     {
       "path": "tools/source-quota-locale-port.mjs",

@@ -555,6 +555,53 @@ function detailFlow(){
  return svg(W,H,DEFS+S.join(''),{title:'点击路径总览',desc:'底栏、两个弹层、模型选择器与用量页的点击路径。'});
 }
 
+// ---------------- responsive footer scene ----------------
+function stripRow({x,y,w,tokens=true,cluster=true,labels=true}){
+ const S=[];const pad=12;
+ S.push(r(x,y,w,30,{fill:'#ffffff',rx:8,stroke:'#ececee'}));
+ const cx=x+pad;
+ S.push(t(cx,y+19,labels?'上下文':'',{size:11,fill:C.muted}));
+ const barX=cx+(labels?34:0);
+ S.push(bar(barX,y+11,44,8,{segments:[{w:8.5,fill:C.blue}]}));
+ const rx=barX+52;
+ S.push(t(rx,y+19,'199k/1m',{size:11.5,weight:600}));
+ S.push(t(rx+56,y+19,'19%',{size:11,fill:C.muted}));
+ const quotaX=x+w-pad-(labels?175:101);
+ if(cluster){
+  const mid=rx+90;
+  S.push(dot(mid+4,y+15,C.faint));
+  S.push(t(mid+14,y+19,'20轮 · 工具399次 · 141词元/秒',{size:11,fill:C.muted}));
+  if(tokens){S.push(line(mid+206,y+8,mid+206,y+22,{stroke:C.border}));S.push(t(mid+218,y+19,'199.0K词元 · 命中96%',{size:11,fill:C.muted}));}
+ }
+ S.push(quotaChip(quotaX,y+19,labels?'5小时':'','50%',50));
+ S.push(quotaChip(quotaX+(labels?74:44),y+19,labels?'周额度':'','30%',30));
+ return S.join('');
+}
+function detailResponsive(){
+ const W=1600,H=860,S=[];const rows=[
+  {w:720,win:'≥ 1200px',note:'全部信息：上下文 / 轮次·工具·速度 / 词元·命中 / 额度',opts:{}},
+  {w:620,win:'≈ 900px',note:'隐藏「词元 · 命中」，保留轮次、工具与速度',opts:{tokens:false}},
+  {w:520,win:'≈ 700px',note:'隐藏整组统计；被藏的轮次/工具在上下文面板里仍有',opts:{tokens:false,cluster:false}},
+  {w:370,win:'< 600px',note:'隐藏文字标签，只留数值与额度圆环（安全网）',opts:{tokens:false,cluster:false,labels:false}}
+ ];
+ S.push(r(0,0,W,H,{fill:'#ffffff'}));
+ S.push(t(56,64,'窄窗口：一行永远不叠字',{size:25,weight:700}));
+ S.push(t(56,94,'条带不换行；按输入框可用宽度依次收起次要信息，每一档都保持一行、26–30px 高。',{size:12.5,fill:C.muted}));
+ rows.forEach((row,i)=>{
+  const y=150+i*150;
+  S.push(t(56,y+18,row.win,{size:12.5,weight:600}));
+  S.push(t(56,y+38,row.w+' px 容器',{size:10.5,fill:C.faint}));
+  S.push(stripRow({x:220,y, w:row.w, ...row.opts}));
+  S.push(t(220,y+52,row.note,{size:11,fill:C.muted}));
+  S.push(callout(String(i+1),196,y+15));
+ });
+ S.push(r(56,750,1488,60,{fill:'#f9f9fb',rx:12}));
+ S.push(t(80,776,'隐藏的都还在弹层里：',{size:12,weight:600}));
+ S.push(t(80,794,'轮次 / 工具次数在上下文面板底部；词元与缓存命中在上下文面板；窗口名就是额度面板的卡片标题。',{size:11.5,fill:C.muted}));
+ S.push(t(56,846,'示意图：演示数据；条带高度与间距按真实界面，隐藏次序与实现一致。',{size:10.5,fill:C.faint}));
+ return svg(W,H,DEFS+S.join(''),{title:'窄窗口下的底栏',desc:'四档宽度下底栏的逐级隐藏：全部 / 隐藏词元命中 / 隐藏统计组 / 隐藏文字标签。'});
+}
+
 const scenes=new Map([
  ['hero-overview',heroOverview()],
  ['hero-strip',heroStrip()],
@@ -564,6 +611,7 @@ const scenes=new Map([
  ['detail-context',detailContext()],
  ['detail-quota',detailQuota()],
  ['detail-picker',detailPicker()],
+ ['detail-responsive',detailResponsive()],
  ['detail-limits',detailLimits()],
  ['detail-cost',detailUsage('费用','detail-cost','用量页 · 费用',[
    ['1','费用与货币','¥ CNY / $ USD 只改显示，不改统计。',520],

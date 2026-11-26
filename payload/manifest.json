@@ -4,7 +4,7 @@
   "nativeCommit": "ca81b7b97a1c",
   "originalServerSha256": "0714162c59487f54ffac6009dd283d5d5f12183d90486795ca13e07c23f1ca71",
   "desktopSha256": "fbf20eaa6e050e15f36a092bfe1b55994275256f03647618e3c148e052b3c498",
-  "patchedServerSha256": "21cb1a0ac7b5bb9e971e41b9e43f9d522ebd6ef421aad7f3d08cf462182970d8",
+  "patchedServerSha256": "27bbe0a17ba4c22c4d5b858db559eea3127b28850ec0f8316a29103e076df81c",
   "files": [
     {
       "path": "apps/server/dist/client/index.html",
@@ -54,7 +54,7 @@
     {
       "path": "apps/server/dist/client/assets/t3-original-source.css",
       "file": "assets/t3-original-source.css",
-      "sha256": "7e95585f0e2e743bce38752a01bc7283151ec8ec76edb489642defcadfa2ab13"
+      "sha256": "45ac47a38dc3921d9f2b0213db4366ed8d327084067534de7cf3c5943924c18b"
     }
   ]
 }

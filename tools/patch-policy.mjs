@@ -1,6 +1,6 @@
-// Fixed release policy. No file writes and no account APIs.
+﻿// Fixed release policy. No file writes and no account APIs.
 import fs from 'node:fs';import path from 'node:path';import {isDeepStrictEqual} from 'node:util';import {sha256,parseAsar,assertDiff,integrity,repack} from './asar.mjs';
-export const PINS=Object.freeze({original:'0714162c59487f54ffac6009dd283d5d5f12183d90486795ca13e07c23f1ca71',patched:'21cb1a0ac7b5bb9e971e41b9e43f9d522ebd6ef421aad7f3d08cf462182970d8',desktop:'fbf20eaa6e050e15f36a092bfe1b55994275256f03647618e3c148e052b3c498'});
+export const PINS=Object.freeze({original:'0714162c59487f54ffac6009dd283d5d5f12183d90486795ca13e07c23f1ca71',patched:'27bbe0a17ba4c22c4d5b858db559eea3127b28850ec0f8316a29103e076df81c',desktop:'fbf20eaa6e050e15f36a092bfe1b55994275256f03647618e3c148e052b3c498'});
 export const TARGETS=Object.freeze(['index.html',...['t3-original-telemetry.js','t3-original-runtime.js','ThreadRouteView-jIIdWstE.js','_chat.usage-B0MA-7bB.js','ProviderModelPicker-Tx_dd0AL.js','runtime-CerGdK8c.js','UsageLimits-DJoUW9my.js','usageFormat-D1we3jzL.js','t3-original-source.css'].map(x=>'assets/'+x)]);
 const prefix='apps/server/dist/client/';
 export function noLinks(file){let p=path.resolve(file);for(;;){let stat;try{stat=fs.lstatSync(p);}catch(error){if(error.code!=='ENOENT')throw error;}if(stat?.isSymbolicLink())throw Error('Symlink/junction refused: '+p);const next=path.dirname(p);if(next===p)break;p=next;}return path.resolve(file);}
